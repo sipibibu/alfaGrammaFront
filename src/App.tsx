@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-        <div style={{display: "flex", flexDirection: "column", gap: "10px"}}>
+        <div style={{display: "flex", flexDirection: "column", gap: "5px"}}>
         <p>Выберите роль</p>
         <select onChange={() => getSelectedValue} value={select}>
             <option>Пользователь</option>
