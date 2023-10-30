@@ -24,14 +24,20 @@
 }
 
 .link {
+  display: block;
+  padding: 5px 10px;
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
 }
 
+.link:hover {
+  background-color: #4D8FDD;
+  border-radius: 15px;
+  opacity: 0.7;
+}
+
 .linkActive {
-  display: block;
-  padding: 5px 10px;
   background-color: #4D8FDD;
   border-radius: 15px;
 }
@@ -42,4 +48,5 @@
   height: 50px;
   width: 50px;
 }
+
 
