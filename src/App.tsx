@@ -1,30 +1,39 @@
 import { useState } from 'react'
 import './App.css'
 import axios from "axios";
-import {server} from "./const";
 
 function App() {
   const [select, setSelect] = useState("Пользователь")
-  const getSelectedValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const axiosInstance = axios.create({
+            baseURL: "https://alpha-gramms.zavsoft.net/",
+            withCredentials: true,
+        }
+        );
+
+    const getSelectedValue = (event) => {
       setSelect(event.target.value)
   }
 
   const axiosGet = () => {
-      axios.get(server + "/register/respondent").then((response) => {
-          console.log(response);
-      });
+    axios.get("https://alpha-gramms.zavsoft.net/register/respondent", {
+        withCredentials: true,
+        credentials: "include",
+        cors: {
+            "Access-Control-Allow-Origin": "https://alpha-gramms.zavsoft.net",
+            "Access-Control-Allow-Credentials": true,
+            "Access-Control-Allow-Methods": ["POST", "PUT", "PATCH", "GET", "DELETE", "OPTIONS"],
+            "Access-Control-Allow-Headers": ["Origin", "X-Requested-With", "Content-Type", "Accept"]
+        }})
   }
 
   return (
     <>
-        <div style={{display: "flex", flexDirection: "column", gap: "5px"}}>
         <p>Выберите роль</p>
-        <select onChange={() => getSelectedValue} value={select}>
+        <select onChange={getSelectedValue} value={select}>
             <option>Пользователь</option>
             <option>Предприниматель</option>
         </select>
-        <button onClick={axiosGet}>войти</button>
-        </div>
+        <button onClick={axiosGet} type={"submit"}>войти</button>
     </>
   )
 }
