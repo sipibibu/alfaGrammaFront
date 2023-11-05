@@ -1,0 +1,49 @@
+.radioList{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+    padding-left: 25px;
+    margin-top: 172px;
+    width: 347px;
+    height: 217px;
+}
+
+.radioItem input[type=radio] {
+    display: none;
+}
+
+.radioItem label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 30px;
+    line-height: 20px;
+    user-select: none;
+}
+.radioItem label:before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    bottom: 1px;
+    background: url(radioButton.svg) 0 0 no-repeat;
+}
+
+/* Checked */
+.radioItem input[type=radio]:checked + label:before {
+    left: 1px;
+    background: url(container.svg) 0 0 no-repeat;
+}
+
+/* Hover */
+.radioItem label:hover:before {
+    filter: brightness(120%);
+}
+
+/* Disabled */
+.radioItem input[type=radio]:disabled + label:before {
+    filter: grayscale(100%);
+}

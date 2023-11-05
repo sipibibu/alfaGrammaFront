@@ -1,0 +1,123 @@
+.profile {
+  display: flex;
+}
+
+.bottomMenu {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 360px;
+  height: calc(100vh - 77px);
+  gap: 32px;
+  padding: 32px;
+  background-color: #FFF;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+.image {
+  align-self: center;
+  width: 250px;
+  height: 250px;
+  border-radius: 16px;
+}
+
+.name {
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.ageTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.age {
+  color:  #4A5568;
+}
+
+.educationTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.education {
+  color:  #4A5568;
+}
+
+.content {
+  margin: 0;
+  padding: 50px 50px 50px 200px;
+}
+
+.skillsContainer {
+  display: flex;
+  gap: 100px;
+  margin-bottom: 100px;
+}
+
+.skillsTitle {
+  font-size: 32px;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.skillsTitle::before {
+  content: url('/src/components/Profile/skills.svg');;
+  position: absolute;
+  left: -50px;
+  background-size: 40px 40px;
+}
+
+.skills {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.skillsType {
+  font-size: 18px;
+  font-weight: 600;
+  color: #4A5568;
+  margin: 0 0 8px;
+}
+
+.skill {
+  font-size: 16px;
+  font-weight: 400;
+  color: #4A5568;
+  margin: 0 0 8px;
+}
+
+.whatUseTitle {
+  font-size: 32px;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.whatUseTitle::before {
+  content: url('/src/components/Profile/whatuse.svg');;
+  position: absolute;
+  left: -50px;
+  background-size: 40px 40px;
+}
+
+.whatUseList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.whatUseItem {
+  font-size: 16px;
+  font-weight: 400;
+  color: #4A5568;
+  margin: 0 0 8px;
+}
