@@ -1,5 +1,5 @@
 import styles from './topmenu.module.css';
-import classNames from 'classnames';
+import * as classNames from 'classnames';
 
 export default function TopMenu() {
   return (
