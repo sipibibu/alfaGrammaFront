@@ -37,8 +37,6 @@ function App() {
         {/*    <option>Предприниматель</option>*/}
         {/*</select>*/}
         {/*<button onClick={axiosGet} type={"submit"}>войти</button>*/}
-        {/*<TopMenu/>*/}
-        {/*<Sidebar/>*/}
         <TopMenu/>
         <Sidebar/>
     </>
