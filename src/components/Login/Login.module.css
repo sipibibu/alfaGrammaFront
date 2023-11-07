@@ -1,0 +1,64 @@
+.loginBlock{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    width: 457px;
+    height: 518px;
+    border-radius: 30px;
+    background: #FFF;
+}
+
+.loginContent{
+    display: flex;
+    flex-direction: column;
+    padding: 125px 92px 195px 92px;
+    gap: 45px;
+}
+
+.inputBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.inputData{
+    width: 273px;
+    height: 40px;
+    border: none;
+    border-radius: 7px;
+    background: #F1F4FF;
+}
+
+.inputData:focus{
+    outline: none;
+}
+
+.inputData::placeholder{
+    color: rgba(64, 58, 75, 0.60);
+    font-family: Lora, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.loginBtn{
+    width: 273px;
+    height: 40px;
+    border-radius: 7px;
+    background: #4D8FDD;
+    color: white;
+    border: none;
+}
+
+.loginBtn:focus{
+    cursor: pointer;
+}
+
+.loginBtn:active{
+    background: #1D8FDD;
+}
