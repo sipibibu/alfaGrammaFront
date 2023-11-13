@@ -12,14 +12,14 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        {/*<Layout>*/}
+        <Layout>
           <Routes>
             <Route path={'/profile'} element={<Profile />}></Route>
             <Route path={'/'} element={<Login />}></Route>
             <Route path={'/mylist'} element={<Sidebar />}></Route>
             <Route path={'/grammas/:id'} element={<GrammaPage />} />
           </Routes>
-        {/*</Layout>*/}
+        </Layout>
       </BrowserRouter>
     </>
   );
