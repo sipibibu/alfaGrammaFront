@@ -1,1 +1,6 @@
-export const server: string = "https://alpha-gramms.zavsoft.net";
+import axios from "axios";
+
+export const axiosInstance = axios.create({
+        baseURL: "http://78.153.5.24:8080",
+    }
+)
