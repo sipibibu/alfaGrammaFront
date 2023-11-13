@@ -1,16 +1,13 @@
 import styles from './profile.module.css';
 import Skills from './Skills.tsx';
 import WhatUse from './WhatUse.tsx';
+import avatar from './Avatar.png';
 
 export default function Profile() {
   return (
     <div className={styles.profile}>
       <div className={styles.bottomMenu}>
-        <img
-          src="/src/components/Profile/Avatar.png"
-          className={styles.image}
-          alt="profile image"
-        />
+        <img src={avatar} className={styles.image} alt="profile image" />
         <p className={styles.name}>Иван Иванов</p>
         <div>
           <h3 className={styles.ageTitle}>Возраст</h3>

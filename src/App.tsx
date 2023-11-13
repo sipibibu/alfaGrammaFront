@@ -1,3 +1,9 @@
+import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Profile from './components/Profile/Profile.tsx';
+import Sidebar from './components/Sidebar/Sidebar.tsx';
+import Layout from './components/Layout/Layout.tsx';
+import GrammaPage from './components/GrammaPage/GrammaPage.tsx';
 import { useState } from 'react'
 import './index.css'
 import axios from "axios";
@@ -37,6 +43,22 @@ function App() {
 
   return (
     <>
+      {/*<p>Выберите роль</p>*/}
+      {/*<select onChange={getSelectedValue} value={select}>*/}
+      {/*    <option>Пользователь</option>*/}
+      {/*    <option>Предприниматель</option>*/}
+      {/*</select>*/}
+      {/*<button onClick={axiosGet} type={"submit"}>войти</button>*/}
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path={'/profile'} element={<Profile />}></Route>
+            <Route path={'/'} element={<Sidebar />}></Route>
+            <Route path={'/mylist'} element={<Sidebar />}></Route>
+            <Route path={'/grammas/:id'} element={<GrammaPage />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
         {/*<input placeholder={"логин"} value={login} onChange={getLogin}/>*/}
         {/*<input placeholder={"пароль"} value={password} onChange={getPassword}/>*/}
         {/*<button onClick={axiosGet} type={"submit"}>войти</button>*/}
@@ -58,7 +80,7 @@ function App() {
             </div>
         </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

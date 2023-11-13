@@ -1,0 +1,88 @@
+.container {
+  height: calc(100vh - 176px);
+  margin: 50px;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 50px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.50);;
+  margin: 0 0 60px;
+}
+
+.title h1 {
+  font-size: 48px;
+  line-height: 98px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.title h2 {
+  font-size: 42px;
+  line-height: 98px;
+  margin: 0;
+  font-weight: 400;
+}
+
+.description {
+  padding: 0 50px;
+
+}
+
+.description h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.description p {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  margin-bottom: 50px;
+  padding: 0 50px;
+  align-items: center;
+}
+
+.calendar {
+  margin-left: 75px;
+}
+
+.calendar::before {
+  content: url('/src/components/GrammaPage/calendar.png');;
+  left: 90px;
+  position: absolute;
+  background-size: 74px 74px;
+}
+
+.calendar p {
+  margin: 0;
+  line-height: 37px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.calendar p span {
+  font-weight: 400;
+}
+
+.menu button {
+  height: 80px;
+  font-size: 42px;
+  line-height: 42px;
+  font-weight: 400;
+  background-color: #4D8FDD;
+  border-radius: 100px;
+  border: 0;
+  padding: 0 25px;
+}
