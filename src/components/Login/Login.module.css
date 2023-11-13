@@ -60,5 +60,6 @@
 }
 
 .loginBtn:active{
+    cursor: pointer;
     background: #1D8FDD;
 }
