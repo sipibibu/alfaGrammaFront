@@ -7,6 +7,7 @@ import GrammaPage from './components/GrammaPage/GrammaPage.tsx';
 import './index.css'
 import * as React from "react";
 import Login from "./components/Login/Login";
+import Registration from "./components/Registration/Registration";
 
 function App() {
   return (
@@ -14,10 +15,10 @@ function App() {
       <BrowserRouter>
         <Layout>
           <Routes>
-            <Route path={'/profile'} element={<Profile />}></Route>
-            <Route path={'/'} element={<Login />}></Route>
-            <Route path={'/mylist'} element={<Sidebar />}></Route>
-            <Route path={'/grammas/:id'} element={<GrammaPage />} />
+            <Route path={'profile'} element={<Profile />}></Route>
+            <Route path={'/'} element={<Registration />}></Route>
+            <Route path={'mylist'} element={<Sidebar />}></Route>
+            <Route path={'grammas/:id'} element={<GrammaPage />} />
           </Routes>
         </Layout>
       </BrowserRouter>
