@@ -1,0 +1,31 @@
+.blockCard{
+    width: 420px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow: 0 4px 46px -2px rgba(0, 0, 0, 0.06);
+}
+
+.textHeading{
+    color: #000;
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.textDescription{
+    width: 234px;
+    color: #000;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

@@ -1,33 +1,42 @@
 import * as React from 'react';
 import styles from './Login.module.css'
-import {useState} from "react";
-import AuthService from "../../API/AuthService";
+import {useContext, useState} from "react";
+import {Context} from "../../main";
+import {observer} from "mobx-react-lite";
 
 const Login = () => {
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
-    const [token, setToken] = useState('')
-
-    const getLogin = (event) => {
-        setLogin(event.target.value)
-    }
-
-    const getPassword = (event) => {
-        setPassword(event.target.value)
-    }
-
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const {store} = useContext(Context)
     return (
         <div className={styles.loginBlock}>
             <div className={styles.loginContent}>
                 <img src="/src/components/TopMenu/logo.png" alt="logo"/>
                 <div className={styles.inputBlock}>
-                    <input placeholder={"Логин"} className={styles.inputData} value={login} onChange={getLogin}/>
-                    <input placeholder={"Пароль"} className={styles.inputData} value={password} onChange={getPassword}/>
+                    <input
+                           placeholder={"Email"}
+                           type={"text"}
+                           className={styles.inputData}
+                           value={email}
+                           onChange={e => setEmail(e.target.value)}
+                    />
+                    <input
+                           placeholder={"Пароль"}
+                           type={"password"}
+                           className={styles.inputData}
+                           value={password}
+                           onChange={e => setPassword(e.target.value)}
+                    />
                 </div>
-                <button className={styles.loginBtn} onClick={() => AuthService.axiosGet(login, password)} type={"submit"}>Войти</button>
+                <button
+                    className={styles.loginBtn}
+                    onClick={() => store.login(email, password)}
+                    type={"submit"}>
+                    Войти
+                </button>
             </div>
         </div>
     );
 };
 
-export default Login;
+export default observer(Login);
