@@ -4,9 +4,9 @@ import Registration from "../Registration/Registration";
 
 const Authorization = () => {
     return (
-        <div>
-            <Registration/>
+        <div style={{display: "flex", flexDirection: "row", gap: "10px"}}>
             <Login/>
+            <Registration/>
         </div>
     );
 };
