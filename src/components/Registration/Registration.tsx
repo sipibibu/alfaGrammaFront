@@ -1,9 +1,8 @@
 import * as React from 'react';
 import styles from '../Login/Login.module.css'
 import {useContext, useState} from "react";
-import AuthService from "../../services/AuthService";
-import {useNavigate} from "react-router";
 import {Context} from "../../main";
+import {observer} from "mobx-react-lite";
 
 const Registration = () => {
     const [name, setName] = useState('')
@@ -12,26 +11,8 @@ const Registration = () => {
     const [password, setPassword] = useState('')
     const [selectRole, setSelectRole] = useState("respondent")// useContext для token, access, interceptors
     const {store} = useContext(Context)
-    // async function registration() {
-    //     setResp((await AuthService.registration(login, password, select)).status)
-    //     console.log(resp)
-    //     if(resp == 200){
-    //         await AuthService.login(login, password).then(resp => setToken(resp.data.access_jwt_token))
-    //         if(select == "respondent"){
-    //             navigate('/profile')
-    //         }
-    //         else {
-    //             navigate('/mylist')
-    //         }
-    //         console.log(token)
-    //     }
-    //     else{
-    //         console.log("что то не так")
-    //     }
-    // }
-
     return (
-        <div className={styles.loginBlock}>
+        <div className={styles.registrationBlock}>
             <div className={styles.loginContent}>
                 <img src="/src/components/TopMenu/logo.png" alt="logo"/>
                 <div className={styles.inputBlock}>
@@ -80,4 +61,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default observer(Registration);
