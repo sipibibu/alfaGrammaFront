@@ -7,6 +7,7 @@ import GrammaPage from './components/GrammaPage/GrammaPage.tsx';
 import './index.css'
 import * as React from "react";
 import Authorization from "./components/Authorization/Authorization";
+import Registration from "./components/Registration/Registration.tsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path={'profile'} element={<Profile />}></Route>
             <Route path={'/'} element={<Authorization />}></Route>
+            <Route path={'/registration'} element={<Registration />}></Route>
             <Route path={'mylist'} element={<Sidebar />}></Route>
             <Route path={'grammas/:id'} element={<GrammaPage />} />
           </Routes>
