@@ -1,0 +1,48 @@
+.radioList{
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  position: relative;
+}
+
+.radioItem input[type=radio] {
+  display: none;
+}
+
+.radioItem input[type=text] {
+  font-family: inherit;
+  border: none;
+  border-bottom: 1px solid ;
+  padding-left: 0;
+  font-size: 16px;
+  cursor: text;
+  line-height: 20px;
+  user-select: none;
+}
+
+.radioItem input[type=text]:focus {
+  outline: none;
+}
+
+.radioItem label {
+}
+
+.radioItem label:before {
+  content: url('/src/components/QuestionConstructor/icons/radio.svg');
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  top: 5px;
+  position: relative;
+}
+
+
+/* Hover */
+.radioItem input[type=text]:hover:before {
+  filter: brightness(120%);
+}
+
+/* Disabled */
+.radioItem input[type=radio]:disabled + input[type=text]:before {
+  filter: grayscale(100%);
+}

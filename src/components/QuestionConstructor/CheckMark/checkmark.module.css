@@ -1,0 +1,74 @@
+.checkbox {
+  position: relative;
+  padding-left: 25px; /* Так как .checkbox__checkmark имеет position: absolute; оставляем для него свободное место */
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox input:checked ~ .checkbox__checkmark {
+  background-color: #fff;
+}
+
+/* Если input отмечен(:checked), то псевдо-элемент .checkbox__checkmark:after(отметка-галочка), применяет данные стили */
+.checkbox input:checked ~ .checkbox__checkmark:after {
+  opacity: 1; /* отображаем отметку-галочку */
+}
+
+/* При наведении(:hover) на всю область checkbox элемент .checkbox__checkmark(область отметки) применяет данные стили*/
+.checkbox:hover input ~ .checkbox__checkmark {
+  background-color: #fff; /* окрашиваем фон в серый цвет*/
+}
+
+/* При наведении(:hover) на всю область checkbox и при отмеченном input  элемент .checkbox__checkmark(область отметки) применяет данные стили*/
+.checkbox:hover input:checked ~ .checkbox__checkmark {
+  background-color: #fff; /* окрашиваем фон в белый цвет*/
+}
+
+/* Исходные стили для области отметки .checkbox__checkmark */
+.checkbox .checkbox__checkmark {
+  position: absolute;
+  top: 2px;
+  left: -5px;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border: 1px solid #000;
+  transition: background-color 0.25s ease;
+}
+
+/* Исходные стили для отметки .checkbox__checkmark:after */
+.checkbox .checkbox__checkmark:after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: -1px;
+  width: 8px; /* ширина - длина левой линии отметки-галочки */
+  height: 15px; /* высота - длина правой линии отметки-галочки */
+  border: solid #ff4848; /* рамка(border) сплошной линией цвета #333 */
+  border-width: 0 1px 1px 0; /* правая и нижняя рамка(border) по 1px  */
+  transform: rotate(40deg); /* блок наклонен по часовой стрелке на 45 градусов */
+  opacity: 0; /* изначально скрыта */
+  transition: opacity 0.25s ease; /* для плавного появления, скрытия, перемещения отметки*/
+}
+
+/* Исходные стили для области описания .checkbox__body*/
+.checkbox .checkbox__body {
+  color: #333;
+  line-height: 1.4;
+  font-size: 16px;
+}
+
+
+.checkbox__body {
+  font-size: 16px;
+  line-height: 16px;
+  border-bottom: 1px solid;
+}

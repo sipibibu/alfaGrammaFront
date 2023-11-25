@@ -1,0 +1,16 @@
+.answer {
+  margin: 0;
+  border: none;
+  border-radius: 8px;
+  background: #F9F9F9;
+  height: 36px;
+  width: calc(100% - 80px);
+  bottom: 30px;
+  position: absolute;
+  font-size: 20px;
+  padding: 0 10px;
+}
+
+.answer::placeholder {
+  opacity: 0.5;
+}
