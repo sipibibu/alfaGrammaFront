@@ -1,5 +1,10 @@
 .loginBlock{
     position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     text-align: center;
     width: 457px;
     height: 518px;
@@ -16,7 +21,7 @@
     left: 0;
     text-align: center;
     width: 457px;
-    height: 700px;
+    height: 718px;
     border-radius: 30px;
     background: #FFF;
 }
@@ -38,6 +43,7 @@
     width: 273px;
     height: 40px;
     border: none;
+    font-family: 'Montserrat', sans-serif;
     border-radius: 7px;
     background: #F1F4FF;
 }
@@ -48,16 +54,40 @@
 
 .inputData::placeholder{
     color: rgba(64, 58, 75, 0.60);
-    font-family: Lora, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
 }
 
+.roleBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 273px;
+}
+
+.textRole{
+    font-size: 14px;
+}
+
+.selectBlock{
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 7px;
+}
+
+.loginBtnBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .loginBtn{
     width: 273px;
     height: 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
     border-radius: 7px;
     background: #4D8FDD;
     color: white;
@@ -71,4 +101,26 @@
 .loginBtn:active{
     cursor: pointer;
     background: #1D8FDD;
+}
+
+.accountBlock{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.accountText{
+    font-size: 14px;
+}
+
+.accountButton{
+    font-family: 'Montserrat', sans-serif;
+    background-color: white;
+    border: none;
+}
+
+.accountButton:focus:active{
+    cursor: pointer;
+    color: #1D8FDD;
 }

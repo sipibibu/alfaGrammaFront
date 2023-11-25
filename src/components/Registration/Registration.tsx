@@ -1,8 +1,9 @@
 import * as React from 'react';
-import styles from '../Login/Login.module.css'
+import styles from '../../styles/Authorization.module.css';
 import {useContext, useState} from "react";
 import {Context} from "../../main";
 import {observer} from "mobx-react-lite";
+import {useNavigate} from "react-router";
 
 const Registration = () => {
     const [name, setName] = useState('')
@@ -10,6 +11,7 @@ const Registration = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [selectRole, setSelectRole] = useState("respondent")// useContext для token, access, interceptors
+    const navigate = useNavigate()
     const {store} = useContext(Context)
     return (
         <div className={styles.registrationBlock}>
@@ -45,17 +47,28 @@ const Registration = () => {
                         onChange={e => setPassword(e.target.value)}
                     />
                 </div>
-                <p>Выберите роль</p>
-                <select value={selectRole} onChange={e => setSelectRole(e.target.value)}>
-                    <option value={"respondent"}>Пользователь</option>
-                    <option value={"manager"}>Менеджер</option>
-                </select>
+                <div className={styles.roleBlock}>
+                    <div className={styles.textRole}>Выберите роль</div>
+                    <select
+                        className={styles.selectBlock}
+                        value={selectRole}
+                        onChange={e => setSelectRole(e.target.value)}>
+                        <option value={"respondent"}>Пользователь</option>
+                        <option value={"manager"}>Менеджер</option>
+                    </select>
+                </div>
+                <div className={styles.loginBtnBlock}>
                 <button
                     className={styles.loginBtn}
                     onClick={() => store.authorization(name, surname, email, password, selectRole)}
                     type={"submit"}>
                     Зарегистрироваться
                 </button>
+                <div className={styles.accountBlock}>
+                    <div className={styles.accountText}>У вас есть аккаунт?</div>
+                    <button className={styles.accountButton} onClick={() => navigate("/")}>Войти</button>
+                </div>
+                </div>
             </div>
         </div>
     );
