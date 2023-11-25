@@ -1,13 +1,15 @@
 import * as React from 'react';
-import styles from './Login.module.css'
+import styles from '../../styles/Authorization.module.css'
 import {useContext, useState} from "react";
 import {Context} from "../../main";
 import {observer} from "mobx-react-lite";
+import {useNavigate} from "react-router";
 
 const Login = () => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const {store} = useContext(Context)
+    const navigate = useNavigate()
     return (
         <div className={styles.loginBlock}>
             <div className={styles.loginContent}>
@@ -28,12 +30,18 @@ const Login = () => {
                            onChange={e => setPassword(e.target.value)}
                     />
                 </div>
-                <button
-                    className={styles.loginBtn}
-                    onClick={() => store.login(email, password)}
-                    type={"submit"}>
-                    Войти
-                </button>
+                <div className={styles.loginBtnBlock}>
+                    <button
+                        className={styles.loginBtn}
+                        onClick={() => store.login(email, password)}
+                        type={"submit"}>
+                        Войти
+                    </button>
+                    <div className={styles.accountBlock}>
+                        <div className={styles.accountText}>У вас нет аккаунта?</div>
+                        <button className={styles.accountButton} onClick={() => navigate("/registration")}>Регистрация</button>
+                    </div>
+                </div>
             </div>
         </div>
     );
