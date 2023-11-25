@@ -1,0 +1,44 @@
+.card {
+  width: 72vw;
+  margin: 0;
+  border: 1px solid rgba(0, 0, 0, 0.80);
+  border-radius: 30px;
+  background-color: #fff;
+  padding: 30px;
+  min-height: 120px;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.title {
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0;
+  height: 24px;
+  border: none;
+  border-bottom: 1px solid;
+  width: 70%;
+}
+
+.title:focus {
+  outline: none;
+}
+
+.title::placeholder {
+  opacity: 0.5;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-items: right;
+  align-items: flex-end;
+}

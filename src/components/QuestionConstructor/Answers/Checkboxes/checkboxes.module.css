@@ -1,0 +1,52 @@
+.radioList{
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  position: relative;
+  padding-left: 5px;
+}
+
+.radioItem input[type=radio] {
+  display: none;
+}
+
+.radioItem input[type=text] {
+  font-family: inherit;
+  border: none;
+  border-bottom: 1px solid ;
+  padding-left: 0;
+  font-size: 16px;
+  cursor: text;
+  line-height: 20px;
+  user-select: none;
+}
+
+.radioItem input[type=text]:focus {
+  outline: none;
+}
+
+.radioItem label {
+}
+
+.radioItem label:before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  top: 5px;
+  right: 5px;
+  position: relative;
+  border: 1px solid;
+  background-color: #e1e1e1;
+}
+
+
+/* Hover */
+.radioItem input[type=text]:hover:before {
+  filter: brightness(120%);
+}
+
+/* Disabled */
+.radioItem input[type=checkbox]:disabled + input[type=text]:before {
+  filter: grayscale(100%);
+}
