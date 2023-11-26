@@ -4,7 +4,7 @@ export default function Text() {
   return (
     <input
       type={'text'}
-      placeholder={'Введите ответ'}
+      placeholder={'Поле ответа'}
       disabled
       className={styles.answer}
     />

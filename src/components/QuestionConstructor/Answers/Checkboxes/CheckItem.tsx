@@ -1,5 +1,5 @@
 import styles from './checkboxes.module.css';
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 
 type CheckItemProps = {
   value: string;
@@ -7,7 +7,7 @@ type CheckItemProps = {
   onChange: (event: ChangeEvent<HTMLInputElement>, key: number) => void;
 };
 
-export default function CheckItem({ value, index, onChange }: CheckItemProps) {
+function CheckItem({ value, index, onChange }: CheckItemProps) {
   return (
     <div className={styles.radioItem}>
       <input name="check" type="radio" value={'1'} disabled />
@@ -22,3 +22,5 @@ export default function CheckItem({ value, index, onChange }: CheckItemProps) {
     </div>
   );
 }
+
+export default React.memo(CheckItem);

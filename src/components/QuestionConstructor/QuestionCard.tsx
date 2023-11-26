@@ -1,6 +1,6 @@
 import styles from './question-card.module.css';
 import CheckMark from './CheckMark/CheckMark.tsx';
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent, useCallback } from 'react';
 import TypesSelect from './TypesSelect/TypesSelect.tsx';
 import { QuestionType } from '../../const.ts';
 import Scale from './Answers/Scale/Scale.tsx';
@@ -63,27 +63,29 @@ const getQuestionField = (
   }
 };
 
-export default function QuestionCard({
-  question,
-  questionChange,
-  index,
-}: QuestionCardProps) {
-  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    questionChange({ ...question, title: event.target.value }, index);
-  };
+function QuestionCard({ question, questionChange, index }: QuestionCardProps) {
+  const handleTitleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      questionChange({ ...question, title: event.target.value }, index);
+    },
+    [question, questionChange]
+  );
 
-  const handleTypeChange = (type: string) => {
-    questionChange(
-      {
-        ...question,
-        type: type,
-        options: getQuestionOptions(type),
-      },
-      index
-    );
-  };
+  const handleTypeChange = useCallback(
+    (type: string) => {
+      questionChange(
+        {
+          ...question,
+          type: type,
+          options: getQuestionOptions(type),
+        },
+        index
+      );
+    },
+    [question, questionChange]
+  );
 
-  const handleIsRequiredChange = () => {
+  const handleIsRequiredChange = useCallback(() => {
     questionChange(
       {
         ...question,
@@ -91,17 +93,20 @@ export default function QuestionCard({
       },
       index
     );
-  };
+  }, [question, questionChange]);
 
-  const handleOptionsChange = (options: QuestionOptions) => {
-    questionChange(
-      {
-        ...question,
-        options: options,
-      },
-      index
-    );
-  };
+  const handleOptionsChange = useCallback(
+    (options: QuestionOptions) => {
+      questionChange(
+        {
+          ...question,
+          options: options,
+        },
+        index
+      );
+    },
+    [question, questionChange]
+  );
 
   return (
     <div className={styles.card}>
@@ -131,3 +136,5 @@ export default function QuestionCard({
     </div>
   );
 }
+
+export default React.memo(QuestionCard);

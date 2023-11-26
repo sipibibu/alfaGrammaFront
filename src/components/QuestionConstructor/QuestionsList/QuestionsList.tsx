@@ -1,9 +1,14 @@
 import QuestionCard from '../QuestionCard.tsx';
 import styles from './question-list.module.css';
 import { Question } from '../../../types.ts';
-import { useState } from 'react';
 import { QuestionType } from '../../../const.ts';
 import NewQuestionButton from '../NewQuestionButton/NewQuestionButton.tsx';
+import React, { useCallback } from 'react';
+
+type QuestionListProps = {
+  questionsList: Question[];
+  questionsChange: (questions: Question[]) => void;
+};
 
 const initialQuestion: Question = {
   title: '',
@@ -12,28 +17,25 @@ const initialQuestion: Question = {
   options: null,
 };
 
-export default function QuestionsList() {
-  const [questions, setQuestions] = useState<Question[]>([]);
-
-  const handleQuestionChange = (updatedQuestion: Question, index: number) => {
-    setQuestions((prevState: Question[]) => {
-      return [
-        ...prevState.slice(0, index),
+function QuestionsList({ questionsList, questionsChange }: QuestionListProps) {
+  const handleQuestionChange = useCallback(
+    (updatedQuestion: Question, index: number) => {
+      questionsChange([
+        ...questionsList.slice(0, index),
         updatedQuestion,
-        ...prevState.slice(index + 1, prevState.length),
-      ];
-    });
-  };
+        ...questionsList.slice(index + 1, questionsList.length),
+      ]);
+    },
+    [questionsList, questionsChange]
+  );
 
-  const handleAddQuestion = () => {
-    setQuestions((prevState: Question[]) => {
-      return [...prevState, initialQuestion];
-    });
-  };
+  const handleAddQuestion = useCallback(() => {
+    questionsChange([...questionsList, initialQuestion]);
+  }, [questionsList, questionsChange]);
 
   return (
     <div className={styles.questions}>
-      {questions.map((question, index) => (
+      {questionsList.map((question, index) => (
         <QuestionCard
           question={question}
           index={index}
@@ -45,3 +47,5 @@ export default function QuestionsList() {
     </div>
   );
 }
+
+export default React.memo(QuestionsList);

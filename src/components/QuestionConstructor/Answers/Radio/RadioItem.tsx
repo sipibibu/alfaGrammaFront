@@ -1,5 +1,5 @@
 import styles from './radio.module.css';
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 
 type RadioItemProps = {
   value: string;
@@ -7,7 +7,7 @@ type RadioItemProps = {
   onChange: (event: ChangeEvent<HTMLInputElement>, key: number) => void;
 };
 
-export default function RadioItem({ value, index, onChange }: RadioItemProps) {
+function RadioItem({ value, index, onChange }: RadioItemProps) {
   return (
     <div className={styles.radioItem}>
       <input name="radio" type="radio" value={'1'} disabled />
@@ -22,3 +22,5 @@ export default function RadioItem({ value, index, onChange }: RadioItemProps) {
     </div>
   );
 }
+
+export default React.memo(RadioItem);

@@ -1,6 +1,6 @@
 import styles from './checkmark.module.css';
 import * as classNames from 'classnames';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 type CheckMarkProps = {
   children: ReactNode;
@@ -9,12 +9,7 @@ type CheckMarkProps = {
   reverse?: boolean;
 };
 
-export default function CheckMark({
-  children,
-  checked,
-  onChange,
-  reverse,
-}: CheckMarkProps) {
+function CheckMark({ children, checked, onChange, reverse }: CheckMarkProps) {
   return (
     <label className={classNames(styles.checkbox, reverse && styles.required)}>
       <div className={styles.checkbox__body}>{children}</div>
@@ -23,3 +18,5 @@ export default function CheckMark({
     </label>
   );
 }
+
+export default React.memo(CheckMark);

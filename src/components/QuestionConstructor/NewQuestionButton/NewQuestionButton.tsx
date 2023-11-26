@@ -1,10 +1,11 @@
 import styles from './new-question-button.module.css';
+import React from 'react';
 
 type NewQuestionButtonProps = {
   onClick: () => void;
 };
 
-export default function NewQuestionButton({ onClick }: NewQuestionButtonProps) {
+function NewQuestionButton({ onClick }: NewQuestionButtonProps) {
   return (
     <div className={styles.card} onClick={onClick}>
       <svg
@@ -22,3 +23,5 @@ export default function NewQuestionButton({ onClick }: NewQuestionButtonProps) {
     </div>
   );
 }
+
+export default React.memo(NewQuestionButton);
