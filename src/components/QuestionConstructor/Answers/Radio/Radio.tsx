@@ -2,13 +2,14 @@ import styles from './radio.module.css';
 import RadioItem from './RadioItem.tsx';
 import { useOptions } from '../../../../hooks/useOptions.ts';
 import { RadioOptions } from '../../../../types.ts';
+import React from 'react';
 
 type RadioProps = {
   options: RadioOptions;
   setOptions: (options: RadioOptions) => void;
 };
 
-export default function Radio({ options, setOptions }: RadioProps) {
+function Radio({ options, setOptions }: RadioProps) {
   const setOptionsArray = useOptions(options, setOptions);
 
   return (
@@ -24,3 +25,5 @@ export default function Radio({ options, setOptions }: RadioProps) {
     </div>
   );
 }
+
+export default React.memo(Radio);

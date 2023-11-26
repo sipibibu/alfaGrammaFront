@@ -2,13 +2,14 @@ import styles from './checkboxes.module.css';
 import CheckItem from './CheckItem.tsx';
 import { useOptions } from '../../../../hooks/useOptions.ts';
 import { CheckboxOptions } from '../../../../types.ts';
+import React from 'react';
 
 type CheckboxesProps = {
   options: CheckboxOptions;
   setOptions: (options: CheckboxOptions) => void;
 };
 
-export default function Checkboxes({ options, setOptions }: CheckboxesProps) {
+function Checkboxes({ options, setOptions }: CheckboxesProps) {
   const setOptionsArray = useOptions(options, setOptions);
 
   return (
@@ -24,3 +25,5 @@ export default function Checkboxes({ options, setOptions }: CheckboxesProps) {
     </div>
   );
 }
+
+export default React.memo(Checkboxes);

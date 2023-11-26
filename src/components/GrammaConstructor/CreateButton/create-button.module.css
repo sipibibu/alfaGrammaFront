@@ -1,0 +1,22 @@
+.submit {
+  background: #FF4848;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  align-self: flex-end;
+  width: 250px;
+  height: 60px;
+  text-align: center;
+  font-family: inherit;
+  font-size: 28px;
+  cursor: pointer;
+  transition: opacity 0.5s ease;
+}
+
+.submit:hover {
+  opacity: 0.8;
+}
+
+.submit:active {
+  opacity: 0.8;
+}

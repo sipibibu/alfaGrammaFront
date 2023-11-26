@@ -10,8 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.18",
+    "@mui/x-date-pickers": "^6.18.2",
     "axios": "^1.5.1",
     "classnames": "^2.3.2",
+    "dayjs": "^1.11.10",
     "mobx": "^6.11.0",
     "mobx-react-lite": "^4.0.5",
     "prettier": "^3.0.3",

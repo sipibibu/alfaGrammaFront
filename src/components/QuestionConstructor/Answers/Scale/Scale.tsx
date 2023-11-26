@@ -1,13 +1,13 @@
 import styles from './scale.module.css';
 import { ScaleOptions } from '../../../../types.ts';
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 
 type ScaleProps = {
   options: ScaleOptions;
   setOptions: (prevState: ScaleOptions) => void;
 };
 
-export default function Scale({ options, setOptions }: ScaleProps) {
+function Scale({ options, setOptions }: ScaleProps) {
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     setOptions({
       ...options,
@@ -56,3 +56,5 @@ export default function Scale({ options, setOptions }: ScaleProps) {
     </div>
   );
 }
+
+export default React.memo(Scale);

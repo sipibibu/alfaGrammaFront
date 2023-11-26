@@ -1,6 +1,6 @@
 import styles from './types-select.module.css';
 import { QuestionType } from '../../../const.ts';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import * as classNames from 'classnames';
 
 type TypesSelectProps = {
@@ -22,10 +22,7 @@ const getTitle = (questionType: string) => {
   }
 };
 
-export default function TypesSelect({
-  questionType,
-  setQuestionType,
-}: TypesSelectProps) {
+function TypesSelect({ questionType, setQuestionType }: TypesSelectProps) {
   const [isMenuShowed, setIsMenuShown] = useState(false);
 
   const handleTypeChange = (event: any) => {
@@ -78,3 +75,5 @@ export default function TypesSelect({
     </>
   );
 }
+
+export default React.memo(TypesSelect);
