@@ -26,9 +26,11 @@ export default class AuthService{
     //     )
     // }
 
-    static async registration(login: string, password: string, role: string): Promise<AxiosResponce<AuthResponce>>{
+    static async registration(name: string, surname: string, login: string, password: string, role: string): Promise<AxiosResponce<AuthResponce>>{
         return axiosInstance.post<AuthResponce>(`/auth/register/${role}`,
             {
+                firstname: name,
+                lastname: surname,
                 username: login,
                 password: password
             })

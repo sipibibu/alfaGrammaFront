@@ -113,6 +113,7 @@
   display: grid;
   grid-auto-flow: column;
   grid-template-rows: repeat(3, 1fr);
+  grid-gap: 10px;
 }
 
 .whatUseItem {
@@ -120,4 +121,23 @@
   font-weight: 400;
   color: #4A5568;
   margin: 0 0 8px;
+}
+
+.whatUseEditBtn{
+  display: flex;
+  width: 270px;
+  height: 55px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  background-color: #FF4848;
+  color: #FFF;
+  border-radius: 50px;
+  border: none;
+  align-items: center;
+  font-family: Montserrat, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
