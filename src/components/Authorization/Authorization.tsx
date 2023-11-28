@@ -3,7 +3,7 @@ import Login from "../Login/Login";
 import {useContext} from "react";
 import {Context} from "../../main";
 import {observer} from "mobx-react-lite";
-import Profile from "../Profile/Profile";
+import Profile from "../Profile/ProfileUser.tsx";
 
 const Authorization = () => {
     const {store} = useContext(Context)

@@ -10,7 +10,7 @@ const Registration = () => {
     const [surname, setSurname] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [selectRole, setSelectRole] = useState("respondent")// useContext для token, access, interceptors
+    const [selectRole, setSelectRole] = useState("respondent")
     const navigate = useNavigate()
     const {store} = useContext(Context)
     return (

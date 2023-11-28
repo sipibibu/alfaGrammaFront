@@ -4,7 +4,6 @@ import AuthService from "../services/AuthService";
 import {AuthResponce} from "../models/responce/AuthResponce";
 import AxiosResponce from "axios";
 
-
 export default class Store {
     user = {} as IUser
     isAuth = false
@@ -32,7 +31,7 @@ export default class Store {
             localStorage.setItem('token', response.data.access_jwt_token)
             this.setAuth(true)
             this.setLogin(true)
-            this.setUser({name: this.user.name, surname:this.user.surname, login, role: this.user.role})
+            this.setUser({name: this.user.name, surname: this.user.surname, login, role: this.user.role})
             console.log(response)
         } catch (e) {
             console.log(e.response?.data?.message)
@@ -41,7 +40,7 @@ export default class Store {
 
     async registration(name: string, surname: string, login: string, password: string, role: string){
         try {
-            const response: AxiosResponce<AuthResponce> = await AuthService.registration(login, password, role)
+            const response: AxiosResponce<AuthResponce> = await AuthService.registration(name, surname, login, password, role)
             this.setAuth(true)
             this.setUser({name, surname, login, role})
             console.log(response)

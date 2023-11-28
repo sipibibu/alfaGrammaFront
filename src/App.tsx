@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Profile from './components/Profile/Profile.tsx';
+import Profile from './components/Profile/ProfileUser.tsx';
 import Sidebar from './components/Sidebar/Sidebar.tsx';
 import Layout from './components/Layout/Layout.tsx';
 import GrammaPage from './components/GrammaPage/GrammaPage.tsx';
