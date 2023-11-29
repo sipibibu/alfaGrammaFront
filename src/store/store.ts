@@ -33,6 +33,7 @@ export default class Store {
             this.setLogin(true)
             this.setUser({name: this.user.name, surname: this.user.surname, login, role: this.user.role})
             console.log(response)
+            console.log(this.isAuth, this.isLogin)
         } catch (e) {
             console.log(e.response?.data?.message)
         }
@@ -51,7 +52,7 @@ export default class Store {
 
     async authorization(name: string, surname: string, login: string, password: string, role: string){
         await this.registration(name, surname, login, password, role)
-        if(this.isAuth && this.user != {}) {
+        if(this.isAuth) {
             await this.login(login, password)
         }
     }
