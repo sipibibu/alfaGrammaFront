@@ -10,6 +10,12 @@ const Login = () => {
     const [password, setPassword] = useState<string>('')
     const {store} = useContext(Context)
     const navigate = useNavigate()
+    async function loginUser(email: string, password: string) {
+        await store.login(email, password)
+        if(store.isAuth && store.isLogin){
+            navigate('/profile')
+        }
+    }
     return (
         <div className={styles.loginBlock}>
             <div className={styles.loginContent}>
@@ -33,7 +39,7 @@ const Login = () => {
                 <div className={styles.loginBtnBlock}>
                     <button
                         className={styles.loginBtn}
-                        onClick={() => store.login(email, password)}
+                        onClick={() => loginUser(email, password)}
                         type={"submit"}>
                         Войти
                     </button>
