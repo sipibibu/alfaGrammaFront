@@ -31,7 +31,7 @@ export default class AuthService{
             {
                 firstname: name,
                 lastname: surname,
-                username: login,
+                email: login,
                 password: password
             })
     }

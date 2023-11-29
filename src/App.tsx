@@ -8,6 +8,8 @@ import './index.css'
 import * as React from "react";
 import Authorization from "./components/Authorization/Authorization";
 import Registration from "./components/Registration/Registration.tsx";
+import GrammaConstructor from "./components/GrammaConstructor/GrammaConstructor.tsx";
+import Login from "./components/Login/Login.tsx";
 
 function App() {
   return (
@@ -15,11 +17,12 @@ function App() {
       <BrowserRouter>
         {/*<Layout>*/}
           <Routes>
-            <Route path={'profile'} element={<Profile />}></Route>
-            <Route path={'/'} element={<Authorization />}></Route>
-            <Route path={'/registration'} element={<Registration />}></Route>
-            <Route path={'mylist'} element={<Sidebar />}></Route>
+            <Route path={'profile'} element={<Profile />}/>
+            <Route path={'/'} element={<Login />}/>
+            <Route path={'registration'} element={<Registration />}/>
+            <Route path={'mylist'} element={<Sidebar />}/>
             <Route path={'grammas/:id'} element={<GrammaPage />} />
+            <Route path={'grammaConstuctor'} element={<GrammaConstructor/>}/>
           </Routes>
         {/*</Layout>*/}
       </BrowserRouter>

@@ -13,6 +13,12 @@ const Registration = () => {
     const [selectRole, setSelectRole] = useState("respondent")
     const navigate = useNavigate()
     const {store} = useContext(Context)
+    async function registration(name: string, surname: string, email: string, password: string, selectRole: string){
+        await store.authorization(name, surname, email, password, selectRole)
+        if(store.isAuth && store.isLogin){
+            navigate('/profile')
+        }
+    }
     return (
         <div className={styles.registrationBlock}>
             <div className={styles.loginContent}>
@@ -60,7 +66,7 @@ const Registration = () => {
                 <div className={styles.loginBtnBlock}>
                 <button
                     className={styles.loginBtn}
-                    onClick={() => store.authorization(name, surname, email, password, selectRole)}
+                    onClick={() => registration(name, surname, email, password, selectRole)}
                     type={"submit"}>
                     Зарегистрироваться
                 </button>
