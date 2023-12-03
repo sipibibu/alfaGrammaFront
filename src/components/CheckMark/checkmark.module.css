@@ -53,7 +53,7 @@
   width: 8px; /* ширина - длина левой линии отметки-галочки */
   height: 15px; /* высота - длина правой линии отметки-галочки */
   border: solid #ff4848; /* рамка(border) сплошной линией цвета #333 */
-  border-width: 0 1px 1px 0; /* правая и нижняя рамка(border) по 1px  */
+  border-width: 0 2px 2px 0; /* правая и нижняя рамка(border) по 1px  */
   transform: rotate(40deg); /* блок наклонен по часовой стрелке на 45 градусов */
   opacity: 0; /* изначально скрыта */
   transition: opacity 0.25s ease; /* для плавного появления, скрытия, перемещения отметки*/
@@ -71,4 +71,5 @@
   font-size: 16px;
   line-height: 16px;
   border-bottom: 1px solid;
+  width: fit-content;
 }
