@@ -1,5 +1,5 @@
 import styles from './question-card.module.css';
-import CheckMark from './CheckMark/CheckMark.tsx';
+import CheckMark from '../CheckMark/CheckMark.tsx';
 import React, { ChangeEvent, useCallback } from 'react';
 import TypesSelect from './TypesSelect/TypesSelect.tsx';
 import { QuestionType } from '../../const.ts';
@@ -123,11 +123,10 @@ function QuestionCard({ question, questionChange, index }: QuestionCardProps) {
             setQuestionType={handleTypeChange}
           />
           <CheckMark
+            value={'Обязательный'}
             checked={question.isRequired}
             onChange={handleIsRequiredChange}
-          >
-            Обязательный
-          </CheckMark>
+          />
         </div>
       </div>
       <div className={styles.questionField}>
