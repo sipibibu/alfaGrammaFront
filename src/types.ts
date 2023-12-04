@@ -23,3 +23,20 @@ export type Gramma = {
   dateTo: string;
   questions: Question[];
 };
+
+export type TextAnswer = string;
+export type RadioAnswer = string;
+export type CheckboxAnswer = string[];
+export type ScaleAnswer = number;
+
+export type QuestionAnswer =
+  | TextAnswer
+  | RadioAnswer
+  | CheckboxAnswer
+  | ScaleAnswer;
+
+export type UserResponse = {
+  grammaId: string;
+  userEmail: string;
+  answers: QuestionAnswer[];
+};

@@ -1,0 +1,36 @@
+.radioButton input[type=radio] {
+  display: none;
+}
+
+.radioButton label {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  padding-left: 30px;
+  line-height: 20px;
+  user-select: none;
+}
+.radioButton label:before {
+  content: url("radio.svg");
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  position: absolute;
+  left: 0;
+  top: 2px;
+}
+
+/* Checked */
+.radioButton input[type=radio]:checked + label:before {
+  content: url("radio-checked.svg");
+}
+
+/* Hover */
+.radioButton label:hover:before {
+  filter: brightness(120%);
+}
+
+/* Disabled */
+.radioButton input[type=radio]:disabled + label:before {
+  filter: grayscale(100%);
+}
