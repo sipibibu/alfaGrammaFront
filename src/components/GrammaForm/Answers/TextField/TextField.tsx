@@ -6,7 +6,7 @@ type TextProps = {
   onAnswerChanged: (answer: TextAnswer) => void;
 };
 
-export default function Text({ onAnswerChanged }: TextProps) {
+export default function TextField({ onAnswerChanged }: TextProps) {
   return (
     <input
       type={'text'}

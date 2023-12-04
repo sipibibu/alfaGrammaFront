@@ -1,4 +1,4 @@
-import styles from './checkboxes.module.css';
+import styles from './checkboxes-field.module.css';
 import { CheckboxAnswer, CheckboxOptions } from '../../../../types.ts';
 import React, { ChangeEvent } from 'react';
 import CheckMark from '../../../CheckMark/CheckMark.tsx';
@@ -9,7 +9,11 @@ type CheckboxesProps = {
   onAnswerChange: (answer: CheckboxAnswer) => void;
 };
 
-function Checkboxes({ options, userAnswer, onAnswerChange }: CheckboxesProps) {
+function CheckboxesField({
+  options,
+  userAnswer,
+  onAnswerChange,
+}: CheckboxesProps) {
   const handleCheck = (evt: ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;
     const index = userAnswer.findIndex((answer) => answer === value);
@@ -31,4 +35,4 @@ function Checkboxes({ options, userAnswer, onAnswerChange }: CheckboxesProps) {
   );
 }
 
-export default React.memo(Checkboxes);
+export default React.memo(CheckboxesField);
