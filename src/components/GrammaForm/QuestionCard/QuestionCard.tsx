@@ -4,6 +4,7 @@ import {
   CheckboxOptions,
   Question,
   QuestionAnswer,
+  RadioAnswer,
   RadioOptions,
   ScaleAnswer,
   ScaleOptions,
@@ -11,10 +12,10 @@ import {
 } from '../../../types.ts';
 import cn from 'classnames';
 import { QuestionType } from '../../../const.ts';
-import Text from '../../QuestionConstructor/Answers/Text/Text.tsx';
-import Radio from "../../QuestionConstructor/Answers/Radio/Radio.tsx";
-import Checkboxes from '../../QuestionConstructor/Answers/Checkboxes/Checkboxes.tsx';
-import Scale from "../../QuestionConstructor/Answers/Scale/Scale.tsx";
+import TextField from '../Answers/TextField/TextField.tsx';
+import RadioField from '../Answers/RadioField/RadioField.tsx';
+import CheckboxesField from '../Answers/CheckboxesField/CheckboxesField.tsx';
+import ScaleField from '../Answers/ScaleField/ScaleField.tsx';
 
 type QuestionCardProps = {
   question: Question;
@@ -31,22 +32,22 @@ const getQuestionField = (
     default:
     case QuestionType.Text:
       return (
-        <Text
+        <TextField
           onAnswerChanged={onAnswerChanged}
           userAnswer={userAnswer as TextAnswer}
         />
       );
     case QuestionType.Radio:
       return (
-        <Radio
+        <RadioField
           options={question.options as RadioOptions}
-          userAnswer={userAnswer as TextAnswer}
+          userAnswer={userAnswer as RadioAnswer}
           onAnswerChange={onAnswerChanged}
         />
       );
     case QuestionType.Checkbox:
       return (
-        <Checkboxes
+        <CheckboxesField
           options={question.options as CheckboxOptions}
           userAnswer={userAnswer as CheckboxAnswer}
           onAnswerChange={onAnswerChanged}
@@ -54,7 +55,7 @@ const getQuestionField = (
       );
     case QuestionType.Scale:
       return (
-        <Scale
+        <ScaleField
           options={question.options as ScaleOptions}
           userAnswer={userAnswer as ScaleAnswer}
           onAnswerChange={onAnswerChanged}
