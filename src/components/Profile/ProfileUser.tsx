@@ -8,8 +8,8 @@ import {additionalDataUser} from "../../models/IUser.ts";
 
 const ProfileUser = () => {
     const {store} = useContext(Context)
-    const {name, surname, login} = store.user
-    const additionalDataUserServer = store.user.additionalData
+    const {name, surname} = store.user
+    const additionalDataUserServer = store.respondent.additionalData
     const [mode, setMode] = useState('display')
     const [additionalDataUser, setAdditionalDataUser] = useState<additionalDataUser>(
         {
@@ -22,7 +22,7 @@ const ProfileUser = () => {
     <div className={styles.profile}>
       <div className={styles.bottomMenu}>
         <img src={avatar} className={styles.image} alt="profile image" />
-        <p className={styles.name}>{name} {surname} {login}</p>
+        <p className={styles.name}>{name} {surname}</p>
         <div>
           <h3 className={styles.ageTitle}>Возраст</h3>
             {

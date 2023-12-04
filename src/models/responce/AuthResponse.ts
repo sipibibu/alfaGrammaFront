@@ -1,4 +1,4 @@
-export interface AuthResponce {
+export interface AuthResponse {
     data: {
         access_jwt_token:string,
         message:string,

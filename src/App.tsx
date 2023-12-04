@@ -6,7 +6,7 @@ import Layout from './components/Layout/Layout.tsx';
 import GrammaPage from './components/GrammaPage/GrammaPage.tsx';
 import './index.css'
 import * as React from "react";
-import Authorization from "./components/Authorization/Authorization";
+import Authorization from "./components/RequireAuth/RequireAuth.tsx";
 import Registration from "./components/Registration/Registration.tsx";
 import GrammaConstructor from "./components/GrammaConstructor/GrammaConstructor.tsx";
 import Login from "./components/Login/Login.tsx";

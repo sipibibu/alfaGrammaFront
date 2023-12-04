@@ -1,11 +1,14 @@
-import {IUser} from "../models/IUser";
+import {IManager, IRespondent, IUser} from "../models/IUser";
 import {makeAutoObservable} from "mobx";
 import AuthService from "../services/AuthService";
-import {AuthResponce} from "../models/responce/AuthResponce";
+import {AuthResponse} from "../models/responce/AuthResponse.ts";
 import AxiosResponce from "axios";
+import {decodeToken} from "../utils/decodeToken.ts";
 
 export default class Store {
     user = {} as IUser
+    respondent = {} as IRespondent
+    manager = {} as IManager
     isAuth = false
     isLogin = false
 
@@ -25,15 +28,22 @@ export default class Store {
         this.user = user
     }
 
+    setRespondent(respondent: IRespondent){
+        this.respondent = respondent
+    }
+
+    setManager(manager: IManager){
+        this.manager = manager
+    }
+
     async login(login: string, password: string){
         try {
-            const response: AxiosResponce<AuthResponce> = await AuthService.login(login, password)
+            const response: AxiosResponce<AuthResponse> = await AuthService.login(login, password)
             localStorage.setItem('token', response.data.access_jwt_token)
             this.setAuth(true)
             this.setLogin(true)
-            this.setUser({name: this.user.name, surname: this.user.surname, login, role: this.user.role})
-            console.log(response)
-            console.log(this.isAuth, this.isLogin)
+            this.setUser(decodeToken(response))
+            console.log(response, this.user)
         } catch (e) {
             console.log(e.response?.data?.message)
         }
@@ -41,9 +51,8 @@ export default class Store {
 
     async registration(name: string, surname: string, login: string, password: string, role: string){
         try {
-            const response: AxiosResponce<AuthResponce> = await AuthService.registration(name, surname, login, password, role)
+            const response: AxiosResponce<AuthResponse> = await AuthService.registration(name, surname, login, password, role)
             this.setAuth(true)
-            this.setUser({name, surname, login, role})
             console.log(response)
         } catch (e) {
             console.log(e.response?.data?.message)
