@@ -4,7 +4,11 @@
   gap: 30px;
   width: 72vw;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 90px;
+}
+
+.container:last-child{
+  margin-bottom: 20px;
 }
 
 .menu {

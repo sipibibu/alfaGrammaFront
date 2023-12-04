@@ -1,6 +1,7 @@
 import {axiosInstance} from "../axios";
 import AxiosResponce from 'axios';
 import {AuthResponse} from "../models/responce/AuthResponse.ts";
+import {IUser, IUserAuth} from "../models/IUser.ts";
 
 export default class AuthService{
     static async login(login: string, password: string): Promise<AxiosResponce<AuthResponse>>{
@@ -26,13 +27,13 @@ export default class AuthService{
     //     )
     // }
 
-    static async registration(name: string, surname: string, login: string, password: string, role: string): Promise<AxiosResponce<AuthResponse>>{
-        return axiosInstance.post<AuthResponse>(`/auth/register/${role}`,
+    static async registration(userAuth: IUserAuth): Promise<AxiosResponce<AuthResponse>>{
+        return axiosInstance.post<AuthResponse>(`/auth/register/${userAuth.role}`,
             {
-                firstname: name,
-                lastname: surname,
-                email: login,
-                password: password
+                firstname: userAuth.name,
+                lastname: userAuth.surname,
+                email: userAuth.login,
+                password: userAuth.password
             })
     }
 

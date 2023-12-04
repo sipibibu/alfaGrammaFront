@@ -4,19 +4,30 @@ import {useContext, useState} from "react";
 import {Context} from "../../main";
 import {observer} from "mobx-react-lite";
 import {useNavigate} from "react-router";
+import {IUserAuth} from "../../models/IUser.ts";
 
 const Registration = () => {
-    const [name, setName] = useState('')
-    const [surname, setSurname] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [selectRole, setSelectRole] = useState("respondent")
+    const [userAuth, setUserAuth] = useState<IUserAuth>({
+        name: '',
+        surname: '',
+        login: '',
+        role: 'respondent',
+        password: ''
+    })
     const navigate = useNavigate()
     const {store} = useContext(Context)
-    async function registration(name: string, surname: string, email: string, password: string, selectRole: string){
-        await store.authorization(name, surname, email, password, selectRole)
+    async function registration(userAuth: IUserAuth){
+        await store.authorization(userAuth)
         if(store.isAuth && store.isLogin){
-            navigate('/profile')
+            if (store.user.role == "Respondent") {
+                navigate('/profile-user')
+            }
+            else if(store.user.role == "Manager") {
+                navigate('/profile-manager')
+            }
+            else {
+                navigate('/')
+            }
         }
     }
     return (
@@ -28,37 +39,37 @@ const Registration = () => {
                         placeholder={"имя"}
                         type={"text"}
                         className={styles.inputData}
-                        value={name}
-                        onChange={e => setName(e.target.value)}
+                        value={userAuth.name}
+                        onChange={(e) => setUserAuth({...userAuth, name: e.target.value})}
                     />
                     <input
                         placeholder={"фамилия"}
                         type={"text"}
                         className={styles.inputData}
-                        value={surname}
-                        onChange={e => setSurname(e.target.value)}
+                        value={userAuth.surname}
+                        onChange={(e) => setUserAuth({...userAuth, surname: e.target.value})}
                     />
                     <input
                         placeholder={"Email"}
                         type={"text"}
                         className={styles.inputData}
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
+                        value={userAuth.login}
+                        onChange={(e) => setUserAuth({...userAuth, login: e.target.value})}
                     />
                     <input
                         placeholder={"Пароль"}
                         type={"password"}
                         className={styles.inputData}
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        value={userAuth.password}
+                        onChange={(e) => setUserAuth({...userAuth, password: e.target.value})}
                     />
                 </div>
                 <div className={styles.roleBlock}>
                     <div className={styles.textRole}>Выберите роль</div>
                     <select
                         className={styles.selectBlock}
-                        value={selectRole}
-                        onChange={e => setSelectRole(e.target.value)}>
+                        value={userAuth.role}
+                        onChange={(e) => setUserAuth({...userAuth, role: e.target.value})}>
                         <option value={"respondent"}>Пользователь</option>
                         <option value={"manager"}>Менеджер</option>
                     </select>
@@ -66,7 +77,7 @@ const Registration = () => {
                 <div className={styles.loginBtnBlock}>
                 <button
                     className={styles.loginBtn}
-                    onClick={() => registration(name, surname, email, password, selectRole)}
+                    onClick={() => registration(userAuth)}
                     type={"submit"}>
                     Зарегистрироваться
                 </button>

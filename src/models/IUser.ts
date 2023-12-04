@@ -7,6 +7,10 @@ export interface IUser{
     role: string
 }
 
+export interface IUserAuth extends IUser{
+    password: string
+}
+
 export interface additionalDataUser{
     age: string,
     education: string,

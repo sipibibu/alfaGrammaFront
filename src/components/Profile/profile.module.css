@@ -9,7 +9,8 @@
   align-items: flex-start;
   justify-content: flex-start;
   width: 360px;
-  height: calc(100vh - 77px);
+  margin-top: 74px;
+  height: calc(100vh - 74px);
   gap: 32px;
   padding: 32px;
   background-color: #FFF;

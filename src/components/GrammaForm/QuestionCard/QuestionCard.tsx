@@ -11,10 +11,10 @@ import {
 } from '../../../types.ts';
 import cn from 'classnames';
 import { QuestionType } from '../../../const.ts';
-import Text from '../Answers/Text/Text.tsx';
-import Radio from '../Answers/Radio/Radio.tsx';
-import Checkboxes from '../Answers/Checkboxes/Checkboxes.tsx';
-import Scale from '../Answers/Scale/Scale.tsx';
+import Text from '../../QuestionConstructor/Answers/Text/Text.tsx';
+import Radio from "../../QuestionConstructor/Answers/Radio/Radio.tsx";
+import Checkboxes from '../../QuestionConstructor/Answers/Checkboxes/Checkboxes.tsx';
+import Scale from "../../QuestionConstructor/Answers/Scale/Scale.tsx";
 
 type QuestionCardProps = {
   question: Question;
