@@ -13,7 +13,15 @@ const Login = () => {
     async function loginUser(email: string, password: string) {
         await store.login(email, password)
         if(store.isAuth && store.isLogin){
-            navigate('/profile')
+            if (store.user.role == "Respondent") {
+                navigate('/profile-respondent')
+            }
+            else if(store.user.role == "Manager") {
+                navigate('/profile-manager')
+            }
+            else {
+                navigate('/')
+            }
         }
     }
     return (
