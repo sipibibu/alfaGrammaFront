@@ -20,7 +20,7 @@ const Registration = () => {
         await store.authorization(userAuth)
         if(store.isAuth && store.isLogin){
             if (store.user.role == "Respondent") {
-                navigate('/profile-user')
+                navigate('/profile-respondent')
             }
             else if(store.user.role == "Manager") {
                 navigate('/profile-manager')

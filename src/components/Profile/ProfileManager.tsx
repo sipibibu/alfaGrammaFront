@@ -22,7 +22,9 @@ const ProfileManager = () => {
                     mode == 'edit' ?
                         <input
                             value={additionalDataManager.companyName}
-                            onChange={(e) => setAdditionalDataManager({...additionalDataManager, companyName: e.target.value})}/>
+                            onChange={(e) => setAdditionalDataManager({...additionalDataManager, companyName: e.target.value})}
+                            placeholder={"название компании"}
+                        />
                         :
                         <p className={styles.name}>{additionalDataManagerServer?.companyName}</p>
                 }

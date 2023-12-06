@@ -8,9 +8,10 @@ import Registration from "./components/Registration/Registration.tsx";
 import Login from "./components/Login/Login.tsx";
 import ProfileUser from "./components/Profile/ProfileUser.tsx";
 import ProfileManager from "./components/Profile/ProfileManager.tsx";
-import {Layout} from "./components/Layout/Layout.tsx";
+import {LayoutRespondent} from "./components/Layout/LayoutRespondent.tsx";
 import GrammaForm from "./components/GrammaForm/GrammaForm.tsx";
 import GrammaConstructor from "./components/GrammaConstructor/GrammaConstructor.tsx";
+import {LayoutManager} from "./components/Layout/LayoutManager.tsx";
 
 function App() {
   return (
@@ -19,13 +20,15 @@ function App() {
           <Routes>
             <Route path={'/'} element={<Login />}/>
             <Route path={'registration'} element={<Registration />}/>
-              <Route path={'/*'} element={<Layout />}>
+              <Route element={<LayoutRespondent />}>
                 <Route path={'profile-respondent'} element={<ProfileUser />}/>
-                <Route path={'profile-manager'} element={<ProfileManager />}/>
                 <Route path={'mylist'} element={<Sidebar />}/>
                 <Route path={'grammas/:id'} element={<GrammaPage />}/>
                 <Route path={'gramma-form'} element={<GrammaForm />}/>
-                <Route path={'gramma-constructor'} element={<GrammaConstructor />}/>  
+              </Route>
+              <Route element={<LayoutManager />}>
+                <Route path={'profile-manager'} element={<ProfileManager />}/>
+                <Route path={'gramma-constructor'} element={<GrammaConstructor />}/>
               </Route>
           </Routes>
       </BrowserRouter>
