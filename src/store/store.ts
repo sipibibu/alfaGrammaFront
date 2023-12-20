@@ -4,9 +4,13 @@ import AuthService from "../services/AuthService";
 import {AuthResponse} from "../models/responce/AuthResponse.ts";
 import AxiosResponce from "axios";
 import {decodeToken} from "../utils/decodeToken.ts";
+import ProfileService from "../services/ProfileService.ts";
 
 export default class Store {
     user = {} as IUser
+    age = 0
+    education = ''
+    interests = ['']
     respondent = {} as IRespondent
     manager = {} as IManager
     isAuth = false
@@ -34,6 +38,18 @@ export default class Store {
 
     setManager(manager: IManager){
         this.manager = manager
+    }
+
+    setAge(age: number) {
+        this.age = age
+    }
+
+    setEducation(education: string) {
+        this.education = education
+    }
+
+    setInterests(interests: string[]) {
+        this.interests = interests
     }
 
     async login(login: string, password: string){
@@ -64,6 +80,43 @@ export default class Store {
         if(this.isAuth) {
             await this.login(userAuth.login, userAuth.password)
         }
+    }
+
+    async updateAge(age: number){
+        try {
+            const response = await ProfileService.updateProfileRespondentAge(age)
+            this.setAge(response.data)
+            console.log(response, this.age)
+        } catch (e) {
+            console.log(e.response?.data?.message)
+        }
+    }
+
+    async updateEducation(education: string){
+        try {
+            const response = await ProfileService.updateProfileRespondentEducation(education)
+            this.setEducation(response.data)
+            console.log(response, this.education)
+        } catch (e) {
+            console.log(e.response?.data?.message)
+        }
+    }
+
+    async updateInterests(interests: string[]){
+        try {
+            const response = await ProfileService.updateProfileRespondentInterests(interests)
+            this.setInterests(response.data)
+            console.log(response, this.interests)
+        } catch (e) {
+            console.log(e.response?.data?.message)
+        }
+    }
+
+    async updateProfile(age: number, education: string, interests: string[]){
+        await this.updateAge(age)
+        await this.updateEducation(education)
+        await this.updateInterests(interests)
+        //this.setRespondent({additionalData: {age: this.age, education: this.education, interests: this.interests}})
     }
 
     async logout(){
