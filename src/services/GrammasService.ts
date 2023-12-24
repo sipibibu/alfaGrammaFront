@@ -1,21 +1,27 @@
 import { axiosInstance } from "../axios";
-import { Gramma } from "../types.ts";
+import { IGrammaForm, IGrammaStructure } from "../types.ts";
 import { adaptGramma } from "../adapters/form-adapter-to-server.tsx";
 
 export default class GrammasService {
-  static async createGramma(gramma: Gramma) {
+  static async createGramma(gramma: IGrammaStructure) {
     return axiosInstance.post("/forms/create", adaptGramma(gramma));
   }
 
-  // static async updateGramma(id: string, gramma: Gramma) {
+  // static async updateGramma(id: number, gramma: Gramma) {
   //   return axiosInstance.put<Gramma>(`/constructor/${id}`, gramma);
   // }
 
-  static async getGramma(id: string) {
-    return axiosInstance.get<Gramma>(`/forms/get/${id}`);
+  static async getGramma(id: number) {
+    return axiosInstance
+      .get<IGrammaForm>(`/forms/get/${id}`)
+      .then((res) => res.data);
   }
 
-  static async deleteGramma(id: string) {
-    return axiosInstance.delete<Gramma>(`/forms/delete/${id}`);
+  static async deleteGramma(id: number) {
+    return axiosInstance.delete<IGrammaStructure>(`/forms/delete/${id}`);
+  }
+
+  static async getAllGrammas() {
+    return axiosInstance.get<IGrammaForm[]>("forms/getAll");
   }
 }

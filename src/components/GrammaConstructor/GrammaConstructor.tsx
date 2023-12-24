@@ -1,13 +1,13 @@
 import styles from "./gramma-constructor.module.css";
 import cn from "classnames";
 import { ChangeEvent, useCallback, useState } from "react";
-import { Gramma, Question } from "../../types.ts";
+import { IGrammaStructure, IQuestion } from "../../types.ts";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { Dayjs } from "dayjs";
 import CreateButton from "./CreateButton/CreateButton.tsx";
 import QuestionsList from "./QuestionConstructor/QuestionsList/QuestionsList.tsx";
 
-const initialGramma: Gramma = {
+const initialGramma: IGrammaStructure = {
   dateFrom: "",
   dateTo: "",
   description: "",
@@ -16,7 +16,7 @@ const initialGramma: Gramma = {
 };
 
 export default function GrammaConstructor() {
-  const [gramma, setGramma] = useState<Gramma>(initialGramma);
+  const [gramma, setGramma] = useState<IGrammaStructure>(initialGramma);
 
   const handleTitleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +49,7 @@ export default function GrammaConstructor() {
     setGramma((prevState) => ({ ...prevState, dateTo: event.format() }));
   }, []);
 
-  const handleChangeQuestions = useCallback((questions: Question[]) => {
+  const handleChangeQuestions = useCallback((questions: IQuestion[]) => {
     setGramma((prevState) => ({ ...prevState, questions: questions }));
   }, []);
 

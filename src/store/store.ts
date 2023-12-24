@@ -4,7 +4,7 @@ import AuthService from "../services/AuthService";
 import { AuthResponse } from "../models/responce/AuthResponse.ts";
 import AxiosResponce from "axios";
 import { decodeToken } from "../utils/decodeToken.ts";
-import { Gramma } from "../types.ts";
+import { IGrammaForm, IGrammaStructure } from "../types.ts";
 import GrammasService from "../services/GrammasService.ts";
 
 export default class Store {
@@ -13,6 +13,7 @@ export default class Store {
   manager = {} as IManager;
   isAuth = false;
   isLogin = false;
+  grammaCard = {} as IGrammaForm;
 
   constructor() {
     makeAutoObservable(this);
@@ -36,6 +37,10 @@ export default class Store {
 
   setManager(manager: IManager) {
     this.manager = manager;
+  }
+
+  setGramma(gramma: IGrammaForm) {
+    this.grammaCard = gramma;
   }
 
   async login(login: string, password: string) {
@@ -83,9 +88,18 @@ export default class Store {
     }
   }
 
-  async createGramma(gramma: Gramma) {
+  async createGramma(gramma: IGrammaStructure) {
     try {
       await GrammasService.createGramma(gramma);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getGramma(id: number) {
+    try {
+      const gramma = await GrammasService.getGramma(id);
+      this.setGramma(gramma);
     } catch (e) {
       console.log(e);
     }

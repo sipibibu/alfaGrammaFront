@@ -1,32 +1,32 @@
-import styles from './question-card.module.css';
+import styles from "./question-card.module.css";
 import {
-  CheckboxAnswer,
+  ICheckboxAnswer,
   CheckboxOptions,
-  Question,
-  QuestionAnswer,
-  RadioAnswer,
+  IQuestion,
+  IQuestionAnswer,
+  IRadioAnswer,
   RadioOptions,
-  ScaleAnswer,
+  IScaleAnswer,
   ScaleOptions,
-  TextAnswer,
-} from '../../../types.ts';
-import cn from 'classnames';
-import { QuestionType } from '../../../const.ts';
-import TextField from '../Answers/TextField/TextField.tsx';
-import RadioField from '../Answers/RadioField/RadioField.tsx';
-import CheckboxesField from '../Answers/CheckboxesField/CheckboxesField.tsx';
-import ScaleField from '../Answers/ScaleField/ScaleField.tsx';
+  ITextAnswer,
+} from "../../../types.ts";
+import cn from "classnames";
+import { QuestionType } from "../../../const.ts";
+import TextField from "../Answers/TextField/TextField.tsx";
+import RadioField from "../Answers/RadioField/RadioField.tsx";
+import CheckboxesField from "../Answers/CheckboxesField/CheckboxesField.tsx";
+import ScaleField from "../Answers/ScaleField/ScaleField.tsx";
 
 type QuestionCardProps = {
-  question: Question;
-  userAnswers: QuestionAnswer;
-  onAnswerChanged: (answer: QuestionAnswer) => void;
+  question: IQuestion;
+  userAnswers: IQuestionAnswer;
+  onAnswerChanged: (answer: IQuestionAnswer) => void;
 };
 
 const getQuestionField = (
-  question: Question,
-  userAnswer: QuestionAnswer,
-  onAnswerChanged: (answer: QuestionAnswer) => void
+  question: IQuestion,
+  userAnswer: IQuestionAnswer,
+  onAnswerChanged: (answer: IQuestionAnswer) => void,
 ) => {
   switch (question.type) {
     default:
@@ -34,14 +34,14 @@ const getQuestionField = (
       return (
         <TextField
           onAnswerChanged={onAnswerChanged}
-          userAnswer={userAnswer as TextAnswer}
+          userAnswer={userAnswer as ITextAnswer}
         />
       );
     case QuestionType.Radio:
       return (
         <RadioField
           options={question.options as RadioOptions}
-          userAnswer={userAnswer as RadioAnswer}
+          userAnswer={userAnswer as IRadioAnswer}
           onAnswerChange={onAnswerChanged}
         />
       );
@@ -49,7 +49,7 @@ const getQuestionField = (
       return (
         <CheckboxesField
           options={question.options as CheckboxOptions}
-          userAnswer={userAnswer as CheckboxAnswer}
+          userAnswer={userAnswer as ICheckboxAnswer}
           onAnswerChange={onAnswerChanged}
         />
       );
@@ -57,7 +57,7 @@ const getQuestionField = (
       return (
         <ScaleField
           options={question.options as ScaleOptions}
-          userAnswer={userAnswer as ScaleAnswer}
+          userAnswer={userAnswer as IScaleAnswer}
           onAnswerChange={onAnswerChanged}
         />
       );

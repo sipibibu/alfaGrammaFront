@@ -1,52 +1,52 @@
-import styles from './gramma-form.module.css';
-import { QuestionType } from '../../const.ts';
-import QuestionsList from './QuestionsList/QuestionList.tsx';
-import SubmitButton from './SumbitButton/SubmitButton.tsx';
-import { useState } from 'react';
-import { Question, QuestionAnswer } from '../../types.ts';
+import styles from "./gramma-form.module.css";
+import { QuestionType } from "../../const.ts";
+import QuestionsList from "./QuestionsList/QuestionList.tsx";
+import SubmitButton from "./SumbitButton/SubmitButton.tsx";
+import { useState } from "react";
+import { IQuestion, IQuestionAnswer } from "../../types.ts";
 
 const gramma = {
-  title: 'Название',
-  dateFrom: '2023-12-03T00:00:00+05:00',
-  dateTo: '2023-12-31T00:00:00+05:00',
-  description: 'Описание опроса',
+  title: "Название",
+  dateFrom: "2023-12-03T00:00:00+05:00",
+  dateTo: "2023-12-31T00:00:00+05:00",
+  description: "Описание опроса",
   questions: [
     {
       isRequired: true,
       options: null,
-      title: 'Текстовое поле',
+      title: "Текстовое поле",
       type: QuestionType.Text,
     },
     {
       isRequired: false,
-      options: ['1 вариант', '2 вариант', '3 вариант'],
-      title: 'Выбор одного',
+      options: ["1 вариант", "2 вариант", "3 вариант"],
+      title: "Выбор одного",
       type: QuestionType.Radio,
     },
     {
       isRequired: false,
-      options: ['1 вариант', '2 вариант', '3 вариант'],
-      title: 'Выбор нескольких',
+      options: ["1 вариант", "2 вариант", "3 вариант"],
+      title: "Выбор нескольких",
       type: QuestionType.Checkbox,
     },
     {
       isRequired: false,
       options: { from: 0, to: 100, step: 10 },
-      title: 'Шкала',
+      title: "Шкала",
       type: QuestionType.Scale,
     },
   ],
 };
 
-const getInitialUserValues = (options: Question[]) => {
-  const answers: QuestionAnswer[] = [];
+const getInitialUserValues = (options: IQuestion[]) => {
+  const answers: IQuestionAnswer[] = [];
   for (let option of options) {
     switch (option.type) {
       case QuestionType.Text:
-        answers.push('');
+        answers.push("");
         break;
       case QuestionType.Radio:
-        answers.push('');
+        answers.push("");
         break;
       case QuestionType.Checkbox:
         answers.push([]);
@@ -61,10 +61,10 @@ const getInitialUserValues = (options: Question[]) => {
 
 export default function GrammaForm() {
   const [userAnswers, setUserAnswers] = useState(
-    getInitialUserValues(gramma.questions)
+    getInitialUserValues(gramma.questions),
   );
 
-  const handleUserAnswerChange = (index: number, updated: QuestionAnswer) => {
+  const handleUserAnswerChange = (index: number, updated: IQuestionAnswer) => {
     setUserAnswers((prevState) => [
       ...prevState.slice(0, index),
       updated,

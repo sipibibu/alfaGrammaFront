@@ -2,15 +2,15 @@ import QuestionCard from "../QuestionCard.tsx";
 import styles from "./question-list.module.css";
 import NewQuestionButton from "../NewQuestionButton/NewQuestionButton.tsx";
 import React, { useCallback } from "react";
-import { Question } from "../../../../types.ts";
+import { IQuestion } from "../../../../types.ts";
 import { QuestionType } from "../../../../const.ts";
 
 type QuestionListProps = {
-  questionsList: Question[];
-  questionsChange: (questions: Question[]) => void;
+  questionsList: IQuestion[];
+  questionsChange: (questions: IQuestion[]) => void;
 };
 
-const initialQuestion: Question = {
+const initialQuestion: IQuestion = {
   title: "",
   type: QuestionType.Text,
   isRequired: false,
@@ -19,7 +19,7 @@ const initialQuestion: Question = {
 
 function QuestionsList({ questionsList, questionsChange }: QuestionListProps) {
   const handleQuestionChange = useCallback(
-    (updatedQuestion: Question, index: number) => {
+    (updatedQuestion: IQuestion, index: number) => {
       questionsChange([
         ...questionsList.slice(0, index),
         updatedQuestion,

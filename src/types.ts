@@ -9,34 +9,38 @@ export type QuestionOptions =
   | CheckboxOptions
   | ScaleOptions;
 
-export type Question = {
+export interface IQuestion {
   title: string;
   type: string;
   isRequired: boolean;
   options: QuestionOptions;
-};
+}
 
-export type Gramma = {
+export interface IGrammaStructure {
   title: string;
   description: string;
   dateFrom: string;
   dateTo: string;
-  questions: Question[];
-};
+  questions: IQuestion[];
+}
 
-export type TextAnswer = string;
-export type RadioAnswer = string;
-export type CheckboxAnswer = string[];
-export type ScaleAnswer = number;
+export interface IGrammaForm extends IGrammaStructure {
+  id: number;
+}
 
-export type QuestionAnswer =
-  | TextAnswer
-  | RadioAnswer
-  | CheckboxAnswer
-  | ScaleAnswer;
+export type ITextAnswer = string;
+export type IRadioAnswer = string;
+export type ICheckboxAnswer = string[];
+export type IScaleAnswer = number;
 
-export type UserResponse = {
+export type IQuestionAnswer =
+  | ITextAnswer
+  | IRadioAnswer
+  | ICheckboxAnswer
+  | IScaleAnswer;
+
+export interface IUserResponse {
   grammaId: string;
   userEmail: string;
-  answers: QuestionAnswer[];
-};
+  answers: IQuestionAnswer[];
+}

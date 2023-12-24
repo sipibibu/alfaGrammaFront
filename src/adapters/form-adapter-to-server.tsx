@@ -1,7 +1,7 @@
 import {
   CheckboxOptions,
-  Gramma,
-  Question,
+  IGrammaStructure,
+  IQuestion,
   QuestionOptions,
   ScaleOptions,
 } from "../types.ts";
@@ -40,7 +40,7 @@ function adaptOptions(questionType: string, options: QuestionOptions) {
   }
 }
 
-function adaptQuestion(question: Question) {
+function adaptQuestion(question: IQuestion) {
   return {
     questionText: question.title,
     isReq: question.isRequired,
@@ -49,7 +49,7 @@ function adaptQuestion(question: Question) {
   };
 }
 
-export function adaptGramma(gramma: Gramma) {
+export function adaptGramma(gramma: IGrammaStructure) {
   return {
     title: gramma.title,
     fullDescription: gramma.description,

@@ -10,7 +10,7 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 import { QuestionType } from "../../../const.ts";
 import {
   CheckboxOptions,
-  Question,
+  IQuestion,
   QuestionOptions,
   RadioOptions,
   ScaleOptions,
@@ -18,8 +18,8 @@ import {
 } from "../../../types.ts";
 
 type QuestionCardProps = {
-  question: Question;
-  handleQuestionChange: (updatedQuestion: Question, index: number) => void;
+  question: IQuestion;
+  handleQuestionChange: (updatedQuestion: IQuestion, index: number) => void;
   handleDeleteQuestion: (index: number) => void;
   index: number;
 };

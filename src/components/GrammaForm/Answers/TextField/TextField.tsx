@@ -1,9 +1,9 @@
 import styles from "./text-field.module.css";
-import { TextAnswer } from "../../../../types.ts";
+import { ITextAnswer } from "../../../../types.ts";
 
 type TextProps = {
-  userAnswer: TextAnswer;
-  onAnswerChanged: (answer: TextAnswer) => void;
+  userAnswer: ITextAnswer;
+  onAnswerChanged: (answer: ITextAnswer) => void;
 };
 
 export default function TextField({ onAnswerChanged }: TextProps) {

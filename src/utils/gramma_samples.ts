@@ -1,7 +1,7 @@
-import { Gramma } from "../types.ts";
+import { IGrammaStructure } from "../types.ts";
 
 export const Samples = {
   FOOD: {
     title: "Предпочтения в еде",
-  } as Gramma,
+  } as IGrammaStructure,
 };

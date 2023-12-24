@@ -1,12 +1,12 @@
 import styles from "./checkboxes-field.module.css";
-import { CheckboxAnswer, CheckboxOptions } from "../../../../types.ts";
+import { ICheckboxAnswer, CheckboxOptions } from "../../../../types.ts";
 import React from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
 
 type CheckboxesProps = {
   options: CheckboxOptions;
-  userAnswer: CheckboxAnswer;
-  onAnswerChange: (answer: CheckboxAnswer) => void;
+  userAnswer: ICheckboxAnswer;
+  onAnswerChange: (answer: ICheckboxAnswer) => void;
 };
 
 function CheckboxesField({
