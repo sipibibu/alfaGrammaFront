@@ -1,12 +1,11 @@
-import styles from './question-card.module.css';
-import CheckMark from '../CheckMark/CheckMark.tsx';
-import React, { ChangeEvent, useCallback } from 'react';
-import TypesSelect from './TypesSelect/TypesSelect.tsx';
-import { QuestionType } from '../../const.ts';
-import Scale from './Answers/Scale/Scale.tsx';
-import Text from './Answers/Text/Text.tsx';
-import Radio from './Answers/Radio/Radio.tsx';
-import Checkboxes from './Answers/Checkboxes/Checkboxes.tsx';
+import styles from "./question-card.module.css";
+import React, { ChangeEvent, useCallback } from "react";
+import TypesSelect from "./TypesSelect/TypesSelect.tsx";
+import { QuestionType } from "../../const.ts";
+import Scale from "./Answers/Scale/Scale.tsx";
+import Text from "./Answers/Text/Text.tsx";
+import Radio from "./Answers/Radio/Radio.tsx";
+import Checkboxes from "./Answers/Checkboxes/Checkboxes.tsx";
 import {
   CheckboxOptions,
   Question,
@@ -14,11 +13,14 @@ import {
   RadioOptions,
   ScaleOptions,
   TextOptions,
-} from '../../types.ts';
+} from "../../types.ts";
+import DeleteQuestionButton from "./DeleteQuestionButton/DeleteQuestionButton.tsx";
+import { Checkbox, FormControlLabel } from "@mui/material";
 
 type QuestionCardProps = {
   question: Question;
-  questionChange: (updatedQuestion: Question, index: number) => void;
+  handleQuestionChange: (updatedQuestion: Question, index: number) => void;
+  handleDeleteQuestion: (index: number) => void;
   index: number;
 };
 
@@ -39,7 +41,7 @@ const getQuestionOptions = (questionType: string) => {
 const getQuestionField = (
   questionType: string,
   options: QuestionOptions,
-  setOptions: (options: QuestionOptions) => void
+  setOptions: (options: QuestionOptions) => void,
 ) => {
   switch (questionType) {
     default:
@@ -63,57 +65,66 @@ const getQuestionField = (
   }
 };
 
-function QuestionCard({ question, questionChange, index }: QuestionCardProps) {
+function QuestionCard({
+  question,
+  handleQuestionChange,
+  handleDeleteQuestion,
+  index,
+}: QuestionCardProps) {
   const handleTitleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      questionChange({ ...question, title: event.target.value }, index);
+      handleQuestionChange({ ...question, title: event.target.value }, index);
     },
-    [question, questionChange]
+    [question, handleQuestionChange],
   );
 
   const handleTypeChange = useCallback(
     (type: string) => {
-      questionChange(
+      handleQuestionChange(
         {
           ...question,
           type: type,
           options: getQuestionOptions(type),
         },
-        index
+        index,
       );
     },
-    [question, questionChange]
+    [question, handleQuestionChange],
   );
 
   const handleIsRequiredChange = useCallback(() => {
-    questionChange(
+    handleQuestionChange(
       {
         ...question,
         isRequired: !question.isRequired,
       },
-      index
+      index,
     );
-  }, [question, questionChange]);
+  }, [question, handleQuestionChange]);
 
   const handleOptionsChange = useCallback(
     (options: QuestionOptions) => {
-      questionChange(
+      handleQuestionChange(
         {
           ...question,
           options: options,
         },
-        index
+        index,
       );
     },
-    [question, questionChange]
+    [question, handleQuestionChange],
   );
+
+  const handleDelete = useCallback(() => {
+    handleDeleteQuestion(index);
+  }, [handleDeleteQuestion, index]);
 
   return (
     <div className={styles.card}>
       <div className={styles.menu}>
         <input
           className={styles.title}
-          placeholder={'Введите вопрос'}
+          placeholder={"Введите вопрос"}
           value={question.title}
           onChange={handleTitleChange}
         />
@@ -122,8 +133,19 @@ function QuestionCard({ question, questionChange, index }: QuestionCardProps) {
             questionType={question.type}
             setQuestionType={handleTypeChange}
           />
-          <CheckMark
-            value={'Обязательный'}
+          <FormControlLabel
+            control={
+              <Checkbox
+                sx={{
+                  color: "#ff4848",
+                  "&.Mui-checked": {
+                    color: "#ff4848",
+                  },
+                }}
+              />
+            }
+            label="Обязательный"
+            labelPlacement="end"
             checked={question.isRequired}
             onChange={handleIsRequiredChange}
           />
@@ -132,6 +154,7 @@ function QuestionCard({ question, questionChange, index }: QuestionCardProps) {
       <div className={styles.questionField}>
         {getQuestionField(question.type, question.options, handleOptionsChange)}
       </div>
+      <DeleteQuestionButton onClick={handleDelete} />
     </div>
   );
 }

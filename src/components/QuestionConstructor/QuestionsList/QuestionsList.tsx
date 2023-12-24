@@ -1,9 +1,9 @@
-import QuestionCard from '../QuestionCard.tsx';
-import styles from './question-list.module.css';
-import { Question } from '../../../types.ts';
-import { QuestionType } from '../../../const.ts';
-import NewQuestionButton from '../NewQuestionButton/NewQuestionButton.tsx';
-import React, { useCallback } from 'react';
+import QuestionCard from "../QuestionCard.tsx";
+import styles from "./question-list.module.css";
+import { Question } from "../../../types.ts";
+import { QuestionType } from "../../../const.ts";
+import NewQuestionButton from "../NewQuestionButton/NewQuestionButton.tsx";
+import React, { useCallback } from "react";
 
 type QuestionListProps = {
   questionsList: Question[];
@@ -11,7 +11,7 @@ type QuestionListProps = {
 };
 
 const initialQuestion: Question = {
-  title: '',
+  title: "",
   type: QuestionType.Text,
   isRequired: false,
   options: null,
@@ -26,12 +26,22 @@ function QuestionsList({ questionsList, questionsChange }: QuestionListProps) {
         ...questionsList.slice(index + 1, questionsList.length),
       ]);
     },
-    [questionsList, questionsChange]
+    [questionsList, questionsChange],
   );
 
   const handleAddQuestion = useCallback(() => {
     questionsChange([...questionsList, initialQuestion]);
   }, [questionsList, questionsChange]);
+
+  const handleDeleteQuestion = useCallback(
+    (index: number) => {
+      questionsChange([
+        ...questionsList.slice(0, index),
+        ...questionsList.slice(index + 1, questionsList.length),
+      ]);
+    },
+    [questionsChange, questionsList],
+  );
 
   return (
     <div className={styles.questions}>
@@ -40,7 +50,8 @@ function QuestionsList({ questionsList, questionsChange }: QuestionListProps) {
           question={question}
           index={index}
           key={index}
-          questionChange={handleQuestionChange}
+          handleDeleteQuestion={handleDeleteQuestion}
+          handleQuestionChange={handleQuestionChange}
         />
       ))}
       <NewQuestionButton onClick={handleAddQuestion} />
