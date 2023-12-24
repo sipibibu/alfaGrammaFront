@@ -82,10 +82,10 @@ export default class Store {
         }
     }
 
-    async updateAge(age: number){
+    async updateAge(age: string){
         try {
             const response = await ProfileService.updateProfileRespondentAge(age)
-            this.setAge(response.data)
+            this.setAge(response.data.age)
             console.log(response, this.age)
         } catch (e) {
             console.log(e.response?.data?.message)
@@ -95,7 +95,7 @@ export default class Store {
     async updateEducation(education: string){
         try {
             const response = await ProfileService.updateProfileRespondentEducation(education)
-            this.setEducation(response.data)
+            this.setEducation(response.data.education)
             console.log(response, this.education)
         } catch (e) {
             console.log(e.response?.data?.message)
@@ -105,18 +105,35 @@ export default class Store {
     async updateInterests(interests: string[]){
         try {
             const response = await ProfileService.updateProfileRespondentInterests(interests)
-            this.setInterests(response.data)
+            this.setInterests(response.data.interests)
             console.log(response, this.interests)
         } catch (e) {
             console.log(e.response?.data?.message)
         }
     }
 
-    async updateProfile(age: number, education: string, interests: string[]){
+    async updateProfile(age: string, education: string, interests: string[]){
         await this.updateAge(age)
         await this.updateEducation(education)
         await this.updateInterests(interests)
-        //this.setRespondent({additionalData: {age: this.age, education: this.education, interests: this.interests}})
+        this.setRespondent(
+            {
+                name: this.user.name,
+                surname: this.user.surname,
+                login: this.user.login,
+                role: this.user.role,
+                additionalData: {age: this.age, education: this.education, interests: this.interests}
+            })
+    }
+
+    async getAccount(){
+        try {
+            const response = await ProfileService.getAccount()
+            this.setRespondent(response.data)
+            console.log(response)
+        } catch (e) {
+            console.log(e.response?.data?.message)
+        }
     }
 
     async logout(){

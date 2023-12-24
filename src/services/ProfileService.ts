@@ -1,7 +1,7 @@
 import {axiosInstance} from "../axios";
 
 export default class ProfileService{
-    static async updateProfileRespondentAge(age: number){
+    static async updateProfileRespondentAge(age: string){
         return axiosInstance.put("/account/setAge",
             {
                 age: age
@@ -22,7 +22,8 @@ export default class ProfileService{
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
-            })
+            }
+            )
     }
 
     static async updateProfileRespondentInterests(interests: string[]){
@@ -34,6 +35,10 @@ export default class ProfileService{
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
             })
+    }
+
+    static async getAccount(){
+        return axiosInstance.get("/account/get")
     }
 
     static async updateProfileManagerAge(age: number){
@@ -54,18 +59,3 @@ export default class ProfileService{
         })
     }
 }
-// import {axiosInstance} from "../axios";
-// import AxiosResponce from 'axios';
-// import {AuthResponse} from "../models/responce/AuthResponse.ts";
-// import {IUserAuth} from "../models/IUser.ts";
-//
-// export default class ProfileService{
-//     static async updateProfileRespondentAge(age: number): {
-//         return axiosInstance.put("/auth/login",
-//             {
-//                age: age
-//             }
-//         )
-//     }
-//
-// }

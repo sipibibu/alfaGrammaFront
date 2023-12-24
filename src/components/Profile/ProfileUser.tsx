@@ -1,30 +1,23 @@
 import styles from './profile.module.css';
 import Interests from './Interests.tsx';
 import avatar from './Avatar.png';
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {Context} from "../../main";
 import {observer} from "mobx-react-lite";
-import {additionalDataRespondent} from "../../models/IUser.ts";
 import {MultiValue} from "react-select";
 
 const ProfileUser = () => {
     const {store} = useContext(Context)
-    const {name, surname} = store.user
+    const {name, surname} = store.respondent
     const additionalDataUserServer = store.respondent.additionalData
-    const [age, setAge] = useState<number>(0)
+    const [age, setAge] = useState<string>('')
     const [education, setEducation] = useState<string>('')
     const [options, setOptions] = useState<MultiValue<string> | string>([])
     const [interests, setInterests] = useState<string[]>([])
     const [mode, setMode] = useState('display')
-    // const [additionalDataUser, setAdditionalDataUser] = useState<additionalDataRespondent>({
-    //     imageUrl: '',
-    //     age: '',
-    //     education: '',
-    //     interests: [],
-    //     options: []
-    // })
-    // const [image, setImage] = useState()
-    // const [imageUrl, setImageUrl] = useState()
+    useEffect(() => {
+        store.getAccount()
+    }, [store])
     return (
     <div className={styles.profile}>
       <div className={styles.bottomMenu}>
@@ -41,7 +34,7 @@ const ProfileUser = () => {
                 mode == 'edit' ?
                     <input
                         value={age}
-                        onChange={(e) => setAge(Number(e.target.value))}/>
+                        onChange={(e) => setAge(e.target.value)}/>
                     :
                     <div>{additionalDataUserServer?.age}</div>
             }

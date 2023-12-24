@@ -1,6 +1,4 @@
-import {IGrammCard} from "../models/IGramm.ts";
-
-export const gramms: IGrammCard[] = [
+export const gramms = [
     {
     name: "Опрос №1",
     description: "IT company",

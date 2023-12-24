@@ -1,6 +1,5 @@
 import styles from './profile.module.css';
-import React, {useContext, useEffect, useState} from "react";
-import {additionalDataRespondent} from "../../models/IUser.ts";
+import React, {useContext} from "react";
 import Select, {
     MultiValue,
     OptionsType,
@@ -20,7 +19,7 @@ export interface Interests{
     options: MultiValue<string> | string
     setOptions: React.Dispatch<React.SetStateAction<MultiValue<string> | string>>
     interests: string[]
-    setInterests: React.Dispatch<any>
+    setInterests: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 export default function Interests({mode, options, setOptions, setInterests} : Interests) {
@@ -38,8 +37,8 @@ export default function Interests({mode, options, setOptions, setInterests} : In
                     isMulti
                 /> :
                 <ul className={styles.whatUseList}>
-                    {userInterests?.map((item) => (
-                        <li className={styles.whatUseItem}>{item}</li>
+                    {userInterests?.map((item, count) => (
+                        <li className={styles.whatUseItem} key={count}>{item}</li>
                     ))}
                 </ul>
             }
