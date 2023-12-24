@@ -38,7 +38,11 @@ export default class ProfileService{
     }
 
     static async getAccount(){
-        return axiosInstance.get("/account/get")
+        return axiosInstance.get("/account/get", {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
     }
 
     static async updateProfileManagerAge(age: number){

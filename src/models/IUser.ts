@@ -13,7 +13,7 @@ export interface IUserAuth extends IUser{
 
 export interface additionalDataRespondent {
     imageUrl?: string,
-    age: number,
+    age: string,
     education: string,
     interests: string[],
     options?: MultiValue<string> | string

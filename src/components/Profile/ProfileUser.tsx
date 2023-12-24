@@ -33,6 +33,7 @@ const ProfileUser = () => {
             {
                 mode == 'edit' ?
                     <input
+                        placeholder={additionalDataUserServer?.age}
                         value={age}
                         onChange={(e) => setAge(e.target.value)}/>
                     :
@@ -44,6 +45,7 @@ const ProfileUser = () => {
             {
                 mode == 'edit' ?
                     <input
+                        placeholder={additionalDataUserServer?.education}
                         value={education}
                         onChange={(e) => setEducation(e.target.value)}/>
                     :

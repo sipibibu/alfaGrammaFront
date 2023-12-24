@@ -3,17 +3,14 @@ import avatar from './Avatar.png';
 import React, {useContext, useState} from "react";
 import {Context} from "../../main";
 import {observer} from "mobx-react-lite";
-import {additionalDataManager} from "../../models/IUser.ts";
 
 const ProfileManager = () => {
     const {store} = useContext(Context)
-    const {name, surname, login} = store.user
+    const {name, surname, login} = store.manager
     const additionalDataManagerServer = store.manager.additionalData
     const [mode, setMode] = useState('display')
-    const [additionalDataManager, setAdditionalDataManager] = useState<additionalDataManager>({
-        companyName: '',
-        description: '',
-    })
+    const [companyName, setCompanyName] = useState('')
+    const [description, setDiscription] = useState('')
     return (
         <div className={styles.profile}>
             <div className={styles.bottomMenu}>
@@ -21,9 +18,9 @@ const ProfileManager = () => {
                 {
                     mode == 'edit' ?
                         <input
-                            value={additionalDataManager.companyName}
-                            onChange={(e) => setAdditionalDataManager({...additionalDataManager, companyName: e.target.value})}
-                            placeholder={"название компании"}
+                            value={companyName}
+                            onChange={(e) => setCompanyName(e.target.value)}
+                            placeholder={additionalDataManagerServer?.companyName ? additionalDataManagerServer?.companyName : "название компании"}
                         />
                         :
                         <p className={styles.name}>{additionalDataManagerServer?.companyName}</p>
@@ -37,7 +34,7 @@ const ProfileManager = () => {
                     <div>{login}</div>
                 </div>
                 {mode == 'edit' ?
-                    <button className={styles.whatUseEditBtn} onClick={() => {setMode('display'); console.log(additionalDataManager)}}>сохранить</button>
+                    <button className={styles.whatUseEditBtn} onClick={() => {setMode('display'); console.log(companyName, description)}}>сохранить</button>
                     :
                     <button className={styles.whatUseEditBtn} onClick={() => setMode('edit')}>редактировать</button>
                 }
@@ -47,8 +44,9 @@ const ProfileManager = () => {
                 {
                     mode == 'edit' ?
                         <input
-                            value={additionalDataManager.description}
-                            onChange={(e) => setAdditionalDataManager({...additionalDataManager, description: e.target.value})}/>
+                            placeholder={additionalDataManagerServer?.description}
+                            value={description}
+                            onChange={(e) => setDiscription(e.target.value)}/>
                         :
                         <div>{additionalDataManagerServer?.description}</div>
                 }

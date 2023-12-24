@@ -8,7 +8,7 @@ import ProfileService from "../services/ProfileService.ts";
 
 export default class Store {
     user = {} as IUser
-    age = 0
+    age = ''
     education = ''
     interests = ['']
     respondent = {} as IRespondent
@@ -113,13 +113,19 @@ export default class Store {
     }
 
     async updateProfile(age: string, education: string, interests: string[]){
-        await this.updateAge(age)
-        await this.updateEducation(education)
-        await this.updateInterests(interests)
+        if(age != this.respondent.additionalData?.age){
+            await this.updateAge(age)
+        }
+        if(education != this.respondent.additionalData?.education){
+            await this.updateEducation(education)
+        }
+        if(interests != this.respondent.additionalData?.interests){
+            await this.updateInterests(interests)
+        }
         this.setRespondent(
             {
-                name: this.user.name,
-                surname: this.user.surname,
+                name: '',
+                surname: '',
                 login: this.user.login,
                 role: this.user.role,
                 additionalData: {age: this.age, education: this.education, interests: this.interests}
@@ -129,7 +135,18 @@ export default class Store {
     async getAccount(){
         try {
             const response = await ProfileService.getAccount()
-            this.setRespondent(response.data)
+            this.setRespondent({
+                name: response.data.firstName,
+                surname: response.data.lastName,
+                login: response.data.email,
+                role: response.data.roles[0],
+                additionalData: {
+                    imageUrl: response.data.image,
+                    age: response.data.age,
+                    education: response.data.education,
+                    interests: response.data.interests
+                }
+            })
             console.log(response)
         } catch (e) {
             console.log(e.response?.data?.message)
@@ -142,6 +159,8 @@ export default class Store {
             this.setLogin(false)
             this.setAuth(false)
             this.setUser({} as IUser)
+            this.setRespondent({} as IRespondent)
+            this.setManager({} as IManager)
         } catch (e) {
             console.log(e.response?.data?.message)
         }

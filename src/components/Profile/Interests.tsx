@@ -38,7 +38,7 @@ export default function Interests({mode, options, setOptions, setInterests} : In
                 /> :
                 <ul className={styles.whatUseList}>
                     {userInterests?.map((item, count) => (
-                        <li className={styles.whatUseItem} key={count}>{item}</li>
+                        <li className={styles.whatUseItem} key={count}>{item.name ? item.name : item}</li>
                     ))}
                 </ul>
             }
