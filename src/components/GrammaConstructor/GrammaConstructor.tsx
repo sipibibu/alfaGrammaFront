@@ -1,44 +1,18 @@
 import styles from "./gramma-constructor.module.css";
-import QuestionsList from "../QuestionConstructor/QuestionsList/QuestionsList.tsx";
 import cn from "classnames";
 import { ChangeEvent, useCallback, useState } from "react";
 import { Gramma, Question } from "../../types.ts";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { Dayjs } from "dayjs";
 import CreateButton from "./CreateButton/CreateButton.tsx";
-import { QuestionType } from "../../const.ts";
+import QuestionsList from "./QuestionConstructor/QuestionsList/QuestionsList.tsx";
 
 const initialGramma: Gramma = {
-  dateFrom: "2023-12-20T00:00:00+05:00",
-  dateTo: "2023-12-30T00:00:00+05:00",
-  description: "desc",
-  questions: [
-    {
-      title: "1",
-      isRequired: true,
-      type: QuestionType.Text,
-      options: null,
-    },
-    {
-      title: "2",
-      isRequired: false,
-      type: QuestionType.Radio,
-      options: ["1", "2", "3"],
-    },
-    {
-      title: "3",
-      isRequired: false,
-      type: QuestionType.Checkbox,
-      options: ["1", "2", "3"],
-    },
-    {
-      title: "4",
-      isRequired: true,
-      type: QuestionType.Scale,
-      options: { from: 0, to: 100, step: 100 },
-    },
-  ],
-  title: "gramma",
+  dateFrom: "",
+  dateTo: "",
+  description: "",
+  questions: [],
+  title: "",
 };
 
 export default function GrammaConstructor() {

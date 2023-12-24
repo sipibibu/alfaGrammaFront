@@ -1,4 +1,4 @@
-import { QuestionType } from "../../../const.ts";
+import { QuestionType } from "../../../../const.ts";
 import React from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 

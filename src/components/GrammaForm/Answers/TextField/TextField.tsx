@@ -1,5 +1,5 @@
-import styles from '../../../QuestionConstructor/Answers/Text/text.module.css';
-import { TextAnswer } from '../../../../types.ts';
+import styles from "./text-field.module.css";
+import { TextAnswer } from "../../../../types.ts";
 
 type TextProps = {
   userAnswer: TextAnswer;
@@ -9,8 +9,8 @@ type TextProps = {
 export default function TextField({ onAnswerChanged }: TextProps) {
   return (
     <input
-      type={'text'}
-      placeholder={'Введите ответ'}
+      type={"text"}
+      placeholder={"Введите ответ"}
       className={styles.answer}
       onChange={(evt) => onAnswerChanged(evt.target.value)}
     />

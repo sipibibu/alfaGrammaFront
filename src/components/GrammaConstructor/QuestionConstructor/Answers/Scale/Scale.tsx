@@ -1,6 +1,6 @@
-import styles from './scale.module.css';
-import { ScaleOptions } from '../../../../types.ts';
-import React, { ChangeEvent } from 'react';
+import { ScaleOptions } from "../../../../../types";
+import styles from "./scale.module.css";
+import React, { ChangeEvent } from "react";
 
 type ScaleProps = {
   options: ScaleOptions;
@@ -13,7 +13,7 @@ function Scale({ options, setOptions }: ScaleProps) {
       ...options,
       [event.target.name]:
         parseInt(event.target.value) >= 0
-          ? event.target.value[0] === '0'
+          ? event.target.value[0] === "0"
             ? event.target.value.slice(1, event.target.value.length)
             : event.target.value
           : 0,
@@ -26,7 +26,7 @@ function Scale({ options, setOptions }: ScaleProps) {
           <label>от</label>
           <input
             type="number"
-            name={'from'}
+            name={"from"}
             min={0}
             value={options.from}
             onChange={handleOnChange}
@@ -36,7 +36,7 @@ function Scale({ options, setOptions }: ScaleProps) {
           <label>до</label>
           <input
             type="number"
-            name={'to'}
+            name={"to"}
             min={0}
             value={options.to}
             onChange={handleOnChange}
@@ -47,7 +47,7 @@ function Scale({ options, setOptions }: ScaleProps) {
         <label>шаг</label>
         <input
           type="number"
-          name={'step'}
+          name={"step"}
           min={1}
           value={options.step}
           onChange={handleOnChange}

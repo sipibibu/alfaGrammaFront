@@ -1,6 +1,6 @@
-import styles from '../../QuestionConstructor/QuestionsList/question-list.module.css';
-import { Question, QuestionAnswer } from '../../../types.ts';
-import QuestionCard from '../QuestionCard/QuestionCard.tsx';
+import styles from "./questions-list.module.css";
+import { Question, QuestionAnswer } from "../../../types.ts";
+import QuestionCard from "../QuestionCard/QuestionCard.tsx";
 
 type QuestionListProps = {
   questions: Question[];

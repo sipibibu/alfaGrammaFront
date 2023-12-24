@@ -1,8 +1,8 @@
-import styles from './checkboxes.module.css';
-import CheckItem from './CheckItem.tsx';
-import { useOptions } from '../../../../hooks/useOptions.ts';
-import { CheckboxOptions } from '../../../../types.ts';
-import React from 'react';
+import styles from "./checkboxes.module.css";
+import CheckItem from "./CheckItem.tsx";
+import React from "react";
+import { CheckboxOptions } from "../../../../../types.ts";
+import { useOptions } from "../../../../../hooks/useOptions.ts";
 
 type CheckboxesProps = {
   options: CheckboxOptions;
@@ -14,7 +14,7 @@ function Checkboxes({ options, setOptions }: CheckboxesProps) {
 
   return (
     <div className={styles.radioList}>
-      {[...options, ''].map((option, i) => (
+      {[...options, ""].map((option, i) => (
         <CheckItem
           value={option}
           index={i}

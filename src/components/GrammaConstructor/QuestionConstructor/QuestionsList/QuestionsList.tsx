@@ -1,9 +1,9 @@
 import QuestionCard from "../QuestionCard.tsx";
 import styles from "./question-list.module.css";
-import { Question } from "../../../types.ts";
-import { QuestionType } from "../../../const.ts";
 import NewQuestionButton from "../NewQuestionButton/NewQuestionButton.tsx";
 import React, { useCallback } from "react";
+import { Question } from "../../../../types.ts";
+import { QuestionType } from "../../../../const.ts";
 
 type QuestionListProps = {
   questionsList: Question[];

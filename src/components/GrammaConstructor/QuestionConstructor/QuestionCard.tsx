@@ -1,11 +1,13 @@
 import styles from "./question-card.module.css";
 import React, { ChangeEvent, useCallback } from "react";
 import TypesSelect from "./TypesSelect/TypesSelect.tsx";
-import { QuestionType } from "../../const.ts";
 import Scale from "./Answers/Scale/Scale.tsx";
 import Text from "./Answers/Text/Text.tsx";
 import Radio from "./Answers/Radio/Radio.tsx";
 import Checkboxes from "./Answers/Checkboxes/Checkboxes.tsx";
+import DeleteQuestionButton from "./DeleteQuestionButton/DeleteQuestionButton.tsx";
+import { Checkbox, FormControlLabel } from "@mui/material";
+import { QuestionType } from "../../../const.ts";
 import {
   CheckboxOptions,
   Question,
@@ -13,9 +15,7 @@ import {
   RadioOptions,
   ScaleOptions,
   TextOptions,
-} from "../../types.ts";
-import DeleteQuestionButton from "./DeleteQuestionButton/DeleteQuestionButton.tsx";
-import { Checkbox, FormControlLabel } from "@mui/material";
+} from "../../../types.ts";
 
 type QuestionCardProps = {
   question: Question;
@@ -34,7 +34,7 @@ const getQuestionOptions = (questionType: string) => {
     case QuestionType.Checkbox:
       return [] as CheckboxOptions;
     case QuestionType.Scale:
-      return { from: 0, to: 0, step: 1 } as QuestionOptions;
+      return { from: 0, to: 0, step: 1 } as ScaleOptions;
   }
 };
 

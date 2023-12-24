@@ -11,7 +11,6 @@ function CreateButton({ gramma }: CreateButtonProps) {
   const { store } = useContext(Context);
   const handleSubmit = () => {
     store.createGramma(gramma);
-    console.log(gramma);
   };
 
   return (
