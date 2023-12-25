@@ -10,7 +10,7 @@ const Selector = () => {
             </div>
             <div className={styles.radioItem}>
                 <input name="radio" id="radio2" type="radio" value={"2"}/>
-                <label htmlFor="radio2">По навыкам</label>
+                <label htmlFor="radio2">По интересам</label>
             </div>
             <div className={styles.radioItem}>
                 <input name="radio" id="radio3" type="radio" value={"3"}/>

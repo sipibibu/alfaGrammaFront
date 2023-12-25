@@ -12,6 +12,10 @@
     padding: 20px;
 }
 
+.href{
+    text-decoration: none;
+}
+
 .textHeading{
     color: #000;
     text-align: center;

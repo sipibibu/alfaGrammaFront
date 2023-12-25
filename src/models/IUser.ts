@@ -11,7 +11,8 @@ export interface IUserAuth extends IUser{
     password: string
 }
 
-export interface additionalDataUser{
+export interface additionalDataRespondent {
+    imageUrl?: string,
     age: string,
     education: string,
     interests: string[],
@@ -19,12 +20,13 @@ export interface additionalDataUser{
 }
 
 export interface additionalDataManager{
+    imageUrl?: string,
     companyName: string,
     description: string
 }
 
 export interface IRespondent extends IUser{
-    additionalData?: additionalDataUser
+    additionalData?: additionalDataRespondent
 }
 
 export interface IManager extends IUser{
