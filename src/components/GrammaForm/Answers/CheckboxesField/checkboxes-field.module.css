@@ -1,7 +1,6 @@
 .checkItemList{
   display: flex;
   flex-direction: column;
-  gap: 19px;
   position: relative;
   padding-left: 5px;
 }

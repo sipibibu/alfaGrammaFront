@@ -1,12 +1,12 @@
-import styles from './scale-field.module.css';
-import { ScaleAnswer, ScaleOptions } from '../../../../types.ts';
-import React from 'react';
-import { Slider } from '@mui/material';
+import styles from "./scale-field.module.css";
+import { IScaleAnswer, ScaleOptions } from "../../../../types.ts";
+import React from "react";
+import { Slider } from "@mui/material";
 
 type ScaleProps = {
   options: ScaleOptions;
-  userAnswer: ScaleAnswer;
-  onAnswerChange: (answer: ScaleAnswer) => void;
+  userAnswer: IScaleAnswer;
+  onAnswerChange: (answer: IScaleAnswer) => void;
 };
 
 const getMarks = ({ from, to, step }: ScaleOptions) => {
@@ -20,7 +20,7 @@ const getMarks = ({ from, to, step }: ScaleOptions) => {
 
 function ScaleField({ options, userAnswer, onAnswerChange }: ScaleProps) {
   const handleChange = (_: Event, newValue: number | number[]) => {
-    if (typeof newValue === 'number') {
+    if (typeof newValue === "number") {
       onAnswerChange(newValue);
     }
   };
@@ -35,13 +35,13 @@ function ScaleField({ options, userAnswer, onAnswerChange }: ScaleProps) {
         max={options.to}
         step={options.step}
         sx={{
-          color: '#ff4848',
-          width: '80%',
-          '& .MuiSlider-thumb': {
-            boxShadow: '0 0 0 8px rgba(255, 72, 72, 0.16)',
+          color: "#ff4848",
+          width: "80%",
+          "& .MuiSlider-thumb": {
+            boxShadow: "0 0 0 8px rgba(255, 72, 72, 0.16)",
           },
-          '& .MuiSlider-thumb:hover': {
-            boxShadow: '0 0 0 12px rgba(255, 72, 72, 0.16)',
+          "& .MuiSlider-thumb:hover": {
+            boxShadow: "0 0 0 12px rgba(255, 72, 72, 0.16)",
           },
         }}
       />

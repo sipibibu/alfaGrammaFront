@@ -1,28 +1,28 @@
-import styles from './gramma-constructor.module.css';
-import QuestionsList from '../QuestionConstructor/QuestionsList/QuestionsList.tsx';
-import cn from 'classnames';
-import { ChangeEvent, useCallback, useState } from 'react';
-import { Gramma, Question } from '../../types.ts';
-import { DateTimePicker } from '@mui/x-date-pickers';
-import { Dayjs } from 'dayjs';
-import CreateButton from './CreateButton/CreateButton.tsx';
+import styles from "./gramma-constructor.module.css";
+import cn from "classnames";
+import { ChangeEvent, useCallback, useState } from "react";
+import { IGrammaStructure, IQuestion } from "../../types.ts";
+import { DateTimePicker } from "@mui/x-date-pickers";
+import { Dayjs } from "dayjs";
+import CreateButton from "./CreateButton/CreateButton.tsx";
+import QuestionsList from "./QuestionConstructor/QuestionsList/QuestionsList.tsx";
 
-const initialGramma: Gramma = {
-  dateFrom: '',
-  dateTo: '',
-  description: '',
+const initialGramma: IGrammaStructure = {
+  dateFrom: "",
+  dateTo: "",
+  description: "",
   questions: [],
-  title: '',
+  title: "",
 };
 
 export default function GrammaConstructor() {
-  const [gramma, setGramma] = useState<Gramma>(initialGramma);
+  const [gramma, setGramma] = useState<IGrammaStructure>(initialGramma);
 
   const handleTitleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       setGramma((prevState) => ({ ...prevState, title: event.target.value }));
     },
-    []
+    [],
   );
 
   const handleDescriptionChange = useCallback(
@@ -32,7 +32,7 @@ export default function GrammaConstructor() {
         description: event.target.value,
       }));
     },
-    []
+    [],
   );
 
   const handleDateFromChange = useCallback((event: Dayjs | null) => {
@@ -49,7 +49,7 @@ export default function GrammaConstructor() {
     setGramma((prevState) => ({ ...prevState, dateTo: event.format() }));
   }, []);
 
-  const handleChangeQuestions = useCallback((questions: Question[]) => {
+  const handleChangeQuestions = useCallback((questions: IQuestion[]) => {
     setGramma((prevState) => ({ ...prevState, questions: questions }));
   }, []);
 
@@ -57,14 +57,14 @@ export default function GrammaConstructor() {
     <div className={styles.container}>
       <div className={styles.menu}>
         <input
-          type={'text'}
-          placeholder={'Название опроса'}
+          type={"text"}
+          placeholder={"Название опроса"}
           className={styles.title}
           value={gramma.title}
           onChange={handleTitleChange}
         />
         <textarea
-          placeholder={'Описание опроса'}
+          placeholder={"Описание опроса"}
           className={styles.description}
           value={gramma.description}
           onChange={handleDescriptionChange}
