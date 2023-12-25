@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Sidebar from "./components/Sidebar/Sidebar.tsx";
 import GrammaPage from "./components/GrammaPage/GrammaPage.tsx";
 import "./index.css";
 import Registration from "./components/Registration/Registration.tsx";
@@ -23,7 +22,6 @@ function App() {
           <Route element={<LayoutRespondent />}>
             <Route path={"/"} element={<AllGrammasListPage />} />
             <Route path={"profile-respondent"} element={<ProfileUser />} />
-            <Route path={"mylist"} element={<Sidebar />} />
             <Route path={"grammas/:id"} element={<GrammaPage />} />
             <Route path={"gramma-form/:id"} element={<GrammaForm />} />
           </Route>
