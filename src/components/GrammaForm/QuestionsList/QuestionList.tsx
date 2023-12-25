@@ -1,11 +1,11 @@
 import styles from "./questions-list.module.css";
-import { IQuestion, IQuestionAnswer } from "../../../types.ts";
+import { IQuestionAnswer, IQuestionForm } from "../../../types.ts";
 import QuestionCard from "../QuestionCard/QuestionCard.tsx";
 
 type QuestionListProps = {
-  questions: IQuestion[];
+  questions: IQuestionForm[];
   userAnswers: IQuestionAnswer[];
-  onAnswerChanged: (index: number, answer: IQuestionAnswer) => void;
+  onAnswerChanged: (answer: IQuestionAnswer) => void;
 };
 
 export default function QuestionList({
@@ -15,14 +15,20 @@ export default function QuestionList({
 }: QuestionListProps) {
   return (
     <div className={styles.questions}>
-      {questions.map((question, index) => (
+      {questions.map((question) => (
         <QuestionCard
-          key={index}
+          key={question.id}
           question={question}
-          onAnswerChanged={(answer: IQuestionAnswer) =>
-            onAnswerChanged(index, answer)
+          onAnswerChanged={(answer: IQuestionAnswer["answer"]) =>
+            onAnswerChanged({ questionId: question.id, answer })
           }
-          userAnswers={userAnswers[index]}
+          userAnswer={
+            (
+              userAnswers.find(
+                (answer) => answer?.questionId === question.id,
+              ) as IQuestionAnswer
+            ).answer
+          }
         />
       ))}
     </div>

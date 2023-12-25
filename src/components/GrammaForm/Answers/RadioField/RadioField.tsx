@@ -1,5 +1,9 @@
 import styles from "./radio-field.module.css";
-import { IRadioAnswer, RadioOptions } from "../../../../types.ts";
+import {
+  IQuestionAnswer,
+  IRadioAnswer,
+  RadioOptions,
+} from "../../../../types.ts";
 import React from "react";
 import {
   FormControl,
@@ -11,7 +15,7 @@ import {
 type RadioProps = {
   options: RadioOptions;
   userAnswer: IRadioAnswer;
-  onAnswerChange: (answer: IRadioAnswer) => void;
+  onAnswerChange: (answer: IQuestionAnswer["answer"]) => void;
 };
 
 function RadioField({ options, userAnswer, onAnswerChange }: RadioProps) {

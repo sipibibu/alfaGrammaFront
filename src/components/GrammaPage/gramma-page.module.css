@@ -1,6 +1,5 @@
 .container {
-  height: calc(100vh - 176px);
-  margin: 50px;
+  margin: 100px 50px 50px;
   background-color: white;
   border-radius: 20px;
   display: flex;
@@ -85,4 +84,6 @@
   border-radius: 100px;
   border: 0;
   padding: 0 25px;
+  color: white;
+  cursor: pointer;
 }

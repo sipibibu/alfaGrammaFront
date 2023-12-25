@@ -2,82 +2,74 @@ import styles from "./gramma-form.module.css";
 import { QuestionType } from "../../const.ts";
 import QuestionsList from "./QuestionsList/QuestionList.tsx";
 import SubmitButton from "./SumbitButton/SubmitButton.tsx";
-import { useState } from "react";
-import { IQuestion, IQuestionAnswer } from "../../types.ts";
+import { useContext, useEffect, useState } from "react";
+import { IQuestionAnswer, IQuestionForm, ScaleOptions } from "../../types.ts";
+import { Context } from "../../main.tsx";
+import { observer } from "mobx-react-lite";
+import { useParams } from "react-router";
 
-const gramma = {
-  title: "Название",
-  dateFrom: "2023-12-03T00:00:00+05:00",
-  dateTo: "2023-12-31T00:00:00+05:00",
-  description: "Описание опроса",
-  questions: [
-    {
-      isRequired: true,
-      options: null,
-      title: "Текстовое поле",
-      type: QuestionType.Text,
-    },
-    {
-      isRequired: false,
-      options: ["1 вариант", "2 вариант", "3 вариант"],
-      title: "Выбор одного",
-      type: QuestionType.Radio,
-    },
-    {
-      isRequired: false,
-      options: ["1 вариант", "2 вариант", "3 вариант"],
-      title: "Выбор нескольких",
-      type: QuestionType.Checkbox,
-    },
-    {
-      isRequired: false,
-      options: { from: 0, to: 100, step: 10 },
-      title: "Шкала",
-      type: QuestionType.Scale,
-    },
-  ],
-};
-
-const getInitialUserValues = (options: IQuestion[]) => {
-  const answers: IQuestionAnswer[] = [];
-  for (let option of options) {
-    switch (option.type) {
-      case QuestionType.Text:
-        answers.push("");
-        break;
-      case QuestionType.Radio:
-        answers.push("");
-        break;
-      case QuestionType.Checkbox:
-        answers.push([]);
-        break;
-      case QuestionType.Scale:
-        answers.push(0);
-        break;
-    }
+const getInitialUserValues = (questionForm: IQuestionForm): IQuestionAnswer => {
+  switch (questionForm.type) {
+    default:
+    case QuestionType.Text:
+      return { questionId: questionForm.id, answer: "" };
+    case QuestionType.Radio:
+      return { questionId: questionForm.id, answer: "" };
+    case QuestionType.Checkbox:
+      return { questionId: questionForm.id, answer: [] };
+    case QuestionType.Scale:
+      return {
+        questionId: questionForm.id,
+        answer: (questionForm.options as ScaleOptions).from,
+      };
   }
-  return answers;
 };
 
-export default function GrammaForm() {
-  const [userAnswers, setUserAnswers] = useState(
-    getInitialUserValues(gramma.questions),
-  );
+function GrammaForm() {
+  const { id } = useParams();
+  const { store } = useContext(Context);
+  const grammaForm = store.grammaForm;
+  const [userAnswers, setUserAnswers] = useState<IQuestionAnswer[]>([]);
 
-  const handleUserAnswerChange = (index: number, updated: IQuestionAnswer) => {
-    setUserAnswers((prevState) => [
-      ...prevState.slice(0, index),
-      updated,
-      ...prevState.slice(index + 1, prevState.length),
-    ]);
+  useEffect(() => {
+    if (id) {
+      const intId = parseInt(id);
+      if (!grammaForm || intId !== grammaForm.id) {
+        store.getGrammasForm(intId);
+      }
+      if (grammaForm) {
+        setUserAnswers(
+          [...grammaForm.questions].map((question) =>
+            getInitialUserValues(question),
+          ),
+        );
+      }
+    }
+  }, [id, grammaForm]);
+
+  if (!grammaForm || !grammaForm.id || userAnswers.length === 0) {
+    return null;
+  }
+
+  const handleUserAnswerChange = (updated: IQuestionAnswer) => {
+    setUserAnswers((prevState) => {
+      const index = prevState.findIndex(
+        (answer) => answer.questionId === updated.questionId,
+      );
+      return [
+        ...prevState.slice(0, index),
+        updated,
+        ...prevState.slice(index + 1, prevState.length),
+      ];
+    });
   };
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{gramma.title}</h1>
-      <p className={styles.description}>{gramma.description}</p>
+      <h1 className={styles.title}>{grammaForm.title}</h1>
+      <p className={styles.description}>{grammaForm.description}</p>
       <QuestionsList
-        questions={gramma.questions}
+        questions={grammaForm.questions}
         userAnswers={userAnswers}
         onAnswerChanged={handleUserAnswerChange}
       />
@@ -85,3 +77,5 @@ export default function GrammaForm() {
     </div>
   );
 }
+
+export default observer(GrammaForm);

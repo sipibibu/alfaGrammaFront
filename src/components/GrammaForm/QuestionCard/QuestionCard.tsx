@@ -1,14 +1,15 @@
 import styles from "./question-card.module.css";
 import {
-  ICheckboxAnswer,
   CheckboxOptions,
+  ICheckboxAnswer,
   IQuestion,
   IQuestionAnswer,
+  IQuestionForm,
   IRadioAnswer,
-  RadioOptions,
   IScaleAnswer,
-  ScaleOptions,
   ITextAnswer,
+  RadioOptions,
+  ScaleOptions,
 } from "../../../types.ts";
 import cn from "classnames";
 import { QuestionType } from "../../../const.ts";
@@ -18,15 +19,15 @@ import CheckboxesField from "../Answers/CheckboxesField/CheckboxesField.tsx";
 import ScaleField from "../Answers/ScaleField/ScaleField.tsx";
 
 type QuestionCardProps = {
-  question: IQuestion;
-  userAnswers: IQuestionAnswer;
-  onAnswerChanged: (answer: IQuestionAnswer) => void;
+  question: IQuestionForm;
+  userAnswer: IQuestionAnswer["answer"];
+  onAnswerChanged: (answer: IQuestionAnswer["answer"]) => void;
 };
 
 const getQuestionField = (
   question: IQuestion,
-  userAnswer: IQuestionAnswer,
-  onAnswerChanged: (answer: IQuestionAnswer) => void,
+  userAnswer: IQuestionAnswer["answer"],
+  onAnswerChanged: (answer: IQuestionAnswer["answer"]) => void,
 ) => {
   switch (question.type) {
     default:
@@ -66,7 +67,7 @@ const getQuestionField = (
 
 export default function QuestionCard({
   question,
-  userAnswers,
+  userAnswer,
   onAnswerChanged,
 }: QuestionCardProps) {
   return (
@@ -75,7 +76,7 @@ export default function QuestionCard({
         {question.title}
       </h2>
       <div className={styles.questionField}>
-        {getQuestionField(question, userAnswers, onAnswerChanged)}
+        {getQuestionField(question, userAnswer, onAnswerChanged)}
       </div>
     </div>
   );

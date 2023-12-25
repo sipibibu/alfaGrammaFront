@@ -6,6 +6,7 @@ import AxiosResponce from "axios";
 import { decodeToken } from "../utils/decodeToken.ts";
 import { IGrammaForm, IGrammaStructure } from "../types.ts";
 import GrammasService from "../services/GrammasService.ts";
+import { MockGrammas } from "../mock/mock-grammas.ts";
 
 export default class Store {
   user = {} as IUser;
@@ -14,6 +15,8 @@ export default class Store {
   isAuth = false;
   isLogin = false;
   grammaCard = {} as IGrammaForm;
+  grammasList = [] as IGrammaForm[];
+  grammaForm: IGrammaForm | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -41,6 +44,14 @@ export default class Store {
 
   setGramma(gramma: IGrammaForm) {
     this.grammaCard = gramma;
+  }
+
+  setGrammasList(grammasList: IGrammaForm[]) {
+    this.grammasList = grammasList;
+  }
+
+  setGrammaForm(grammaForm: IGrammaForm) {
+    this.grammaForm = grammaForm;
   }
 
   async login(login: string, password: string) {
@@ -98,10 +109,31 @@ export default class Store {
 
   async getGramma(id: number) {
     try {
-      const gramma = await GrammasService.getGramma(id);
-      this.setGramma(gramma);
+      const gramma = MockGrammas.find((gramma) => gramma.id === id);
+      if (gramma) {
+        this.setGramma(gramma);
+      }
     } catch (e) {
       console.log(e);
     }
+  }
+
+  async getGrammasList() {
+    try {
+      setTimeout(() => {
+        this.setGrammasList(MockGrammas);
+      }, 500);
+    } catch (e) {}
+  }
+
+  async getGrammasForm(id: number) {
+    try {
+      setTimeout(() => {
+        const gramma = MockGrammas.find((gramma) => gramma.id === id);
+        if (gramma) {
+          this.setGrammaForm(gramma);
+        }
+      }, 500);
+    } catch (e) {}
   }
 }

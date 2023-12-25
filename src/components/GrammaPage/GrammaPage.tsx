@@ -3,8 +3,10 @@ import { getFormattedDateTime } from "../../utils.ts";
 import { useContext, useEffect } from "react";
 import { Context } from "../../main.tsx";
 import { useParams } from "react-router";
+import { observer } from "mobx-react-lite";
+import { Link } from "react-router-dom";
 
-export default function GrammaPage() {
+function GrammaPage() {
   const { id } = useParams();
   const { store } = useContext(Context);
   const gramma = store.grammaCard;
@@ -38,8 +40,12 @@ export default function GrammaPage() {
             <span> {getFormattedDateTime(gramma.dateTo)}</span>
           </p>
         </div>
-        <button>Записаться</button>
+        <Link to={`/gramma-form/${gramma.id}`}>
+          <button>Пройти</button>
+        </Link>
       </div>
     </div>
   );
 }
+
+export default observer(GrammaPage);

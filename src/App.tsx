@@ -11,19 +11,21 @@ import { LayoutRespondent } from "./components/Layout/LayoutRespondent.tsx";
 import GrammaForm from "./components/GrammaForm/GrammaForm.tsx";
 import GrammaConstructor from "./components/GrammaConstructor/GrammaConstructor.tsx";
 import { LayoutManager } from "./components/Layout/LayoutManager.tsx";
+import AllGrammasListPage from "./pages/AllGrammasListPage/AllGrammasListPage.tsx";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path={"/"} element={<Login />} />
           <Route path={"registration"} element={<Registration />} />
+          <Route path={"/login"} element={<Login />} />
           <Route element={<LayoutRespondent />}>
+            <Route path={"/"} element={<AllGrammasListPage />} />
             <Route path={"profile-respondent"} element={<ProfileUser />} />
             <Route path={"mylist"} element={<Sidebar />} />
             <Route path={"grammas/:id"} element={<GrammaPage />} />
-            <Route path={"gramma-form"} element={<GrammaForm />} />
+            <Route path={"gramma-form/:id"} element={<GrammaForm />} />
           </Route>
           <Route element={<LayoutManager />}>
             <Route path={"profile-manager"} element={<ProfileManager />} />

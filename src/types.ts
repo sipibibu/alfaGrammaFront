@@ -24,8 +24,13 @@ export interface IGrammaStructure {
   questions: IQuestion[];
 }
 
+export interface IQuestionForm extends IQuestion {
+  id: number;
+}
+
 export interface IGrammaForm extends IGrammaStructure {
   id: number;
+  questions: IQuestionForm[];
 }
 
 export type ITextAnswer = string;
@@ -33,11 +38,10 @@ export type IRadioAnswer = string;
 export type ICheckboxAnswer = string[];
 export type IScaleAnswer = number;
 
-export type IQuestionAnswer =
-  | ITextAnswer
-  | IRadioAnswer
-  | ICheckboxAnswer
-  | IScaleAnswer;
+export type IQuestionAnswer = {
+  questionId: number;
+  answer: ITextAnswer | IRadioAnswer | ICheckboxAnswer | IScaleAnswer;
+};
 
 export interface IUserResponse {
   grammaId: string;
