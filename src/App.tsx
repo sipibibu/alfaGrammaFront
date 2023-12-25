@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import GrammaPage from "./components/GrammaPage/GrammaPage.tsx";
 import "./index.css";
 import Registration from "./components/Registration/Registration.tsx";
 import Login from "./components/Login/Login.tsx";
@@ -11,6 +10,8 @@ import GrammaForm from "./components/GrammaForm/GrammaForm.tsx";
 import GrammaConstructor from "./components/GrammaConstructor/GrammaConstructor.tsx";
 import { LayoutManager } from "./components/Layout/LayoutManager.tsx";
 import AllGrammasListPage from "./pages/AllGrammasListPage/AllGrammasListPage.tsx";
+import GrammaPage from "./pages/GrammaPage/GrammaPage.tsx";
+import PlannedGrammasPage from "./pages/PlannedGrammasPage/PlannedGrammasPage.tsx";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route element={<LayoutRespondent />}>
             <Route path={"/"} element={<AllGrammasListPage />} />
             <Route path={"profile-respondent"} element={<ProfileUser />} />
+            <Route path={"/mylist"} element={<PlannedGrammasPage />} />
             <Route path={"grammas/:id"} element={<GrammaPage />} />
             <Route path={"gramma-form/:id"} element={<GrammaForm />} />
           </Route>
