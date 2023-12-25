@@ -1,8 +1,6 @@
 import { IManager, IRespondent, IUser, IUserAuth } from "../models/IUser";
 import { makeAutoObservable } from "mobx";
 import AuthService from "../services/AuthService";
-import { AuthResponse } from "../models/responce/AuthResponse.ts";
-import AxiosResponce from "axios";
 import { decodeToken } from "../utils/decodeToken.ts";
 import ProfileService from "../services/ProfileService.ts";
 import { IGrammaForm, IGrammaStructure } from "../types.ts";
@@ -60,8 +58,9 @@ export default class Store {
 
   async registration(userAuth: IUserAuth) {
     try {
-      const response: AxiosResponce<AuthResponse> =
-        await AuthService.registration(userAuth);
+      const response = await AuthService.registration(userAuth).then(
+        (res) => res.data,
+      );
       this.setAuth(true);
       console.log(response);
     } catch (e) {
@@ -90,9 +89,8 @@ export default class Store {
 
   async login(login: string, password: string) {
     try {
-      const response: AxiosResponce<AuthResponse> = await AuthService.login(
-        login,
-        password,
+      const response = await AuthService.login(login, password).then(
+        (res) => res.data,
       );
       localStorage.setItem("token", response.data.access_jwt_token);
       this.setAuth(true);
