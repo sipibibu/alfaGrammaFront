@@ -1,24 +1,25 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
+import * as ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
 import Store from "./store/store";
-import {createContext} from "react";
+import { createContext } from "react";
 
-interface State{
-    store: Store
+interface State {
+  store: Store;
 }
 
-const store = new Store()
+const store = new Store();
 
 export const Context = createContext<State>({
-    store
-})
+  store,
+});
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Context.Provider value={{
-      store
-  }}>
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <Context.Provider
+    value={{
+      store,
+    }}
+  >
     <App />
-  </Context.Provider>
-)
+  </Context.Provider>,
+);
