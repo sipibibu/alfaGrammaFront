@@ -216,6 +216,14 @@ export default class Store {
     } catch (e) {}
   }
 
+  async getPlannedGrammas() {
+    try {
+      setTimeout(() => {
+        this.setGrammasList(MockGrammas);
+      }, 500);
+    } catch (e) {}
+  }
+
   async logout() {
     try {
       localStorage.removeItem("token");
