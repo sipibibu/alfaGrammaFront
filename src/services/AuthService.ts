@@ -4,7 +4,7 @@ import {AuthResponse} from "../models/responce/AuthResponse.ts";
 import {IUserAuth} from "../models/IUser.ts";
 
 export default class AuthService{
-    static async login(login: string, password: string): Promise<AxiosResponce<AuthResponse>>{
+    static async login(login: string, password: string){
         return axiosInstance.post<AuthResponse>("/auth/login",
             {
                 email: login,
@@ -13,7 +13,7 @@ export default class AuthService{
         )
     }
 
-    static async registration(userAuth: IUserAuth): Promise<AxiosResponce<AuthResponse>>{
+    static async registration(userAuth: IUserAuth){
         return axiosInstance.post<AuthResponse>(`/auth/register/${userAuth.role}`,
             {
                 firstName: userAuth.name,
@@ -23,8 +23,7 @@ export default class AuthService{
             })
     }
 
-    static async logout(): Promise<void>{
-        return await axiosInstance.post("/auth/logout")
-    }
-
+  static async logout(){
+    return await axiosInstance.post("/auth/logout");
+  }
 }

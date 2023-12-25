@@ -1,8 +1,8 @@
-import styles from './radio.module.css';
-import RadioItem from './RadioItem.tsx';
-import { useOptions } from '../../../../hooks/useOptions.ts';
-import { RadioOptions } from '../../../../types.ts';
-import React from 'react';
+import { RadioOptions } from "../../../../../types.ts";
+import styles from "./radio.module.css";
+import RadioItem from "./RadioItem.tsx";
+import React from "react";
+import { useOptions } from "../../../../../hooks/useOptions.ts";
 
 type RadioProps = {
   options: RadioOptions;
@@ -14,7 +14,7 @@ function Radio({ options, setOptions }: RadioProps) {
 
   return (
     <div className={styles.radioList}>
-      {[...options, ''].map((variant, i) => (
+      {[...options, ""].map((variant, i) => (
         <RadioItem
           value={variant}
           index={i}

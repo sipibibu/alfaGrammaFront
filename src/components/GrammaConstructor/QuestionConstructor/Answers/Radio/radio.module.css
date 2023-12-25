@@ -28,7 +28,7 @@
 }
 
 .radioItem label:before {
-  content: url('/src/components/QuestionConstructor/icons/radio.svg');
+  content: url('/src/components/GrammaConstructor/QuestionConstructor/icons/radio.svg');
   display: inline-block;
   width: 20px;
   height: 20px;

@@ -1,14 +1,15 @@
 .blockCard{
-    width: 420px;
-    height: 450px;
+    width: 300px;
+    height: 200px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    justify-content: center;
+    gap: 20px;
+    justify-content: space-between;
     align-items: center;
     border-radius: 15px;
     background: #FFF;
     box-shadow: 0 4px 46px -2px rgba(0, 0, 0, 0.06);
+    padding: 20px;
 }
 
 .href{

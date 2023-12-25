@@ -1,9 +1,9 @@
-import React from 'react';
-import styles from './submit-button.module.css';
-import { QuestionAnswer } from '../../../types.ts';
+import React from "react";
+import styles from "./submit-button.module.css";
+import { IQuestionAnswer } from "../../../types.ts";
 
 type SubmitButtonProps = {
-  answers: QuestionAnswer[];
+  answers: IQuestionAnswer[];
 };
 
 function SubmitButton({ answers }: SubmitButtonProps) {
@@ -12,7 +12,7 @@ function SubmitButton({ answers }: SubmitButtonProps) {
   };
 
   return (
-    <button className={styles.submit} type={'button'} onClick={handleSubmit}>
+    <button className={styles.submit} type={"button"} onClick={handleSubmit}>
       Отправить
     </button>
   );
