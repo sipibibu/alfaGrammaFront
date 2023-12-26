@@ -46,6 +46,7 @@ const ProfileManager = () => {
             onClick={() => {
               setMode("display");
               console.log(companyName, description);
+              store.updateProfileManager(companyName, description)
             }}
           >
             сохранить
@@ -74,4 +75,5 @@ const ProfileManager = () => {
     </div>
   );
 };
+
 export default observer(ProfileManager);

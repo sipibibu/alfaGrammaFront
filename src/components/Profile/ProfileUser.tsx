@@ -57,7 +57,7 @@ const ProfileUser = () => {
               <button className={styles.whatUseEditBtn} onClick={() => {
                   setMode('display');
                   console.log(age, education, interests);
-                  store.updateProfile(age, education, interests)}}>сохранить
+                  store.updateProfileRespondent(age, education, interests)}}>сохранить
               </button>
               :
           <button className={styles.whatUseEditBtn} onClick={() => setMode('edit')}>редактировать</button>

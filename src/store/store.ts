@@ -14,6 +14,8 @@ export default class Store {
   age = "";
   education = "";
   interests = [""];
+  companyName = "";
+  description = "";
   respondent = {} as IRespondent;
   manager = {} as IManager;
   isAuth = false;
@@ -56,6 +58,14 @@ export default class Store {
 
   setGrammaForm(grammaForm: IGrammaForm) {
     this.grammaForm = grammaForm;
+  }
+
+  setDescription(description: string){
+    this.description = description
+  }
+
+  setCompanyName(name: string){
+    this.companyName = name
   }
 
   async registration(userAuth: IUserAuth) {
@@ -163,7 +173,7 @@ export default class Store {
     }
   }
 
-  async updateProfile(age: string, education: string, interests: string[]) {
+  async updateProfileRespondent(age: string, education: string, interests: string[]) {
     if (age != this.respondent.additionalData?.age) {
       await this.updateAge(age);
     }
@@ -182,6 +192,47 @@ export default class Store {
         age: this.age,
         education: this.education,
         interests: this.interests,
+      },
+    });
+  }
+
+  async updateCompanyName(name: string){
+    try {
+      const response =
+          await ProfileService.updateProfileManagerCompanyName(name);
+      this.setCompanyName(response.data.name);
+      console.log(response, this.companyName);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async updateDescription(description: string){
+    try {
+      const response =
+          await ProfileService.updateProfileManagerDescription(description);
+      this.setDescription(response.data.description);
+      console.log(response, this.description);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async updateProfileManager(name: string, description: string) {
+    if (name != this.manager.additionalData?.companyName) {
+      await this.updateCompanyName(name);
+    }
+    if (description != this.manager.additionalData?.description) {
+      await this.updateDescription(description);
+    }
+    this.setManager({
+      name: "",
+      surname: "",
+      login: this.user.login,
+      role: this.user.role,
+      additionalData: {
+          companyName: this.companyName,
+          description: this.description
       },
     });
   }
