@@ -1,23 +1,25 @@
 import styles from './profile.module.css';
 import Interests from './Interests.tsx';
 import avatar from './Avatar.png';
-import {useContext, useEffect, useState} from "react";
-import {Context} from "../../main";
-import {observer} from "mobx-react-lite";
-import {MultiValue} from "react-select";
+import { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
+import { MultiValue } from "react-select";
+import { useStores } from "../../rootStoreContext.ts";
 
 const ProfileUser = () => {
-    const {store} = useContext(Context)
-    const {name, surname} = store.respondent
-    const additionalDataUserServer = store.respondent.additionalData
+    const { userStore, profileRespondentStore } = useStores()
+    const {name, surname} = userStore.respondent
+    const additionalDataUserServer = userStore.respondent.additionalData
     const [age, setAge] = useState<string>('')
     const [education, setEducation] = useState<string>('')
     const [options, setOptions] = useState<MultiValue<string> | string>([])
     const [interests, setInterests] = useState<string[]>([])
     const [mode, setMode] = useState('display')
+
     useEffect(() => {
-        store.getAccount()
-    }, [store])
+        userStore.getAccount()
+    }, [userStore])
+
     return (
     <div className={styles.profile}>
       <div className={styles.bottomMenu}>
@@ -57,7 +59,7 @@ const ProfileUser = () => {
               <button className={styles.whatUseEditBtn} onClick={() => {
                   setMode('display');
                   console.log(age, education, interests);
-                  store.updateProfile(age, education, interests)}}>сохранить
+                  profileRespondentStore.updateProfile(age, education, interests)}}>сохранить
               </button>
               :
           <button className={styles.whatUseEditBtn} onClick={() => setMode('edit')}>редактировать</button>
@@ -69,4 +71,5 @@ const ProfileUser = () => {
     </div>
     );
 }
+
 export default observer(ProfileUser);

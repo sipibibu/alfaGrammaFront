@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import { IGrammaStructure } from "../../../types.ts";
 import styles from "./create-button.module.css";
-import { Context } from "../../../main.tsx";
+import { useStores } from "../../../rootStoreContext.ts";
 
 type CreateButtonProps = {
   gramma: IGrammaStructure;
 };
 
 function CreateButton({ gramma }: CreateButtonProps) {
-  const { store } = useContext(Context);
+  const { grammaStore } = useStores();
   const handleSubmit = () => {
-    store.createGramma(gramma);
+    grammaStore.createGramma(gramma);
   };
 
   return (
