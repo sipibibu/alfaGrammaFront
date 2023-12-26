@@ -22,7 +22,7 @@ class ProfileManagerStore{
         try {
             const response =
                 await ProfileService.updateProfileManagerCompanyName(companyName)
-            this.setCompanyName(response.data.name)
+            this.setCompanyName(response.data.title)
             console.log(response, this.companyName);
         } catch (e){
             console.log(e)
@@ -57,6 +57,27 @@ class ProfileManagerStore{
                 description: this.description,
             },
         });
+    }
+
+    async getCompany(){
+        try {
+            const response = await ProfileService.getAccount();
+            UserStore.setManager(
+                {
+                    name: response.data.firstName,
+                    surname: response.data.lastName,
+                    login: response.data.login,
+                    role: response.data.roles[0],
+                    additionalData: {
+                        companyName: response.data.title,
+                        description: response.data.description,
+                    }
+                }
+            )
+            console.log(response);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
 }

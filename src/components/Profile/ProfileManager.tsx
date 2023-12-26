@@ -1,6 +1,6 @@
 import styles from "./profile.module.css";
 import avatar from "./Avatar.png";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../../rootStoreContext.ts";
 
@@ -11,6 +11,11 @@ const ProfileManager = () => {
   const [mode, setMode] = useState("display");
   const [companyName, setCompanyName] = useState("");
   const [description, setDiscription] = useState("");
+
+  useEffect(() => {
+    profileManagerStore.getCompany()
+  }, [profileManagerStore])
+
   return (
     <div className={styles.profile}>
       <div className={styles.bottomMenu}>

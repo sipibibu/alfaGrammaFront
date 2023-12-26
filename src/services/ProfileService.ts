@@ -10,8 +10,7 @@ export default class ProfileService{
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
-        }
-        )
+        })
     }
 
     static async updateProfileRespondentEducation(education: string){
@@ -23,8 +22,7 @@ export default class ProfileService{
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
-            }
-        )
+            })
     }
 
     static async updateProfileRespondentInterests(interests: string[]){
@@ -36,8 +34,7 @@ export default class ProfileService{
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
-            }
-        )
+            })
     }
 
     static async getAccount(){
@@ -46,8 +43,11 @@ export default class ProfileService{
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
-            }
-    )
+            })
+    }
+
+    static async getCompany(title: string){
+        return axiosInstance.get(`/company/${title}`)
     }
 
     static async updateProfileManagerCompanyName(companyName: string){
