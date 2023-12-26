@@ -17,6 +17,7 @@ export interface IQuestion {
 }
 
 export interface IGrammaStructure {
+  interest: string;
   title: string;
   description: string;
   dateFrom: string;

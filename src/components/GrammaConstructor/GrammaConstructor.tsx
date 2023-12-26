@@ -6,17 +6,14 @@ import { DateTimePicker } from "@mui/x-date-pickers";
 import { Dayjs } from "dayjs";
 import CreateButton from "./CreateButton/CreateButton.tsx";
 import QuestionsList from "./QuestionConstructor/QuestionsList/QuestionsList.tsx";
-
-const initialGramma: IGrammaStructure = {
-  dateFrom: "",
-  dateTo: "",
-  description: "",
-  questions: [],
-  title: "",
-};
+import InterestSelect from "./InterestSelect/InterestSelect.tsx";
+import SamplesSelect from "./SamplesSelect/SamplesSelect.tsx";
+import { Samples, SampleVariants } from "../../utils/gramma_samples.ts";
 
 export default function GrammaConstructor() {
-  const [gramma, setGramma] = useState<IGrammaStructure>(initialGramma);
+  const [gramma, setGramma] = useState<IGrammaStructure>(
+    Samples[SampleVariants.EMPTY],
+  );
 
   const handleTitleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -53,9 +50,21 @@ export default function GrammaConstructor() {
     setGramma((prevState) => ({ ...prevState, questions: questions }));
   }, []);
 
+  const handleChangeInterest = useCallback((interest: string) => {
+    setGramma((prevState) => ({ ...prevState, interest: interest }));
+  }, []);
+
+  const handleSampleChange = useCallback(
+    (sample: keyof typeof SampleVariants) => {
+      setGramma(Samples[sample]);
+    },
+    [],
+  );
+
   return (
     <div className={styles.container}>
       <div className={styles.menu}>
+        <SamplesSelect onChange={handleSampleChange} />
         <input
           type={"text"}
           placeholder={"Название опроса"}
@@ -69,9 +78,13 @@ export default function GrammaConstructor() {
           value={gramma.description}
           onChange={handleDescriptionChange}
         />
-        <div />
+        <InterestSelect
+          chosenInterest={gramma.interest}
+          onChange={handleChangeInterest}
+        />
         <div className={cn(styles.date, styles.dateFrom)}>
           <DateTimePicker
+            sx={{ width: "100%" }}
             label="Дата начала"
             ampm={false}
             onAccept={handleDateFromChange}
@@ -79,7 +92,7 @@ export default function GrammaConstructor() {
         </div>
         <div className={cn(styles.date, styles.dateTo)}>
           <DateTimePicker
-            className={styles.calendar}
+            sx={{ width: "100%" }}
             label="Дата конца"
             orientation="portrait"
             ampm={false}

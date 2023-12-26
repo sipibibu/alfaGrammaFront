@@ -2,8 +2,9 @@ import styles from "./planned-grammas-page.module.css";
 import { useContext, useEffect } from "react";
 import { Context } from "../../main.tsx";
 import GrammasList from "../../components/GrammasList/GrammasList.tsx";
+import { observer } from "mobx-react-lite";
 
-export default function PlannedGrammasPage() {
+function PlannedGrammasPage() {
   const { store } = useContext(Context);
   const grammasList = store.grammasList;
 
@@ -17,3 +18,5 @@ export default function PlannedGrammasPage() {
     </div>
   );
 }
+
+export default observer(PlannedGrammasPage);

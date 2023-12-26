@@ -17,7 +17,15 @@ export default function TopMenuRespondent() {
         <CustomLink link={"/"} text={"опросы"} />
         <CustomLink link={"/mylist"} text={"мои опросы"} />
       </nav>
-      <Link to={store.user.role == "Respondent" ? "/profile-respondent" : "/"}>
+      <Link
+        to={
+          store.user.role == "Respondent"
+            ? "/profile-respondent"
+            : store.user.role === "Manager"
+            ? "/profile-manager"
+            : "/login"
+        }
+      >
         <img
           src={profileImage}
           className={styles.profileImage}

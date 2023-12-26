@@ -89,9 +89,7 @@ export default class Store {
 
   async login(login: string, password: string) {
     try {
-      const response = await AuthService.login(login, password).then(
-        (res) => res.data,
-      );
+      const response = await AuthService.login(login, password);
       localStorage.setItem("token", response.data.access_jwt_token);
       this.setAuth(true);
       this.setLogin(true);

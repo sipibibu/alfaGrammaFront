@@ -90,7 +90,7 @@ const Registration = () => {
             <div className={styles.accountText}>У вас есть аккаунт?</div>
             <button
               className={styles.accountButton}
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/login")}
             >
               Войти
             </button>
