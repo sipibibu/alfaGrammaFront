@@ -1,15 +1,15 @@
 import styles from "./planned-grammas-page.module.css";
-import { useContext, useEffect } from "react";
-import { Context } from "../../main.tsx";
+import { useEffect } from "react";
 import GrammasList from "../../components/GrammasList/GrammasList.tsx";
 import { observer } from "mobx-react-lite";
+import { useStores } from "../../rootStoreContext.ts";
 
 function PlannedGrammasPage() {
-  const { store } = useContext(Context);
-  const grammasList = store.grammasList;
+  const { grammaStore } = useStores();
+  const grammasList = grammaStore.grammasList;
 
   useEffect(() => {
-    store.getPlannedGrammas();
+    grammaStore.getPlannedGrammasList();
   }, []);
 
   return (

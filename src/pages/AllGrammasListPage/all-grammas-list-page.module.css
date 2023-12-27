@@ -1,7 +1,5 @@
 .grammasPage {
   margin-top: 75px;
-}
-
-.list {
-  margin-left: 350px;
+  display: grid;
+  grid-template-columns: 2fr 8fr;
 }
