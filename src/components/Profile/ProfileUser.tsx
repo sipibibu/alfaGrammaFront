@@ -7,7 +7,7 @@ import { MultiValue } from "react-select";
 import { useStores } from "../../rootStoreContext.ts";
 
 const ProfileUser = () => {
-    const { userStore,profileRespondentStore } = useStores()
+    const {userStore, profileRespondentStore } = useStores()
     const {name, surname} = userStore.respondent
     const additionalDataUserServer = userStore.respondent.additionalData
     const [age, setAge] = useState<string>('')
@@ -17,8 +17,8 @@ const ProfileUser = () => {
     const [mode, setMode] = useState('display')
 
     useEffect(() => {
-        profileRespondentStore.getAccount()
-    }, [profileRespondentStore])
+        userStore.getAccount()
+    }, [userStore])
 
     return (
     <div className={styles.profile}>

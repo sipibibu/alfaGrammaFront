@@ -78,27 +78,6 @@ class ProfileRespondentStore {
             },
         });
     }
-
-    async getAccount(){
-        try {
-            const response = await ProfileService.getAccount();
-            userStore.setRespondent({
-                name: response.data.firstName,
-                surname: response.data.lastName,
-                login: response.data.email,
-                role: response.data.roles[0],
-                additionalData: {
-                    imageUrl: response.data.image,
-                    age: response.data.age,
-                    education: response.data.education,
-                    interests: response.data.interests,
-                },
-            });
-            console.log(response);
-        } catch (e) {
-            console.log(e);
-        }
-    }
 }
 
 export default new ProfileRespondentStore();

@@ -50,5 +50,5 @@ const GrammsPage = () => {
       </div>
   );
 };
-// gramms with state in mobx
+
 export default GrammsPage;

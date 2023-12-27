@@ -59,9 +59,9 @@ class ProfileManagerStore{
         });
     }
 
-    async getCompany(){
+    async getCompany(title: string){
         try {
-            const response = await ProfileService.getAccount();
+            const response = await ProfileService.getCompany(title);
             UserStore.setManager(
                 {
                     name: response.data.firstName,

@@ -1,10 +1,10 @@
 import {IManager, IRespondent, IUserAuth} from "../../models/IUser.ts";
 import AxiosResponce from "axios";
-import {AuthResponse} from "../../models/responce/AuthResponse.ts";
+import { AuthResponse } from "../../models/responce/AuthResponse.ts";
 import AuthService from "../../services/AuthService.ts";
-import {makeAutoObservable} from "mobx";
+import { makeAutoObservable } from "mobx";
+import { decodeToken } from "../../utils/decodeToken.ts";
 import ProfileService from "../../services/ProfileService.ts";
-import {decodeToken} from "../../utils/decodeToken.ts";
 
 class UserStore{
     respondent = {} as IRespondent;
@@ -68,6 +68,41 @@ class UserStore{
         await this.registration(userAuth);
         if (this.isAuth) {
             await this.login(userAuth.login, userAuth.password);
+        }
+    }
+
+    async getAccount(){
+        try {
+            const response = await ProfileService.getAccount();
+            if (this.role == 'Respondent'){
+                this.setRespondent({
+                    name: response.data.firstName,
+                    surname: response.data.lastName,
+                    login: response.data.email,
+                    role: response.data.roles[0],
+                    additionalData: {
+                        imageUrl: response.data.image,
+                        age: response.data.age,
+                        education: response.data.education,
+                        interests: response.data.interests,
+                    },
+                });
+            }
+            else {
+                this.setManager({
+                        name: response.data.firstName,
+                        surname: response.data.lastName,
+                        login: response.data.email,
+                        role: response.data.roles[0],
+                        additionalData: {
+                            companyName: response.data.company.title,
+                            description: response.data.company.description,
+                        },
+                    });
+            }
+            console.log(response);
+        } catch (e) {
+            console.log(e);
         }
     }
 

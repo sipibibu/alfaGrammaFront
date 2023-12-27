@@ -13,8 +13,8 @@ const ProfileManager = () => {
   const [description, setDiscription] = useState("");
 
   useEffect(() => {
-    profileManagerStore.getCompany()
-  }, [profileManagerStore])
+    userStore.getAccount()
+  }, [userStore])
 
   return (
     <div className={styles.profile}>
