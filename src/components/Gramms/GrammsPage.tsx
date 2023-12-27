@@ -2,8 +2,8 @@ import styles from './GrammsPage.module.css';
 import Search from '../Search/Search';
 import Selector from '../Selector/Selector';
 import PollCard from "../PollCard/PollCard";
-import {gramms} from "../../const/mock.ts";
-import {useState} from "react";
+import { gramms } from "../../const/mock.ts";
+import { useState } from "react";
 
 const GrammsPage = () => {
   const [search, setSearch] = useState<string>('')
@@ -50,5 +50,5 @@ const GrammsPage = () => {
       </div>
   );
 };
-// gramms with state in mobx
+
 export default GrammsPage;

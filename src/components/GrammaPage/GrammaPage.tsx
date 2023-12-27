@@ -1,21 +1,21 @@
 import styles from "./gramma-page.module.css";
 import { getFormattedDateTime } from "../../utils.ts";
 import { useContext, useEffect } from "react";
-import { Context } from "../../main.tsx";
 import { useParams } from "react-router";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
+import { useStores } from "../../rootStoreContext.ts";
 
 function GrammaPage() {
   const { id } = useParams();
-  const { store } = useContext(Context);
-  const gramma = store.grammaCard;
+  const { grammaStore } = useStores();
+  const gramma = grammaStore.grammaCard;
 
   useEffect(() => {
     if (id) {
       const intId = parseInt(id);
       if (intId !== gramma.id) {
-        store.getGramma(intId);
+        grammaStore.getGramma(intId);
       }
     }
   }, [id]);

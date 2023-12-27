@@ -1,7 +1,6 @@
 import styles from "./profile.module.css";
-import { useContext } from "react";
 import Select, { MultiValue, OptionsType, OptionType } from "react-select";
-import { Context } from "../../main.tsx";
+import { useStores } from "../../rootStoreContext.ts";
 
 const optionsServer: OptionsType<OptionType> = [
   { value: "спорт", label: "спорт" },
@@ -24,8 +23,8 @@ export default function Interests({
   setOptions,
   setInterests,
 }: Interests) {
-  const { store } = useContext(Context);
-  const userInterests = store.respondent.additionalData?.interests;
+  const { userStore } = useStores();
+  const userInterests = userStore.respondent.additionalData?.interests;
   return (
     <>
       <h3 className={styles.whatUseTitle}>Чем интересуюсь</h3>

@@ -7,6 +7,7 @@ import { IQuestionAnswer, IQuestionForm, ScaleOptions } from "../../types.ts";
 import { Context } from "../../main.tsx";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router";
+import {useStores} from "../../rootStoreContext.ts";
 
 const getInitialUserValues = (questionForm: IQuestionForm): IQuestionAnswer => {
   switch (questionForm.type) {
@@ -27,15 +28,15 @@ const getInitialUserValues = (questionForm: IQuestionForm): IQuestionAnswer => {
 
 function GrammaForm() {
   const { id } = useParams();
-  const { store } = useContext(Context);
-  const grammaForm = store.grammaForm;
+  const { grammaStore } = useStores();
+  const grammaForm = grammaStore.grammaForm;
   const [userAnswers, setUserAnswers] = useState<IQuestionAnswer[]>([]);
 
   useEffect(() => {
     if (id) {
       const intId = parseInt(id);
       if (!grammaForm || intId !== grammaForm.id) {
-        store.getGrammasForm(intId);
+        grammaStore.getGrammasForm(intId);
       }
       if (grammaForm) {
         setUserAnswers(
