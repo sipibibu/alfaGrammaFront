@@ -33,17 +33,21 @@
   font-size: 20px;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
+  transition: all 0.25s ease-in-out;
 }
 
 .link:hover {
   background-color: #4D8FDD;
+  color: white;
   border-radius: 100px;
   opacity: 0.7;
+
 }
 
 .linkActive {
   background-color: #4D8FDD;
   border-radius: 100px;
+  color: white;
 }
 
 
