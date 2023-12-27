@@ -104,7 +104,7 @@ export default function GrammaConstructor() {
         questionsList={gramma.questions}
         questionsChange={handleChangeQuestions}
       />
-      <CreateButton gramma={gramma} />
+      <CreateButton grammaCard={gramma} />
     </div>
   );
 }

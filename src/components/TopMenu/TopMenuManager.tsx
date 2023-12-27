@@ -1,13 +1,12 @@
-import {useContext} from 'react';
 import styles from "./topmenu.module.css";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "./logo.png";
 import CustomLink from "../UI/CustomLink.tsx";
 import profileImage from "./profile-image.png";
-import {Context} from "../../main.tsx";
+import { useStores } from "../../rootStoreContext.ts";
 
 const TopMenuManager = () => {
-    const {store} = useContext(Context)
+    const { userStore } = useStores()
     return (
         <div className={styles.menu}>
             <Link to={'/'}>
@@ -15,9 +14,9 @@ const TopMenuManager = () => {
             </Link>
             <nav className={styles.nav}>
                 <CustomLink link={"/"} text={"наши опросы"}/>
-                <CustomLink link={store.user.role == "Manager" ? '/gramma-constructor' : '/'} text={"создать опрос"}/>
+                <CustomLink link={userStore.role == "Manager" ? '/gramma-constructor' : '/'} text={"создать опрос"}/>
             </nav>
-            <Link to={ store.user.role == "Manager" ? '/profile-manager' : '/'}>
+            <Link to={userStore.role == "Manager" ? '/profile-manager' : '/'}>
                 <img
                     src={profileImage}
                     className={styles.profileImage}

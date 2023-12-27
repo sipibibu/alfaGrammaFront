@@ -1,31 +1,22 @@
-import styles from "./topmenu.module.css";
-import logo from "./logo.png";
-import profileImage from "./profile-image.png";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { Context } from "../../main.tsx";
+import styles from './topmenu.module.css';
+import logo from './logo.png';
+import profileImage from './profile-image.png';
+import { Link } from 'react-router-dom';
 import CustomLink from "../UI/CustomLink.tsx";
+import { useStores } from "../../rootStoreContext.ts";
 
 export default function TopMenuRespondent() {
-  const { store } = useContext(Context);
+  const { userStore} = useStores()
   return (
     <div className={styles.menu}>
-      <Link to={"/"}>
+      <Link to={'/'}>
         <img src={logo} className={styles.logo} alt="logo" />
       </Link>
       <nav className={styles.nav}>
-        <CustomLink link={"/"} text={"опросы"} />
-        <CustomLink link={"/mylist"} text={"мои опросы"} />
+        <CustomLink link={"/"} text={"опросы"}/>
+        <CustomLink link={userStore.role == "Respondent" ? '/gramma-form' : '/'} text={"мои опросы"}/>
       </nav>
-      <Link
-        to={
-          store.user.role == "Respondent"
-            ? "/profile-respondent"
-            : store.user.role === "Manager"
-            ? "/profile-manager"
-            : "/login"
-        }
-      >
+      <Link to={ userStore.role == "Respondent" ? '/profile-respondent' : '/'}>
         <img
           src={profileImage}
           className={styles.profileImage}

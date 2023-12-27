@@ -1,9 +1,9 @@
 import styles from "../../styles/Authorization.module.css";
-import { useContext, useState } from "react";
-import { Context } from "../../main";
+import { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
 import { IUserAuth } from "../../models/IUser.ts";
+import { useStores } from "../../rootStoreContext.ts";
 
 const Registration = () => {
   const [userAuth, setUserAuth] = useState<IUserAuth>({
@@ -14,19 +14,21 @@ const Registration = () => {
     password: "",
   });
   const navigate = useNavigate();
-  const { store } = useContext(Context);
+  const { userStore } = useStores()
+
   async function registration(userAuth: IUserAuth) {
-    await store.authorization(userAuth);
-    if (store.isAuth && store.isLogin) {
-      if (store.user.role == "Respondent") {
+    await userStore.authorization(userAuth);
+    if (userStore.isAuth && userStore.isLogin) {
+      if (userStore.role == "Respondent") {
         navigate("/profile-respondent");
-      } else if (store.user.role == "Manager") {
+      } else if (userStore.role == "Manager") {
         navigate("/profile-manager");
       } else {
         navigate("/");
       }
     }
   }
+
   return (
     <div className={styles.registrationBlock}>
       <div className={styles.loginContent}>

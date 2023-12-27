@@ -7,59 +7,68 @@ export default class ProfileService{
                 age: age
             },
         {
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem('token')
-                        }
-                    }
-        )
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
     }
 
     static async updateProfileRespondentEducation(education: string){
-        return axiosInstance.put("/account/setEducation", {
-            education: education
-        },
+        return axiosInstance.put("/account/setEducation",
+            {
+                education: education
+            },
             {
                 headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
-            }
-            )
+            })
     }
 
     static async updateProfileRespondentInterests(interests: string[]){
-        return axiosInstance.put("/account/setInterests", {
-            interests: interests
-        },
+        return axiosInstance.put("/account/setInterests",
+            {
+                interests: interests
+            },
             {
                 headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             })
     }
 
     static async getAccount(){
-        return axiosInstance.get("/account/get", {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            }
-        })
+        return axiosInstance.get("/account/get",
+            {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
     }
 
-    static async updateProfileManagerAge(age: number){
-        return axiosInstance.put("/account/setAge", {
-            age: age
-        })
+    static async getCompany(title: string){
+        return axiosInstance.get(`/company/${title}`)
     }
 
-    static async updateProfileManagerEducation(age: number){
-        return axiosInstance.put("/account/setAge", {
-            age: age
-        })
+    static async updateProfileManagerCompanyName(companyName: string){
+        return axiosInstance.put("/company/setTitle", {
+            title: companyName
+        },
+            {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
     }
 
-    static async updateProfileManagerInterests(age: number){
-        return axiosInstance.put("/account/setAge", {
-            age: age
-        })
+    static async updateProfileManagerDescription(description: string){
+        return axiosInstance.put("/company/setDescription", {
+            description: description
+        },
+            {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
     }
 }
