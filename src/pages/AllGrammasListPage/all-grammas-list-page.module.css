@@ -1,5 +1,7 @@
 .grammasPage {
-  display: flex;
-  flex-direction: row;
-  gap: 45px;
+  margin-top: 75px;
+}
+
+.list {
+  margin-left: 350px;
 }

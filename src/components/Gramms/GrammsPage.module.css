@@ -1,8 +1,0 @@
-.sidebar{
-    display: flex;
-    width: 347px;
-    height: calc(100vh - 74px);
-    margin-top: 72px;
-    border: 1px solid rgba(0, 0, 0, 0.10);
-    background: #FFF;
-}
