@@ -45,7 +45,12 @@ export type IQuestionAnswer = {
 };
 
 export interface IUserResponse {
-  grammaId: string;
-  userEmail: string;
+  grammaId: number;
   answers: IQuestionAnswer[];
+}
+
+export enum AuthorizationStatus {
+  Unknown,
+  NoAuth,
+  Auth,
 }

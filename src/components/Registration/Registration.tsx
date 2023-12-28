@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
 import { IUserAuth } from "../../models/IUser.ts";
 import { useStores } from "../../rootStoreContext.ts";
+import { AuthorizationStatus } from "../../types.ts";
 
 const Registration = () => {
   const [userAuth, setUserAuth] = useState<IUserAuth>({
@@ -14,11 +15,11 @@ const Registration = () => {
     password: "",
   });
   const navigate = useNavigate();
-  const { userStore } = useStores()
+  const { userStore } = useStores();
 
   async function registration(userAuth: IUserAuth) {
     await userStore.authorization(userAuth);
-    if (userStore.isAuth && userStore.isLogin) {
+    if (userStore.isAuth === AuthorizationStatus.Auth && userStore.isLogin) {
       if (userStore.role == "Respondent") {
         navigate("/profile-respondent");
       } else if (userStore.role == "Manager") {

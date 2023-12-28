@@ -45,9 +45,8 @@ class GrammaStore {
 
   async getGrammasList() {
     try {
-      setTimeout(() => {
-        this.setGrammasList(MockGrammas);
-      }, 500);
+      const grammasList = await GrammasService.getAllGrammas();
+      this.setGrammasList(grammasList);
     } catch (e) {}
   }
 
@@ -58,6 +57,22 @@ class GrammaStore {
         if (gramma) {
           this.setGrammaForm(gramma);
         }
+      }, 500);
+    } catch (e) {}
+  }
+
+  async getPlannedGrammasList() {
+    try {
+      setTimeout(() => {
+        this.setGrammasList(MockGrammas);
+      }, 500);
+    } catch (e) {}
+  }
+
+  async getCompanysGrammasList() {
+    try {
+      setTimeout(() => {
+        this.setGrammasList(MockGrammas);
       }, 500);
     } catch (e) {}
   }

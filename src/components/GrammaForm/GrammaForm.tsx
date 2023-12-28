@@ -2,12 +2,11 @@ import styles from "./gramma-form.module.css";
 import { QuestionType } from "../../const.ts";
 import QuestionsList from "./QuestionsList/QuestionList.tsx";
 import SubmitButton from "./SumbitButton/SubmitButton.tsx";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IQuestionAnswer, IQuestionForm, ScaleOptions } from "../../types.ts";
-import { Context } from "../../main.tsx";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router";
-import {useStores} from "../../rootStoreContext.ts";
+import { useStores } from "../../rootStoreContext.ts";
 
 const getInitialUserValues = (questionForm: IQuestionForm): IQuestionAnswer => {
   switch (questionForm.type) {
@@ -74,7 +73,7 @@ function GrammaForm() {
         userAnswers={userAnswers}
         onAnswerChanged={handleUserAnswerChange}
       />
-      <SubmitButton answers={userAnswers} />
+      <SubmitButton answers={userAnswers} grammaId={grammaForm.id} />
     </div>
   );
 }

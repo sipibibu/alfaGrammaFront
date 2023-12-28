@@ -1,14 +1,17 @@
 import React from "react";
 import styles from "./submit-button.module.css";
 import { IQuestionAnswer } from "../../../types.ts";
+import { useStores } from "../../../rootStoreContext.ts";
 
 type SubmitButtonProps = {
+  grammaId: number;
   answers: IQuestionAnswer[];
 };
 
-function SubmitButton({ answers }: SubmitButtonProps) {
+function SubmitButton({ grammaId, answers }: SubmitButtonProps) {
+  const { answersStore } = useStores();
   const handleSubmit = () => {
-    console.log({ answers });
+    answersStore.sendAnswers({ grammaId, answers });
   };
 
   return (
