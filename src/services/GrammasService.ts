@@ -22,6 +22,8 @@ export default class GrammasService {
   }
 
   static async getAllGrammas() {
-    return axiosInstance.get<IGrammaForm[]>("forms/getAll");
+    return axiosInstance
+      .get<IGrammaForm[]>("forms/getAll")
+      .then((res) => res.data);
   }
 }
