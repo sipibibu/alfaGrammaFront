@@ -4,8 +4,10 @@ import profileImage from "./profile-image.png";
 import { Link } from "react-router-dom";
 import CustomLink from "../UI/CustomLink.tsx";
 import { useStores } from "../../rootStoreContext.ts";
+import { observer } from "mobx-react-lite";
+import { AuthorizationStatus } from "../../types.ts";
 
-export default function TopMenuRespondent() {
+function TopMenuRespondent() {
   const { userStore } = useStores();
   return (
     <div className={styles.menu}>
@@ -17,7 +19,11 @@ export default function TopMenuRespondent() {
         <CustomLink link={"/mylist"} text={"мои опросы"} />
       </nav>
       <Link
-        to={userStore.role == "Respondent" ? "/profile-respondent" : "/login"}
+        to={
+          userStore.isAuth === AuthorizationStatus.Auth
+            ? "/profile-respondent"
+            : "/login"
+        }
       >
         <img
           src={profileImage}
@@ -28,3 +34,5 @@ export default function TopMenuRespondent() {
     </div>
   );
 }
+
+export default observer(TopMenuRespondent);

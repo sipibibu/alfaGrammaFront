@@ -12,8 +12,16 @@ import { LayoutManager } from "./components/Layout/LayoutManager.tsx";
 import AllGrammasListPage from "./pages/AllGrammasListPage/AllGrammasListPage.tsx";
 import GrammaPage from "./pages/GrammaPage/GrammaPage.tsx";
 import PlannedGrammasPage from "./pages/PlannedGrammasPage/PlannedGrammasPage.tsx";
+import CompanysGrammasPage from "./pages/CompanysGrammas/CompanysGrammas.tsx";
+import { useEffect } from "react";
+import { useStores } from "./rootStoreContext.ts";
 
 function App() {
+  const { userStore } = useStores();
+
+  useEffect(() => {
+    userStore.getAccount();
+  }, []);
   return (
     <>
       <BrowserRouter>
@@ -29,6 +37,7 @@ function App() {
           </Route>
           <Route element={<LayoutManager />}>
             <Route path={"profile-manager"} element={<ProfileManager />} />
+            <Route path={"/ourgrammas"} element={<CompanysGrammasPage />} />
             <Route
               path={"gramma-constructor"}
               element={<GrammaConstructor />}
