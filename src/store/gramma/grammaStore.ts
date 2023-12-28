@@ -1,22 +1,23 @@
 import { makeAutoObservable } from "mobx";
-import { IGrammaForm, IGrammaStructure } from "../../types.ts";
+import { IGramma, IGrammaForm, IGrammaStructure } from "../../types.ts";
 import GrammasService from "../../services/GrammasService.ts";
-import { MockGrammas } from "../../mock/mock-grammas.ts";
+import { adaptGramma } from "../../adapters/form-adapter-to-client.ts";
 
 class GrammaStore {
-  grammaCard = {} as IGrammaForm;
-  grammasList = [] as IGrammaForm[];
+  grammaCard = {} as IGramma;
+  grammasList = [] as IGramma[];
   grammaForm: IGrammaForm | null = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setGramma(gramma: IGrammaForm) {
+  setGramma(gramma: IGramma) {
     this.grammaCard = gramma;
   }
 
-  setGrammasList(grammasList: IGrammaForm[]) {
+  setGrammasList(grammasList: IGramma[]) {
+    console.log(grammasList);
     this.grammasList = grammasList;
   }
 
@@ -34,41 +35,43 @@ class GrammaStore {
 
   async getGramma(id: number) {
     try {
-      const gramma = MockGrammas.find((gramma) => gramma.id === id);
-      if (gramma) {
-        this.setGramma(gramma);
-      }
+      const gramma = await GrammasService.getGramma(id);
+      this.setGramma(adaptGramma(gramma));
     } catch (e) {
       console.log(e);
     }
   }
 
+  //
   async getGrammasList() {
     try {
       const grammasList = await GrammasService.getAllGrammas();
-      this.setGrammasList(grammasList);
-    } catch (e) {}
+      this.setGrammasList(grammasList.map((gramma) => adaptGramma(gramma)));
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  async getGrammasForm(id: number) {
+  //
+  async getGrammaForm(id: number) {
     try {
-      setTimeout(() => {
-        const gramma = MockGrammas.find((gramma) => gramma.id === id);
-        if (gramma) {
-          this.setGrammaForm(gramma);
-        }
-      }, 500);
-    } catch (e) {}
+      const gramma = await GrammasService.getGrammaForm(id);
+      const adapted = adaptGramma(gramma);
+      console.log(adapted);
+      this.setGrammaForm(adapted);
+    } catch (e) {
+      console.log(e);
+    }
   }
-
-  async getPlannedGrammasList() {
-    try {
-      setTimeout(() => {
-        this.setGrammasList(MockGrammas);
-      }, 500);
-    } catch (e) {}
-  }
-
+  //
+  // async getPlannedGrammasList() {
+  //   try {
+  //     setTimeout(() => {
+  //       this.setGrammasList(MockGrammas);
+  //     }, 500);
+  //   } catch (e) {}
+  // }
+  //
   async getCompanysGrammasList() {
     try {
       setTimeout(() => {

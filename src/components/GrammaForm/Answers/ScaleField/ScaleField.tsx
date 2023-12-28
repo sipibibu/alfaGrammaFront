@@ -19,6 +19,12 @@ const getMarks = ({ from, to, step }: ScaleOptions) => {
 };
 
 function ScaleField({ options, userAnswer, onAnswerChange }: ScaleProps) {
+  // @ts-ignore
+  const from = parseInt(options.from.text);
+  // @ts-ignore
+  const to = parseInt(options.to.text);
+  // @ts-ignore
+  const step = parseInt(options.step.text);
   const handleChange = (_: Event, newValue: number | number[]) => {
     if (typeof newValue === "number") {
       onAnswerChange(newValue);
@@ -29,11 +35,11 @@ function ScaleField({ options, userAnswer, onAnswerChange }: ScaleProps) {
       <Slider
         value={userAnswer}
         onChange={handleChange}
-        marks={getMarks(options)}
-        defaultValue={options.from}
-        min={options.from}
-        max={options.to}
-        step={options.step}
+        marks={getMarks({ from, to, step })}
+        defaultValue={from}
+        min={from}
+        max={to}
+        step={step}
         sx={{
           color: "#ff4848",
           width: "80%",

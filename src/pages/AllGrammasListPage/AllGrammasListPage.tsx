@@ -1,22 +1,24 @@
 import styles from "./all-grammas-list-page.module.css";
 import GrammasList from "../../components/GrammasList/GrammasList.tsx";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import {useStores} from "../../rootStoreContext.ts";
+import { useStores } from "../../rootStoreContext.ts";
 import Sidebar from "../../components/Sidebar/Sidebar.tsx";
 
 function AllGrammasListPage() {
   const { grammaStore } = useStores();
   const grammas = grammaStore.grammasList;
-  const [search, setSearch] = useState<string>('')
-
+  const [search, setSearch] = useState<string>("");
+  console.log(grammas);
   const onChangeSearch = (input: string) => {
-    setSearch(input)
-  }
+    setSearch(input);
+  };
 
-  const filteredGramms = grammas.filter(gramm => {
-    return (gramm.title + gramm.description).toLowerCase().includes(search.toLowerCase())
-  })
+  const filteredGramms = grammas.filter((gramm) => {
+    return (gramm.title + gramm.description)
+      .toLowerCase()
+      .includes(search.toLowerCase());
+  });
 
   useEffect(() => {
     grammaStore.getGrammasList();
@@ -24,7 +26,7 @@ function AllGrammasListPage() {
 
   return (
     <div className={styles.grammasPage}>
-      <Sidebar search={search} onChangeSearch={onChangeSearch}/>
+      <Sidebar search={search} onChangeSearch={onChangeSearch} />
       <GrammasList grammasList={filteredGramms} />
     </div>
   );

@@ -1,6 +1,6 @@
 import styles from "./gramma-page.module.css";
 import { getFormattedDateTime } from "../../utils.ts";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
@@ -33,11 +33,13 @@ function GrammaPage() {
         <div className={styles.calendar}>
           <p>
             Начало:
-            <span> {getFormattedDateTime(gramma.dateFrom)}</span>
+            {/*<span> {getFormattedDateTime(gramma.dateFrom)}</span>*/}
+            <span>24.12.2023, 00:00</span>
           </p>
           <p>
             Конец:
-            <span> {getFormattedDateTime(gramma.dateTo)}</span>
+            {/*<span> {getFormattedDateTime(gramma.dateTo)}</span>*/}
+            <span>30.12.2023, 00:00</span>
           </p>
         </div>
         <Link to={`/gramma-form/${gramma.id}`}>

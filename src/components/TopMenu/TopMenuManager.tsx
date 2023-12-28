@@ -9,7 +9,6 @@ import { observer } from "mobx-react-lite";
 
 const TopMenuManager = () => {
   const { userStore } = useStores();
-  console.log(userStore);
   return (
     <div className={styles.menu}>
       <Link to={"/"}>

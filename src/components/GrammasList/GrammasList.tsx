@@ -1,9 +1,9 @@
 import styles from "./grammas-list.module.css";
 import PollCard from "../PollCard/PollCard.tsx";
-import { IGrammaForm } from "../../types.ts";
+import { IGramma } from "../../types.ts";
 
 type GrammasListProps = {
-  grammasList: IGrammaForm[];
+  grammasList: IGramma[];
 };
 
 export default function GrammasList({ grammasList }: GrammasListProps) {

@@ -1,22 +1,27 @@
 import styles from "./companys-grammas-page.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import GrammasList from "../../components/GrammasList/GrammasList.tsx";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../../rootStoreContext.ts";
+import AnswersList from "../../components/AnswersList/AnswersList.tsx";
 
 function CompanysGrammasPage() {
-  const { grammaStore, userStore } = useStores();
+  const [showAnswers, setShowAnswers] = useState(false);
+  const { grammaStore } = useStores();
   const grammasList = grammaStore.grammasList;
-  console.log(userStore);
 
   useEffect(() => {
-    grammaStore.getCompanysGrammasList();
+    grammaStore.getGrammasList();
   }, []);
 
   return (
-    <div className={styles.grammasPage}>
-      <GrammasList grammasList={grammasList} />
-    </div>
+    <>
+      {showAnswers && <AnswersList onClick={() => setShowAnswers(false)} />}
+      <div className={styles.grammasPage}>
+        <GrammasList grammasList={grammasList} />
+      </div>
+      <div onClick={() => setShowAnswers(true)}>Показать ответы</div>
+    </>
   );
 }
 

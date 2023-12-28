@@ -30,12 +30,13 @@ function GrammaForm() {
   const { grammaStore } = useStores();
   const grammaForm = grammaStore.grammaForm;
   const [userAnswers, setUserAnswers] = useState<IQuestionAnswer[]>([]);
+  console.log(grammaForm);
 
   useEffect(() => {
     if (id) {
       const intId = parseInt(id);
       if (!grammaForm || intId !== grammaForm.id) {
-        grammaStore.getGrammasForm(intId);
+        grammaStore.getGrammaForm(intId);
       }
       if (grammaForm) {
         setUserAnswers(
@@ -63,13 +64,13 @@ function GrammaForm() {
       ];
     });
   };
-
+  console.log(grammaForm);
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>{grammaForm.title}</h1>
       <p className={styles.description}>{grammaForm.description}</p>
       <QuestionsList
-        questions={grammaForm.questions}
+        questions={[...grammaForm.questions] as IQuestionForm[]}
         userAnswers={userAnswers}
         onAnswerChanged={handleUserAnswerChange}
       />

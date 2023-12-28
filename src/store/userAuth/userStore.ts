@@ -71,7 +71,6 @@ class UserStore {
   async getAccount() {
     try {
       const response = await ProfileService.getAccount();
-      console.log(response);
       this.isLogin = true;
       this.setAuth(AuthorizationStatus.Auth);
       if (response.data.roles[0] == "Respondent") {

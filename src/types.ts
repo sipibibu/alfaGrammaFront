@@ -29,9 +29,17 @@ export interface IQuestionForm extends IQuestion {
   id: number;
 }
 
-export interface IGrammaForm extends IGrammaStructure {
-  id: number;
+export interface IGrammaForm extends IGramma {
   questions: IQuestionForm[];
+}
+
+export interface IGramma {
+  id: number;
+  title: string;
+  description: string;
+  dateFrom: string;
+  dateTo: string;
+  companyName: string;
 }
 
 export type ITextAnswer = string;
@@ -45,7 +53,7 @@ export type IQuestionAnswer = {
 };
 
 export interface IUserResponse {
-  grammaId: number;
+  formId: number;
   answers: IQuestionAnswer[];
 }
 
