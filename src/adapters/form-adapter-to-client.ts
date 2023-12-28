@@ -43,6 +43,7 @@ function adaptQuestionType(type: string) {
 
 function adaptQuestion(question: any) {
   return {
+    id: question.id,
     title: question.questionText,
     type: adaptQuestionType(question.type),
     isRequired: question.isReq,

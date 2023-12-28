@@ -49,12 +49,12 @@ export type IScaleAnswer = number;
 
 export type IQuestionAnswer = {
   questionId: number;
-  answer: ITextAnswer | IRadioAnswer | ICheckboxAnswer | IScaleAnswer;
+  text: ITextAnswer | IRadioAnswer | ICheckboxAnswer | IScaleAnswer;
 };
 
 export interface IUserResponse {
   formId: number;
-  answers: IQuestionAnswer[];
+  questions: IQuestionAnswer[];
 }
 
 export enum AuthorizationStatus {

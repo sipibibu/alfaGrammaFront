@@ -12,15 +12,15 @@ const getInitialUserValues = (questionForm: IQuestionForm): IQuestionAnswer => {
   switch (questionForm.type) {
     default:
     case QuestionType.Text:
-      return { questionId: questionForm.id, answer: "" };
+      return { questionId: questionForm.id, text: "" };
     case QuestionType.Radio:
-      return { questionId: questionForm.id, answer: "" };
+      return { questionId: questionForm.id, text: "" };
     case QuestionType.Checkbox:
-      return { questionId: questionForm.id, answer: [] };
+      return { questionId: questionForm.id, text: [] };
     case QuestionType.Scale:
       return {
         questionId: questionForm.id,
-        answer: (questionForm.options as ScaleOptions).from,
+        text: (questionForm.options as ScaleOptions).from,
       };
   }
 };

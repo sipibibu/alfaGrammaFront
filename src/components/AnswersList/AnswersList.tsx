@@ -13,14 +13,14 @@ function AnswersList({ onClick }: AnswerListProps) {
   useEffect(() => {
     answersStore.getGrammaAnswers(1);
   }, [answersStore]);
-
+  console.log(grammaAnswers)
   return (
       <div className={styles.answersPage}>
     <div className={styles.answersForm}>
       <div className={styles.answers}>
         {grammaAnswers.map((grammaAnswer) =>
-          grammaAnswer.answers.map((answer) => (
-            <div>{answer.answer.toString()}</div>
+          grammaAnswer.questions.map((answer) => (
+            <p>{`${answer.text.toString()} \n`}</p>
           )),
         )}
       </div>
