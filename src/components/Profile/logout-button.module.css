@@ -1,0 +1,27 @@
+.logout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: #FF4848;
+  border-radius: 50px;
+  color: white;
+  width: 270px;
+  height: 55px;
+  font: inherit;
+  font-size: 24px;
+  transition: opacity 0.25s ease-in-out;
+  line-height: normal;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.logout:hover {
+  opacity: 0.8;
+}
+
+.logout:active {
+  padding: 10px;
+  opacity: 0.6;
+}

@@ -2,11 +2,11 @@ import styles from "./gramma-form.module.css";
 import { QuestionType } from "../../const.ts";
 import QuestionsList from "./QuestionsList/QuestionList.tsx";
 import SubmitButton from "./SumbitButton/SubmitButton.tsx";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IQuestionAnswer, IQuestionForm, ScaleOptions } from "../../types.ts";
-import { Context } from "../../main.tsx";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router";
+import { useStores } from "../../rootStoreContext.ts";
 
 const getInitialUserValues = (questionForm: IQuestionForm): IQuestionAnswer => {
   switch (questionForm.type) {
@@ -27,15 +27,16 @@ const getInitialUserValues = (questionForm: IQuestionForm): IQuestionAnswer => {
 
 function GrammaForm() {
   const { id } = useParams();
-  const { store } = useContext(Context);
-  const grammaForm = store.grammaForm;
+  const { grammaStore } = useStores();
+  const grammaForm = grammaStore.grammaForm;
   const [userAnswers, setUserAnswers] = useState<IQuestionAnswer[]>([]);
+  console.log(grammaForm);
 
   useEffect(() => {
     if (id) {
       const intId = parseInt(id);
       if (!grammaForm || intId !== grammaForm.id) {
-        store.getGrammasForm(intId);
+        grammaStore.getGrammaForm(intId);
       }
       if (grammaForm) {
         setUserAnswers(
@@ -63,17 +64,17 @@ function GrammaForm() {
       ];
     });
   };
-
+  console.log(grammaForm);
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>{grammaForm.title}</h1>
       <p className={styles.description}>{grammaForm.description}</p>
       <QuestionsList
-        questions={grammaForm.questions}
+        questions={[...grammaForm.questions] as IQuestionForm[]}
         userAnswers={userAnswers}
         onAnswerChanged={handleUserAnswerChange}
       />
-      <SubmitButton answers={userAnswers} />
+      <SubmitButton answers={userAnswers} grammaId={grammaForm.id} />
     </div>
   );
 }

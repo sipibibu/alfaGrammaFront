@@ -17,6 +17,7 @@ export interface IQuestion {
 }
 
 export interface IGrammaStructure {
+  interest: string;
   title: string;
   description: string;
   dateFrom: string;
@@ -28,9 +29,17 @@ export interface IQuestionForm extends IQuestion {
   id: number;
 }
 
-export interface IGrammaForm extends IGrammaStructure {
-  id: number;
+export interface IGrammaForm extends IGramma {
   questions: IQuestionForm[];
+}
+
+export interface IGramma {
+  id: number;
+  title: string;
+  description: string;
+  dateFrom: string;
+  dateTo: string;
+  companyName: string;
 }
 
 export type ITextAnswer = string;
@@ -44,7 +53,12 @@ export type IQuestionAnswer = {
 };
 
 export interface IUserResponse {
-  grammaId: string;
-  userEmail: string;
+  formId: number;
   answers: IQuestionAnswer[];
+}
+
+export enum AuthorizationStatus {
+  Unknown,
+  NoAuth,
+  Auth,
 }

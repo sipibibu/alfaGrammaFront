@@ -13,12 +13,13 @@ export default function QuestionList({
   userAnswers,
   onAnswerChanged,
 }: QuestionListProps) {
+  console.log(questions);
   return (
     <div className={styles.questions}>
       {questions.map((question) => (
         <QuestionCard
           key={question.id}
-          question={question}
+          question={question as IQuestionForm}
           onAnswerChanged={(answer: IQuestionAnswer["answer"]) =>
             onAnswerChanged({ questionId: question.id, answer })
           }

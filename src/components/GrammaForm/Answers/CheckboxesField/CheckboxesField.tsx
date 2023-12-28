@@ -44,10 +44,10 @@ function CheckboxesField({
                 },
               }}
               onChange={handleCheck}
-              value={option}
+              value={option.text}
             />
           }
-          label={option}
+          label={option.text}
           labelPlacement="end"
         />
       ))}

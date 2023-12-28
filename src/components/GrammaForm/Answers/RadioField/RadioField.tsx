@@ -19,6 +19,7 @@ type RadioProps = {
 };
 
 function RadioField({ options, userAnswer, onAnswerChange }: RadioProps) {
+  // @ts-ignore
   return (
     <div className={styles.radioList}>
       <FormControl>
@@ -30,7 +31,7 @@ function RadioField({ options, userAnswer, onAnswerChange }: RadioProps) {
           {options.map((option, i) => (
             <FormControlLabel
               key={i}
-              value={option}
+              value={option.text}
               control={
                 <Radio
                   sx={{
@@ -39,11 +40,11 @@ function RadioField({ options, userAnswer, onAnswerChange }: RadioProps) {
                       color: "#ff4848",
                     },
                   }}
-                  checked={option === userAnswer}
-                  onChange={() => onAnswerChange(option)}
+                  checked={option.text === userAnswer}
+                  onChange={() => onAnswerChange(option.text)}
                 />
               }
-              label={option}
+              label={option.text}
             />
           ))}
         </RadioGroup>

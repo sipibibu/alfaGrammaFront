@@ -53,8 +53,8 @@ export function adaptGramma(gramma: IGrammaStructure) {
   return {
     title: gramma.title,
     fullDescription: gramma.description,
-    start: gramma.dateFrom,
-    end: gramma.dateTo,
+    start: gramma.dateFrom.slice(0, 19),
+    end: gramma.dateTo.slice(0, 19),
     questions: gramma.questions.map((question) => adaptQuestion(question)),
   };
 }

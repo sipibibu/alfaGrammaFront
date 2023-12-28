@@ -1,7 +1,0 @@
-.grammas {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
-  margin-left: 100px;
-  margin-right: 100px;
-}

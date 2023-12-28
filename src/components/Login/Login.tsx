@@ -1,26 +1,29 @@
 import styles from "../../styles/Authorization.module.css";
-import { useContext, useState } from "react";
-import { Context } from "../../main";
+import { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
+import { useStores } from "../../rootStoreContext.ts";
+import { AuthorizationStatus } from "../../types.ts";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { store } = useContext(Context);
+  const { userStore } = useStores();
   const navigate = useNavigate();
+
   async function loginUser(email: string, password: string) {
-    await store.login(email, password);
-    if (store.isAuth && store.isLogin) {
-      if (store.user.role == "Respondent") {
+    await userStore.login(email, password);
+    if (userStore.isAuth === AuthorizationStatus.Auth && userStore.isLogin) {
+      if (userStore.role == "Respondent") {
         navigate("/profile-respondent");
-      } else if (store.user.role == "Manager") {
+      } else if (userStore.role == "Manager") {
         navigate("/profile-manager");
       } else {
         navigate("/");
       }
     }
   }
+
   return (
     <div className={styles.loginBlock}>
       <div className={styles.loginContent}>

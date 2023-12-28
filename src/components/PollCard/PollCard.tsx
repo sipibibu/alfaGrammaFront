@@ -1,10 +1,10 @@
 import styles from "./PollCard.module.css";
 import grammaImage from "./gramma.png";
-import { IGrammaForm } from "../../types.ts";
+import { IGramma } from "../../types.ts";
 import { Link } from "react-router-dom";
 
 type PollCardProps = {
-  gramma: Pick<IGrammaForm, "id" | "title" | "description">;
+  gramma: Pick<IGramma, "id" | "title" | "description">;
 };
 
 const PollCard = ({ gramma }: PollCardProps) => {

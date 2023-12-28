@@ -1,10 +1,13 @@
 import { axiosInstance } from "../axios";
-import { IGrammaForm, IGrammaStructure } from "../types.ts";
+import { IGrammaStructure } from "../types.ts";
 import { adaptGramma } from "../adapters/form-adapter-to-server.tsx";
+import { GrammaFromServer } from "../adapters/form-adapter-to-client.ts";
 
 export default class GrammasService {
   static async createGramma(gramma: IGrammaStructure) {
-    return axiosInstance.post("/forms/create", adaptGramma(gramma));
+    const adapted = adaptGramma(gramma);
+    console.log(adapted);
+    return axiosInstance.post("/forms/create", adapted);
   }
 
   // static async updateGramma(id: number, gramma: Gramma) {
@@ -13,15 +16,23 @@ export default class GrammasService {
 
   static async getGramma(id: number) {
     return axiosInstance
-      .get<IGrammaForm>(`/forms/get/${id}`)
+      .get<GrammaFromServer>(`/forms/getShort/${id}`)
+      .then((res) => res.data);
+  }
+
+  static async getGrammaForm(id: number) {
+    return axiosInstance
+      .get<GrammaFromServer>(`/forms/get/${id}`)
       .then((res) => res.data);
   }
 
   static async deleteGramma(id: number) {
-    return axiosInstance.delete<IGrammaStructure>(`/forms/delete/${id}`);
+    return axiosInstance.delete<GrammaFromServer>(`/forms/delete/${id}`);
   }
 
   static async getAllGrammas() {
-    return axiosInstance.get<IGrammaForm[]>("forms/getAll");
+    return axiosInstance
+      .get<GrammaFromServer[]>("/forms/getAll")
+      .then((res) => res.data);
   }
 }
