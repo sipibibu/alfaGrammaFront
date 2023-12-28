@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     userStore.getAccount();
-  }, []);
+  }, [userStore]);
   return (
     <>
       <BrowserRouter>

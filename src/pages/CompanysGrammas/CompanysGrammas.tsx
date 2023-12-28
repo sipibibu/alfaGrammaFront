@@ -12,15 +12,17 @@ function CompanysGrammasPage() {
 
   useEffect(() => {
     grammaStore.getGrammasList();
-  }, []);
+  }, [grammaStore]);
 
   return (
     <>
-      {showAnswers && <AnswersList onClick={() => setShowAnswers(false)} />}
       <div className={styles.grammasPage}>
         <GrammasList grammasList={grammasList} />
       </div>
-      <div onClick={() => setShowAnswers(true)}>Показать ответы</div>
+        <div className={styles.answers}>
+          <div className={styles.getAnswersBtn} onClick={() => setShowAnswers(true)}>Показать ответы</div>
+            {showAnswers && <AnswersList onClick={() => setShowAnswers(false)} />}
+        </div>
     </>
   );
 }

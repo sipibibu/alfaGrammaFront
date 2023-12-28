@@ -1,3 +1,19 @@
 .grammasPage {
   margin-top: 136px;
 }
+
+.answers{
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+}
+
+.getAnswersBtn{
+  margin-left: 15px;
+  padding-bottom: 40px;
+  font-family: Montserrat, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}

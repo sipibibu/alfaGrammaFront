@@ -1,14 +1,47 @@
+.answersPage{
+  margin: auto;
+  right: 0;
+  bottom: 145px;
+  left: 0;
+  text-align: center;
+}
+
 .answers {
-  width: 50%;
+  display: flex;
+  width: 800px;
   height: 500px;
   border: 1px solid #000;
   border-radius: 20px;
   background-color: #efefef;
-  position: fixed;
   padding: 20px;
-  left: 25%;
-  right: 25%;
-  top: auto;
-  bottom: auto;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 10000;
+}
+
+.answersForm{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.answerBtn{
+  display: flex;
+  margin-left: 575px;
+  width: 270px;
+  height: 55px;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff4848;
+  border: none;
+  border-radius: 50px;
+  font-family: Montserrat, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  color: #FFF;
 }
