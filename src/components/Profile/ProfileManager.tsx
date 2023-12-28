@@ -1,8 +1,9 @@
 import styles from "./profile.module.css";
 import avatar from "./Avatar.png";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../../rootStoreContext.ts";
+import LogoutButton from "./LogoutButton.tsx";
 
 const ProfileManager = () => {
   const { userStore, profileManagerStore } = useStores();
@@ -13,8 +14,8 @@ const ProfileManager = () => {
   const [description, setDiscription] = useState("");
 
   useEffect(() => {
-    userStore.getAccount()
-  }, [userStore])
+    userStore.getAccount();
+  }, [userStore]);
 
   return (
     <div className={styles.profile}>
@@ -51,7 +52,7 @@ const ProfileManager = () => {
             onClick={() => {
               setMode("display");
               console.log(companyName, description);
-              profileManagerStore.updateProfile(companyName, description)
+              profileManagerStore.updateProfile(companyName, description);
             }}
           >
             сохранить
@@ -64,6 +65,7 @@ const ProfileManager = () => {
             редактировать
           </button>
         )}
+        <LogoutButton />
       </div>
       <div className={styles.content}>
         <h3 className={styles.whatUseTitle}>Описание</h3>
