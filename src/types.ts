@@ -48,6 +48,7 @@ export type ICheckboxAnswer = string[];
 export type IScaleAnswer = number;
 
 export type IQuestionAnswer = {
+  question?: {questionText: string};
   questionId: number;
   text: ITextAnswer | IRadioAnswer | ICheckboxAnswer | IScaleAnswer;
 };
