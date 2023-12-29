@@ -10,7 +10,7 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 type CheckboxesProps = {
   options: CheckboxOptions;
   userAnswer: ICheckboxAnswer;
-  onAnswerChange: (answer: IQuestionAnswer["answer"]) => void;
+  onAnswerChange: (answer: IQuestionAnswer["text"]) => void;
 };
 
 function CheckboxesField({

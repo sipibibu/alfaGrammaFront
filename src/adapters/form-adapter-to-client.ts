@@ -23,7 +23,7 @@ function adaptOptions(type: string, ansVar: string[]) {
     case "CheckboxQuestion":
       return ansVar;
     case "ScaleQuestion":
-      return { from: ansVar[0], to: ansVar[1], step: ansVar[2] };
+      return { from: ansVar[2], to: ansVar[1], step: ansVar[0] };
   }
 }
 

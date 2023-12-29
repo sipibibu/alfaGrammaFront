@@ -27,11 +27,35 @@ export const Samples = {
     title: "Любимая кухня",
   } as IGrammaStructure,
   [SampleVariants.TIMEMANAGEMENT]: {
-    interest: "Таймменеджмент",
+    interest: "Тайм-менеджмент",
     dateFrom: "",
     dateTo: "",
-    description: "",
-    questions: [],
+    description: "Тайм-менеджмент",
+    questions: [{
+      title: "Какие трудности вы испытываете при управлении своим временем?",
+      type: QuestionType.Text,
+      isRequired: true,
+      options: null,
+    } as IQuestion,
+      {
+        title: "Как бы вы охарактеризовали своё управление временем?",
+        type: QuestionType.Radio,
+        isRequired: false,
+        options: ["очень хорошо", "не очень", "плохо"],
+      } as IQuestion,
+      {
+        title: "Как вы оцениваете своё умение управлять временем?",
+        type: QuestionType.Scale,
+        isRequired: false,
+        options: { from: 0, to: 100, step: 10 },
+      } as IQuestion,
+      {
+        title: "Как бы вы хотели улучшить свое управление временем?",
+        type: QuestionType.Checkbox,
+        isRequired: false,
+        options: ["ничего не менять", "изменить хоть что-то", "поставить цель"],
+      } as IQuestion,
+    ],
     title: "Управление временем",
   } as IGrammaStructure,
   [SampleVariants.WORK]: {
@@ -80,7 +104,7 @@ export const Samples = {
 export const SampleTitles = {
   [SampleVariants.EMPTY]: "Пустой шаблон",
   [SampleVariants.FOOD]: "Еда",
-  [SampleVariants.TIMEMANAGEMENT]: "Таймменеджмент",
+  [SampleVariants.TIMEMANAGEMENT]: "Тайм-менеджмент",
   [SampleVariants.WORK]: "Работа",
   [SampleVariants.TEST]: "ТЕСТ",
 };

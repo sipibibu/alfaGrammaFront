@@ -14,7 +14,7 @@ const PollCardForManager = ({ gramma }: PollCardProps) => {
     const [active, setActive] = useState(false)
     return (
             <div className={active ? styles.blockCardActive : styles.blockCard} onClick={() => {
-                setActive(true)
+                setActive(!active)
                 answersStore.getGrammaAnswers(gramma.id);
             }}>
                 <Link to={`/grammas/${gramma.id}`} style={{ textDecoration: "none" }}>

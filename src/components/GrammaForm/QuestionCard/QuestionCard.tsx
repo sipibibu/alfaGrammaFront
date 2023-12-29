@@ -20,14 +20,14 @@ import ScaleField from "../Answers/ScaleField/ScaleField.tsx";
 
 type QuestionCardProps = {
   question: IQuestionForm;
-  userAnswer: IQuestionAnswer["answer"];
-  onAnswerChanged: (answer: IQuestionAnswer["answer"]) => void;
+  userAnswer: IQuestionAnswer["text"];
+  onAnswerChanged: (answer: IQuestionAnswer["text"]) => void;
 };
 
 const getQuestionField = (
   question: IQuestion,
-  userAnswer: IQuestionAnswer["answer"],
-  onAnswerChanged: (answer: IQuestionAnswer["answer"]) => void,
+  userAnswer: IQuestionAnswer["text"],
+  onAnswerChanged: (answer: IQuestionAnswer["text"]) => void,
 ) => {
   switch (question.type) {
     default:

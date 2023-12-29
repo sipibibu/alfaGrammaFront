@@ -38,7 +38,7 @@ function GrammaForm() {
       if (!grammaForm || intId !== grammaForm.id) {
         grammaStore.getGrammaForm(intId);
       }
-      if (grammaForm) {
+      else {
         setUserAnswers(
           [...grammaForm.questions].map((question) =>
             getInitialUserValues(question),

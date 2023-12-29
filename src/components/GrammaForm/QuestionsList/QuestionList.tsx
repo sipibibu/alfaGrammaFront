@@ -20,15 +20,15 @@ export default function QuestionList({
         <QuestionCard
           key={question.id}
           question={question as IQuestionForm}
-          onAnswerChanged={(answer: IQuestionAnswer["answer"]) =>
-            onAnswerChanged({ questionId: question.id, answer })
+          onAnswerChanged={(answer: IQuestionAnswer["text"]) =>
+            onAnswerChanged({ questionId: question.id, text: answer })
           }
           userAnswer={
             (
               userAnswers.find(
                 (answer) => answer?.questionId === question.id,
               ) as IQuestionAnswer
-            ).answer
+            ).text
           }
         />
       ))}

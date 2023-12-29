@@ -15,7 +15,7 @@ import {
 type RadioProps = {
   options: RadioOptions;
   userAnswer: IRadioAnswer;
-  onAnswerChange: (answer: IQuestionAnswer["answer"]) => void;
+  onAnswerChange: (answer: IQuestionAnswer["text"]) => void;
 };
 
 function RadioField({ options, userAnswer, onAnswerChange }: RadioProps) {
