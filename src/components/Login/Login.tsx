@@ -3,7 +3,7 @@ import { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
 import { useStores } from "../../rootStoreContext.ts";
-import { AuthorizationStatus } from "../../const.ts";
+import { validateLoginForm } from "../../utils/validation.ts";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -12,12 +12,12 @@ const Login = () => {
   const navigate = useNavigate();
 
   async function loginUser(email: string, password: string) {
-    await userStore.login(email, password);
-    if (userStore.isAuth === AuthorizationStatus.Auth && userStore.isLogin) {
+    if (validateLoginForm(email)) {
+      await userStore.login(email, password);
       if (userStore.role == "Respondent") {
-        navigate("/profile-respondent");
+        navigate("/grammas");
       } else if (userStore.role == "Manager") {
-        navigate("/profile-manager");
+        navigate("/ourgrammas");
       } else {
         navigate("/");
       }

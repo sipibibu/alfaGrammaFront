@@ -1,17 +1,22 @@
 import React from "react";
 import styles from "./submit-button.module.css";
-import { IQuestionAnswer } from "../../../types.ts";
+import { IQuestionAnswer, IQuestionWithId } from "../../../types.ts";
 import { useStores } from "../../../rootStoreContext.ts";
+import { validateAnswers } from "../../../utils/validation.ts";
 
 type SubmitButtonProps = {
   grammaId: number;
   answers: IQuestionAnswer[];
+  questions: IQuestionWithId[];
 };
 
-function SubmitButton({ grammaId, answers }: SubmitButtonProps) {
+function SubmitButton({ grammaId, answers, questions }: SubmitButtonProps) {
   const { answersStore } = useStores();
+
   const handleSubmit = () => {
-    answersStore.sendAnswers(answers, grammaId);
+    if (validateAnswers(answers, questions)) {
+      answersStore.sendAnswers(answers, grammaId);
+    }
   };
 
   return (

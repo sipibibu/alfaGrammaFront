@@ -4,22 +4,23 @@ import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
 import { IUserAuth } from "../../models/IUser.ts";
 import { useStores } from "../../rootStoreContext.ts";
-import { AuthorizationStatus } from "../../const.ts";
+import { Role } from "../../const.ts";
+import { validateRegistrationForm } from "../../utils/validation.ts";
 
 const Registration = () => {
   const [userAuth, setUserAuth] = useState<IUserAuth>({
     name: "",
     surname: "",
     login: "",
-    role: "respondent",
+    role: Role.Respondent,
     password: "",
   });
   const navigate = useNavigate();
   const { userStore } = useStores();
 
   async function registration(userAuth: IUserAuth) {
-    await userStore.authorization(userAuth);
-    if (userStore.isAuth === AuthorizationStatus.Auth && userStore.isLogin) {
+    if (validateRegistrationForm(userAuth)) {
+      await userStore.authorization(userAuth);
       if (userStore.role == "Respondent") {
         navigate("/profile-respondent");
       } else if (userStore.role == "Manager") {
@@ -77,8 +78,8 @@ const Registration = () => {
             value={userAuth.role}
             onChange={(e) => setUserAuth({ ...userAuth, role: e.target.value })}
           >
-            <option value={"respondent"}>Пользователь</option>
-            <option value={"manager"}>Менеджер</option>
+            <option value={Role.Respondent}>Пользователь</option>
+            <option value={Role.Manager}>Менеджер</option>
           </select>
         </div>
         <div className={styles.loginBtnBlock}>
