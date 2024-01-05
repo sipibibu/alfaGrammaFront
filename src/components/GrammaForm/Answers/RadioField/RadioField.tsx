@@ -19,7 +19,6 @@ type RadioProps = {
 };
 
 function RadioField({ options, userAnswer, onAnswerChange }: RadioProps) {
-  console.log("Радио");
   return (
     <div className={styles.radioList}>
       <FormControl>

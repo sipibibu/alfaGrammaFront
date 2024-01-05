@@ -32,7 +32,6 @@ function ScaleField({ options, userAnswer, onAnswerChange }: ScaleProps) {
       onAnswerChange(newValue);
     }
   };
-  console.log(from, to, step);
   return (
     <div className={styles.scale}>
       <Slider

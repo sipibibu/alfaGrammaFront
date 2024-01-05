@@ -6,13 +6,8 @@ import { GrammaFromServer } from "../adapters/form-adapter-to-client.ts";
 export default class GrammasService {
   static async createGramma(gramma: IGrammaConstructor) {
     const adapted = adaptGramma(gramma);
-    console.log(adapted);
     return axiosInstance.post("/forms/create", adapted);
   }
-
-  // static async updateGramma(id: number, gramma: Gramma) {
-  //   return axiosInstance.put<Gramma>(`/constructor/${id}`, gramma);
-  // }
 
   static async getGramma(id: number) {
     return axiosInstance

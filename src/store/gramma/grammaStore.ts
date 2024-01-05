@@ -17,7 +17,6 @@ class GrammaStore {
   }
 
   setGrammasList(grammasList: IGramma[]) {
-    console.log(grammasList);
     this.grammasList = grammasList;
   }
 

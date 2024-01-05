@@ -48,7 +48,6 @@ function GrammaForm() {
   if (!grammaForm || !grammaForm.id || userAnswers.length === 0) {
     return null;
   }
-  console.log(grammaForm);
   const handleUserAnswerChange = (updated: IQuestionAnswer) => {
     setUserAnswers((prevState) => {
       const index = prevState.findIndex(

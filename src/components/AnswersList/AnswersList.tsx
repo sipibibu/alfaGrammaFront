@@ -9,7 +9,6 @@ type AnswerListProps = {
 function AnswersList({ onClick }: AnswerListProps) {
   const { answersStore } = useStores();
   const grammaAnswers = answersStore.grammaAnswers;
-  console.log(grammaAnswers);
   return (
     <div className={styles.answersPage}>
       <div className={styles.answersForm}>

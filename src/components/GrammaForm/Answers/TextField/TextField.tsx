@@ -7,7 +7,6 @@ type TextProps = {
 };
 
 export default function TextField({ onAnswerChanged }: TextProps) {
-  console.log("Текст");
   return (
     <input
       type={"text"}

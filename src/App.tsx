@@ -15,6 +15,8 @@ import PlannedGrammasPage from "./pages/PlannedGrammasPage/PlannedGrammasPage.ts
 import CompanysGrammasPage from "./pages/CompanysGrammas/CompanysGrammas.tsx";
 import { useEffect } from "react";
 import { useStores } from "./rootStoreContext.ts";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { userStore } = useStores();
@@ -24,6 +26,18 @@ function App() {
   }, [userStore]);
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <BrowserRouter>
         <Routes>
           <Route path={"registration"} element={<Registration />} />

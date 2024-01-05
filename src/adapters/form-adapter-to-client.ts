@@ -37,7 +37,6 @@ export type AnswersFromServer = {
 };
 
 function adaptQuestion(question: QuestionFromServer) {
-  console.log(question);
   return {
     id: question.id,
     title: question.questionText,

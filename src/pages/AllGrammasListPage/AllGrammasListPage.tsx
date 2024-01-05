@@ -9,7 +9,6 @@ function AllGrammasListPage() {
   const { grammaStore } = useStores();
   const grammas = grammaStore.grammasList;
   const [search, setSearch] = useState<string>("");
-  console.log(grammas);
   const onChangeSearch = (input: string) => {
     setSearch(input);
   };

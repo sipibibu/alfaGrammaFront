@@ -30,7 +30,6 @@ function CheckboxesField({
       ]);
     }
   };
-  console.log("Чекбокс");
   return (
     <div className={styles.checkItemList}>
       {options.map((option, i) => (

@@ -51,7 +51,6 @@ const ProfileManager = () => {
             className={styles.whatUseEditBtn}
             onClick={() => {
               setMode("display");
-              console.log(companyName, description);
               profileManagerStore.updateProfile(companyName, description);
             }}
           >

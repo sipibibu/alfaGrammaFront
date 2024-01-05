@@ -67,7 +67,6 @@ export default function QuestionCard({
   userAnswer,
   onAnswerChanged,
 }: QuestionCardProps) {
-  console.log("Вопрос");
   return (
     <div className={styles.question}>
       <h2 className={cn(styles.title, question.isRequired && styles.required)}>
