@@ -1,4 +1,13 @@
-import { IAnswerVariants, IGrammaConstructor, IQuestion } from "../types.ts";
+import {
+  IAnswerVariants,
+  ICheckboxAnswer,
+  IGrammaConstructor,
+  IQuestion,
+  IQuestionAnswer,
+  IQuestionWithId,
+  IRadioAnswer,
+  ITextAnswer,
+} from "../types.ts";
 import { toast } from "react-toastify";
 import { QuestionType } from "../const.ts";
 
@@ -74,6 +83,59 @@ function validateOptions(options: IAnswerVariants, type: string) {
       break;
     default:
       return true;
+  }
+  return true;
+}
+
+export function validateAnswers(
+  answers: IQuestionAnswer[],
+  questions: IQuestionWithId[],
+) {
+  for (let answer of answers) {
+    const question = questions.find(
+      (question) => question.id === answer.questionId,
+    );
+    if (!question?.isRequired) {
+      continue;
+    }
+    switch (question?.type) {
+      case QuestionType.Text:
+        if ((answer.text as ITextAnswer) === "") {
+          toast.warn(
+            `На вопрос "${
+              question?.title.length > 40
+                ? question?.title.slice(0, 40) + "..."
+                : question?.title
+            }" не дан ответ`,
+          );
+          return false;
+        }
+        break;
+      case QuestionType.Radio:
+        if ((answer.text as IRadioAnswer) === "") {
+          toast.warn(
+            `На вопрос "${
+              question?.title.length > 40
+                ? question?.title.slice(0, 40) + "..."
+                : question?.title
+            }" не дан ответ`,
+          );
+          return false;
+        }
+        break;
+      case QuestionType.Checkbox:
+        if ((answer.text as ICheckboxAnswer).length === 0) {
+          toast.warn(
+            `На вопрос "${
+              question?.title.length > 40
+                ? question?.title.slice(0, 40) + "..."
+                : question?.title
+            }" не дан ответ`,
+          );
+          return false;
+        }
+        break;
+    }
   }
   return true;
 }

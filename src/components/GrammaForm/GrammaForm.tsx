@@ -69,7 +69,11 @@ function GrammaForm() {
         userAnswers={userAnswers}
         onAnswerChanged={handleUserAnswerChange}
       />
-      <SubmitButton answers={userAnswers} grammaId={grammaForm.id} />
+      <SubmitButton
+        answers={userAnswers}
+        grammaId={grammaForm.id}
+        questions={grammaForm.questions}
+      />
     </div>
   );
 }
