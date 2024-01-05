@@ -10,6 +10,7 @@ import {
 } from "../types.ts";
 import { toast } from "react-toastify";
 import { QuestionType } from "../const.ts";
+import { IUserAuth } from "../models/IUser.ts";
 
 export function validateConstructor(gramma: IGrammaConstructor) {
   if (gramma.title.length < 5) {
@@ -49,10 +50,7 @@ function validateQuestion(question: IQuestion) {
     toast.warn("Название всех вопросов должно содеражать хотя бы 5 символов");
     return false;
   }
-  if (!validateOptions(question.options, question.type)) {
-    return false;
-  }
-  return true;
+  return validateOptions(question.options, question.type);
 }
 
 function validateOptions(options: IAnswerVariants, type: string) {
@@ -136,6 +134,42 @@ export function validateAnswers(
         }
         break;
     }
+  }
+  return true;
+}
+
+export function validateRegistrationForm(user: IUserAuth) {
+  if (user.name === "") {
+    toast.warn("Имя пользователя не должно быть пустым");
+    return false;
+  }
+  if (user.surname === "") {
+    toast.warn("Фамилия пользователя не должна быть пустой");
+    return false;
+  }
+  if (/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+)/.test(user.login)) {
+    toast.warn("Указан некорректный email");
+    return false;
+  }
+  if (/[a-zA-Z]/.test(user.password)) {
+    toast.warn("Пароль должен содержать хотя бы 1 букву");
+    return false;
+  }
+  if (/[0-9]/.test(user.password)) {
+    toast.warn("Пароль должен содержать хотя бы 1 цифру");
+    return false;
+  }
+  if (user.password.length < 5) {
+    toast.warn("Пароль не должен быть короче 5 символов");
+    return false;
+  }
+  return true;
+}
+
+export function validateLoginForm(email: string) {
+  if (/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+)/.test(email)) {
+    toast.warn("Указан некорректный email");
+    return false;
   }
   return true;
 }
