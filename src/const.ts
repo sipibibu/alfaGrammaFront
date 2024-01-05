@@ -12,6 +12,7 @@ export enum AuthorizationStatus {
 }
 
 export enum Role {
-  Respondent = "respondent",
-  Manager = "manager",
+  None = "None",
+  Respondent = "Respondent",
+  Manager = "Manager",
 }

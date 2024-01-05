@@ -59,6 +59,15 @@ class GrammaStore {
       console.log(e);
     }
   }
+
+  async getPlannedGrammasList() {
+    try {
+      const grammasList = await GrammasService.getAllGrammas();
+      this.setGrammasList(grammasList.map((gramma) => adaptGramma(gramma)));
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 export default new GrammaStore();

@@ -147,15 +147,15 @@ export function validateRegistrationForm(user: IUserAuth) {
     toast.warn("Фамилия пользователя не должна быть пустой");
     return false;
   }
-  if (/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+)/.test(user.login)) {
+  if (!/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+)/.test(user.login)) {
     toast.warn("Указан некорректный email");
     return false;
   }
-  if (/[a-zA-Z]/.test(user.password)) {
+  if (!/[a-zA-Z]/.test(user.password)) {
     toast.warn("Пароль должен содержать хотя бы 1 букву");
     return false;
   }
-  if (/[0-9]/.test(user.password)) {
+  if (!/[0-9]/.test(user.password)) {
     toast.warn("Пароль должен содержать хотя бы 1 цифру");
     return false;
   }
@@ -167,7 +167,7 @@ export function validateRegistrationForm(user: IUserAuth) {
 }
 
 export function validateLoginForm(email: string) {
-  if (/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+)/.test(email)) {
+  if (!/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+)/.test(email)) {
     toast.warn("Указан некорректный email");
     return false;
   }

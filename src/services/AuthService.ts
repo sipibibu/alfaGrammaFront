@@ -12,7 +12,7 @@ export default class AuthService {
 
   static async registration(userAuth: IUserAuth) {
     return axiosInstance.post<AuthResponseData>(
-      `/auth/register/${userAuth.role}`,
+      `/auth/register/${userAuth.role.toLowerCase()}`,
       {
         firstName: userAuth.name,
         lastName: userAuth.surname,

@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
 import { IUserAuth } from "../../models/IUser.ts";
 import { useStores } from "../../rootStoreContext.ts";
-import { AuthorizationStatus, Role } from "../../const.ts";
+import { Role } from "../../const.ts";
 import { validateRegistrationForm } from "../../utils/validation.ts";
 
 const Registration = () => {
@@ -21,14 +21,12 @@ const Registration = () => {
   async function registration(userAuth: IUserAuth) {
     if (validateRegistrationForm(userAuth)) {
       await userStore.authorization(userAuth);
-      if (userStore.isAuth === AuthorizationStatus.Auth && userStore.isLogin) {
-        if (userStore.role == "Respondent") {
-          navigate("/profile-respondent");
-        } else if (userStore.role == "Manager") {
-          navigate("/profile-manager");
-        } else {
-          navigate("/");
-        }
+      if (userStore.role == "Respondent") {
+        navigate("/profile-respondent");
+      } else if (userStore.role == "Manager") {
+        navigate("/profile-manager");
+      } else {
+        navigate("/");
       }
     }
   }
