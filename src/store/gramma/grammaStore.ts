@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { IGramma, IGrammaForm, IGrammaStructure } from "../../types.ts";
+import { IGramma, IGrammaForm, IGrammaConstructor } from "../../types.ts";
 import GrammasService from "../../services/GrammasService.ts";
 import { adaptGramma } from "../../adapters/form-adapter-to-client.ts";
 
@@ -25,7 +25,7 @@ class GrammaStore {
     this.grammaForm = grammaForm;
   }
 
-  async createGramma(gramma: IGrammaStructure) {
+  async createGramma(gramma: IGrammaConstructor) {
     try {
       await GrammasService.createGramma(gramma);
     } catch (e) {
@@ -42,7 +42,6 @@ class GrammaStore {
     }
   }
 
-  //
   async getGrammasList() {
     try {
       const grammasList = await GrammasService.getAllGrammas();
@@ -52,32 +51,14 @@ class GrammaStore {
     }
   }
 
-  //
   async getGrammaForm(id: number) {
     try {
       const gramma = await GrammasService.getGrammaForm(id);
       const adapted = adaptGramma(gramma);
-      console.log(adapted);
       this.setGrammaForm(adapted);
     } catch (e) {
       console.log(e);
     }
-  }
-  //
-  // async getPlannedGrammasList() {
-  //   try {
-  //     setTimeout(() => {
-  //       this.setGrammasList(MockGrammas);
-  //     }, 500);
-  //   } catch (e) {}
-  // }
-  //
-  async getCompanysGrammasList() {
-    try {
-      setTimeout(() => {
-        this.setGrammasList(MockGrammas);
-      }, 500);
-    } catch (e) {}
   }
 }
 

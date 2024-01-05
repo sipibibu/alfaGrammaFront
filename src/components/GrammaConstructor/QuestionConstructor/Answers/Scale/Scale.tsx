@@ -1,10 +1,10 @@
-import { ScaleOptions } from "../../../../../types";
+import { IAnswerVariants } from "../../../../../types";
 import styles from "./scale.module.css";
 import React, { ChangeEvent } from "react";
 
 type ScaleProps = {
-  options: ScaleOptions;
-  setOptions: (prevState: ScaleOptions) => void;
+  options: IAnswerVariants;
+  setOptions: (prevState: IAnswerVariants) => void;
 };
 
 function Scale({ options, setOptions }: ScaleProps) {
@@ -18,6 +18,9 @@ function Scale({ options, setOptions }: ScaleProps) {
             : event.target.value
           : 0,
     });
+    const newOptions = [...options];
+    newOptions[parseInt(event.target.name)].text = event.target.value;
+    setOptions(newOptions);
   };
   return (
     <div className={styles.lines}>
@@ -26,9 +29,9 @@ function Scale({ options, setOptions }: ScaleProps) {
           <label>от</label>
           <input
             type="number"
-            name={"from"}
+            name={"0"}
             min={0}
-            value={options.from}
+            value={options[0].text}
             onChange={handleOnChange}
           />
         </div>
@@ -36,9 +39,9 @@ function Scale({ options, setOptions }: ScaleProps) {
           <label>до</label>
           <input
             type="number"
-            name={"to"}
+            name={"1"}
             min={0}
-            value={options.to}
+            value={options[1].text}
             onChange={handleOnChange}
           />
         </div>
@@ -47,9 +50,9 @@ function Scale({ options, setOptions }: ScaleProps) {
         <label>шаг</label>
         <input
           type="number"
-          name={"step"}
+          name={"2"}
           min={1}
-          value={options.step}
+          value={options[2].text}
           onChange={handleOnChange}
         />
       </div>

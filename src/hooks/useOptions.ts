@@ -1,14 +1,14 @@
 import { ChangeEvent } from "react";
-import { CheckboxOptions, RadioOptions } from "../types.ts";
+import { IAnswerVariants } from "../types.ts";
 
 export const useOptions = (
-  options: string[],
-  setOptions: (options: RadioOptions | CheckboxOptions) => void,
+  options: IAnswerVariants,
+  setOptions: (options: IAnswerVariants) => void,
 ): ((event: ChangeEvent<HTMLInputElement>, key: number) => void) => {
   return (event: ChangeEvent<HTMLInputElement>, key: number) => {
-    let newOptions: RadioOptions | CheckboxOptions;
+    let newOptions: IAnswerVariants;
     if (key === options.length) {
-      newOptions = [...options, event.target.value];
+      newOptions = [...options, { text: event.target.value }];
     } else if (event.target.value === "") {
       newOptions = [
         ...options.slice(0, key),
@@ -17,7 +17,7 @@ export const useOptions = (
     } else {
       newOptions = [
         ...options.slice(0, key),
-        event.target.value,
+        { text: event.target.value },
         ...options.slice(key + 1, options.length),
       ];
     }

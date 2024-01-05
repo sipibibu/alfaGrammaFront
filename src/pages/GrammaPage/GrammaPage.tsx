@@ -1,5 +1,4 @@
 import styles from "./gramma-page.module.css";
-import { getFormattedDateTime } from "../../utils.ts";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import { observer } from "mobx-react-lite";
@@ -23,7 +22,7 @@ function GrammaPage() {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <h1>{gramma.title}</h1> <h2>Какая-то ООО</h2>
+        <h1>{gramma.title}</h1> <h2>{gramma.companyName}</h2>
       </div>
       <div className={styles.description}>
         <h2>Описание</h2>

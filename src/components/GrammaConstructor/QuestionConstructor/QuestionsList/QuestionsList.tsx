@@ -14,7 +14,7 @@ const initialQuestion: IQuestion = {
   title: "",
   type: QuestionType.Text,
   isRequired: false,
-  options: null,
+  options: [],
 };
 
 function QuestionsList({ questionsList, questionsChange }: QuestionListProps) {

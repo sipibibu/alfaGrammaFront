@@ -1,9 +1,9 @@
 import styles from "./questions-list.module.css";
-import { IQuestionAnswer, IQuestionForm } from "../../../types.ts";
+import { IQuestionAnswer, IQuestionWithId } from "../../../types.ts";
 import QuestionCard from "../QuestionCard/QuestionCard.tsx";
 
 type QuestionListProps = {
-  questions: IQuestionForm[];
+  questions: IQuestionWithId[];
   userAnswers: IQuestionAnswer[];
   onAnswerChanged: (answer: IQuestionAnswer) => void;
 };
@@ -13,13 +13,12 @@ export default function QuestionList({
   userAnswers,
   onAnswerChanged,
 }: QuestionListProps) {
-  console.log(questions);
   return (
     <div className={styles.questions}>
       {questions.map((question) => (
         <QuestionCard
           key={question.id}
-          question={question as IQuestionForm}
+          question={question as IQuestionWithId}
           onAnswerChanged={(answer: IQuestionAnswer["text"]) =>
             onAnswerChanged({ questionId: question.id, text: answer })
           }

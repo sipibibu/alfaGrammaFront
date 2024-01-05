@@ -1,5 +1,17 @@
-import { IGrammaForm, IQuestionForm } from "../types.ts";
-import { QuestionType } from "../const.ts";
+import {
+  IGrammaForm,
+  IQuestionAnswer,
+  IQuestionWithId,
+  IUserResponse,
+} from "../types.ts";
+
+type QuestionFromServer = {
+  id: number;
+  questionText: string;
+  type: string;
+  isReq: boolean;
+  ansVar: [];
+};
 
 export type GrammaFromServer = {
   id: number;
@@ -10,45 +22,29 @@ export type GrammaFromServer = {
   fullDescription: string;
   startingAt: [number, number, number, number, number, number, number];
   closingAt: [number, number, number, number, number, number, number];
-  questions: IQuestionForm[];
+  questions: QuestionFromServer[];
 };
 
-function adaptOptions(type: string, ansVar: string[]) {
-  switch (type) {
-    default:
-    case "TextQuestion":
-      return null;
-    case "RadioQuestion":
-      return ansVar;
-    case "CheckboxQuestion":
-      return ansVar;
-    case "ScaleQuestion":
-      return { from: ansVar[2], to: ansVar[1], step: ansVar[0] };
-  }
-}
+type AnswerFromServer = {
+  id: number;
+  question: QuestionFromServer;
+  text: string;
+};
 
-function adaptQuestionType(type: string) {
-  switch (type) {
-    default:
-    case "TextQuestion":
-      return QuestionType.Text;
-    case "RadioQuestion":
-      return QuestionType.Radio;
-    case "CheckboxQuestion":
-      return QuestionType.Checkbox;
-    case "ScaleQuestion":
-      return QuestionType.Scale;
-  }
-}
+export type AnswersFromServer = {
+  formId: number;
+  questions: AnswerFromServer[];
+};
 
-function adaptQuestion(question: any) {
+function adaptQuestion(question: QuestionFromServer) {
+  console.log(question);
   return {
     id: question.id,
     title: question.questionText,
-    type: adaptQuestionType(question.type),
+    type: question.type,
     isRequired: question.isReq,
-    options: adaptOptions(question.type, question.ansVar),
-  };
+    options: question.ansVar.reverse(),
+  } as IQuestionWithId;
 }
 
 export function adaptGramma(gramma: GrammaFromServer) {
@@ -56,15 +52,31 @@ export function adaptGramma(gramma: GrammaFromServer) {
     id: gramma.id,
     title: gramma.title,
     description: gramma.fullDescription,
-    dateFrom: gramma.startingAt
-      ? `${gramma.startingAt[0]}-${gramma.startingAt[1]}-${gramma.startingAt[2]}T${gramma.startingAt[3]}:${gramma.startingAt[4]}`
-      : "",
-    dateTo: gramma.startingAt
-      ? `${gramma.closingAt[0]}-${gramma.closingAt[1]}-${gramma.closingAt[2]}T${gramma.closingAt[3]}:${gramma.closingAt[4]}`
-      : "",
+    dateFrom: "2024-01-01T00:00:00+05:00",
+    dateTo: "2024-01-31T00:00:00+05:00",
     companyName: gramma.companyName,
     questions: gramma.questions
       ? gramma.questions.map((question) => adaptQuestion(question))
       : [],
   } as IGrammaForm;
+}
+
+export function adaptQuestionAnswer(question: AnswerFromServer) {
+  return {
+    questionId: question.id,
+    text: question.text,
+    question: adaptQuestion(question.question),
+  } as IQuestionAnswer;
+}
+
+export function adaptAnswers(answers: AnswersFromServer[]) {
+  return answers.map(
+    (answer) =>
+      ({
+        formId: answer.formId,
+        questions: answer.questions.map((question) =>
+          adaptQuestionAnswer(question),
+        ),
+      }) as IUserResponse,
+  );
 }

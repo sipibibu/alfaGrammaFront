@@ -1,6 +1,12 @@
 export const QuestionType = {
-  Text: 'text',
-  Checkbox: 'checkbox',
-  Radio: 'radio',
-  Scale: 'scale',
+  Text: "TextQuestion",
+  Checkbox: "CheckboxQuestion",
+  Radio: "RadioQuestion",
+  Scale: "ScaleQuestion",
 };
+
+export enum AuthorizationStatus {
+  Unknown,
+  NoAuth,
+  Auth,
+}

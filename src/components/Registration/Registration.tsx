@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
 import { IUserAuth } from "../../models/IUser.ts";
 import { useStores } from "../../rootStoreContext.ts";
-import { AuthorizationStatus } from "../../types.ts";
+import { AuthorizationStatus } from "../../const.ts";
 
 const Registration = () => {
   const [userAuth, setUserAuth] = useState<IUserAuth>({

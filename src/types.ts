@@ -1,36 +1,28 @@
-export type TextOptions = null;
-export type RadioOptions = string[];
-export type CheckboxOptions = string[];
-export type ScaleOptions = { from: number; to: number; step: number };
+type IAnswerVariant = {
+  id?: number;
+  text: string;
+};
 
-export type QuestionOptions =
-  | TextOptions
-  | RadioOptions
-  | CheckboxOptions
-  | ScaleOptions;
+export type IAnswerVariants = IAnswerVariant[];
 
 export interface IQuestion {
   title: string;
   type: string;
   isRequired: boolean;
-  options: QuestionOptions;
+  options: IAnswerVariants;
 }
 
-export interface IGrammaStructure {
+export interface IQuestionWithId extends IQuestion {
+  id: number;
+}
+
+export interface IGrammaConstructor {
   interest: string;
   title: string;
   description: string;
   dateFrom: string;
   dateTo: string;
   questions: IQuestion[];
-}
-
-export interface IQuestionForm extends IQuestion {
-  id: number;
-}
-
-export interface IGrammaForm extends IGramma {
-  questions: IQuestionForm[];
 }
 
 export interface IGramma {
@@ -42,24 +34,22 @@ export interface IGramma {
   companyName: string;
 }
 
+export interface IGrammaForm extends IGramma {
+  questions: IQuestionWithId[];
+}
+
 export type ITextAnswer = string;
 export type IRadioAnswer = string;
 export type ICheckboxAnswer = string[];
 export type IScaleAnswer = number;
 
 export type IQuestionAnswer = {
-  question?: {questionText: string};
   questionId: number;
   text: ITextAnswer | IRadioAnswer | ICheckboxAnswer | IScaleAnswer;
+  question?: IQuestionWithId;
 };
 
 export interface IUserResponse {
   formId: number;
   questions: IQuestionAnswer[];
-}
-
-export enum AuthorizationStatus {
-  Unknown,
-  NoAuth,
-  Auth,
 }

@@ -1,10 +1,10 @@
 import React from "react";
-import { IGrammaStructure } from "../../../types.ts";
+import { IGrammaConstructor } from "../../../types.ts";
 import styles from "./create-button.module.css";
 import { useStores } from "../../../rootStoreContext.ts";
 
 type CreateButtonProps = {
-  gramma: IGrammaStructure;
+  gramma: IGrammaConstructor;
 };
 
 function CreateButton({ gramma }: CreateButtonProps) {

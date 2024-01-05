@@ -1,14 +1,14 @@
 import styles from "./checkboxes-field.module.css";
 import {
+  IAnswerVariants,
   ICheckboxAnswer,
-  CheckboxOptions,
   IQuestionAnswer,
 } from "../../../../types.ts";
 import React from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
 
 type CheckboxesProps = {
-  options: CheckboxOptions;
+  options: IAnswerVariants;
   userAnswer: ICheckboxAnswer;
   onAnswerChange: (answer: IQuestionAnswer["text"]) => void;
 };
@@ -30,6 +30,7 @@ function CheckboxesField({
       ]);
     }
   };
+  console.log("Чекбокс");
   return (
     <div className={styles.checkItemList}>
       {options.map((option, i) => (

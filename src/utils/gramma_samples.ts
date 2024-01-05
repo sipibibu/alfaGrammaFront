@@ -1,4 +1,4 @@
-import { IGrammaStructure, IQuestion } from "../types.ts";
+import { IGrammaConstructor, IQuestion } from "../types.ts";
 import { QuestionType } from "../const.ts";
 
 export const SampleVariants = {
@@ -17,7 +17,7 @@ export const Samples = {
     description: "",
     questions: [],
     title: "",
-  } as IGrammaStructure,
+  } as IGrammaConstructor,
   [SampleVariants.FOOD]: {
     interest: "Еда",
     dateFrom: "",
@@ -25,39 +25,48 @@ export const Samples = {
     description: "",
     questions: [],
     title: "Любимая кухня",
-  } as IGrammaStructure,
+  } as IGrammaConstructor,
   [SampleVariants.TIMEMANAGEMENT]: {
     interest: "Тайм-менеджмент",
     dateFrom: "",
     dateTo: "",
     description: "Тайм-менеджмент",
-    questions: [{
-      title: "Какие трудности вы испытываете при управлении своим временем?",
-      type: QuestionType.Text,
-      isRequired: true,
-      options: null,
-    } as IQuestion,
+    questions: [
+      {
+        title: "Какие трудности вы испытываете при управлении своим временем?",
+        type: QuestionType.Text,
+        isRequired: true,
+        options: [],
+      } as IQuestion,
       {
         title: "Как бы вы охарактеризовали своё управление временем?",
         type: QuestionType.Radio,
         isRequired: false,
-        options: ["очень хорошо", "не очень", "плохо"],
+        options: [
+          { text: "очень хорошо" },
+          { text: "не очень" },
+          { text: "плохо" },
+        ],
       } as IQuestion,
       {
         title: "Как вы оцениваете своё умение управлять временем?",
         type: QuestionType.Scale,
         isRequired: false,
-        options: { from: 0, to: 100, step: 10 },
+        options: [{ text: "0" }, { text: "100" }, { text: "10" }],
       } as IQuestion,
       {
         title: "Как бы вы хотели улучшить свое управление временем?",
         type: QuestionType.Checkbox,
         isRequired: false,
-        options: ["ничего не менять", "изменить хоть что-то", "поставить цель"],
+        options: [
+          { text: "ничего не менять" },
+          { text: "изменить хоть что-то" },
+          { text: "поставить цель" },
+        ],
       } as IQuestion,
     ],
     title: "Управление временем",
-  } as IGrammaStructure,
+  } as IGrammaConstructor,
   [SampleVariants.WORK]: {
     interest: "IT",
     dateFrom: "",
@@ -65,7 +74,7 @@ export const Samples = {
     description: "",
     questions: [],
     title: "Удовлетворенность работой",
-  } as IGrammaStructure,
+  } as IGrammaConstructor,
   [SampleVariants.TEST]: {
     interest: "",
     dateFrom: "2023-12-24T06:35",
@@ -76,29 +85,29 @@ export const Samples = {
         title: "1 вопрос",
         type: QuestionType.Text,
         isRequired: true,
-        options: null,
+        options: [],
       } as IQuestion,
       {
         title: "2 вопрос",
         type: QuestionType.Radio,
         isRequired: false,
-        options: ["1", "2", "3"],
+        options: [{ text: "1" }, { text: "2" }, { text: "3" }],
       } as IQuestion,
       {
         title: "3 вопрос",
         type: QuestionType.Checkbox,
         isRequired: false,
-        options: ["1", "2", "3"],
+        options: [{ text: "1" }, { text: "2" }, { text: "3" }],
       } as IQuestion,
       {
         title: "4 вопрос",
         type: QuestionType.Scale,
         isRequired: false,
-        options: { from: 0, to: 100, step: 10 },
+        options: [{ text: "0" }, { text: "100" }, { text: "10" }],
       } as IQuestion,
     ],
     title: "Title",
-  } as IGrammaStructure,
+  } as IGrammaConstructor,
 } as const;
 
 export const SampleTitles = {

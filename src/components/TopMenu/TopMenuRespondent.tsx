@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import CustomLink from "../UI/CustomLink.tsx";
 import { useStores } from "../../rootStoreContext.ts";
 import { observer } from "mobx-react-lite";
-import { AuthorizationStatus } from "../../types.ts";
+import { AuthorizationStatus } from "../../const.ts";
 
 function TopMenuRespondent() {
   const { userStore } = useStores();

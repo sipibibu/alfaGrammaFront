@@ -11,14 +11,7 @@ type SubmitButtonProps = {
 function SubmitButton({ grammaId, answers }: SubmitButtonProps) {
   const { answersStore } = useStores();
   const handleSubmit = () => {
-    console.log(answers)
-    answersStore.sendAnswers({
-      formId: grammaId,
-      questions: answers.map((answer) => ({
-        ...answer,
-        text: answer.text.toString(),
-      })),
-    });
+    answersStore.sendAnswers(answers, grammaId);
   };
 
   return (

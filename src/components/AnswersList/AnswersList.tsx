@@ -7,27 +7,27 @@ type AnswerListProps = {
 };
 
 function AnswersList({ onClick }: AnswerListProps) {
-  const { answersStore} = useStores();
+  const { answersStore } = useStores();
   const grammaAnswers = answersStore.grammaAnswers;
-  console.log(grammaAnswers)
+  console.log(grammaAnswers);
   return (
-      <div className={styles.answersPage}>
-    <div className={styles.answersForm}>
-      <div className={styles.answers}>
-        {grammaAnswers.map((grammaAnswer) =>
-          grammaAnswer.questions.map((answer) => (
-            <>
-              <p>{answer.question.questionText}</p>
-              <p>{answer.text.toString()}</p>
-            </>
-          )),
-        )}
+    <div className={styles.answersPage}>
+      <div className={styles.answersForm}>
+        <div className={styles.answers}>
+          {grammaAnswers.map((grammaAnswer) =>
+            grammaAnswer.questions.map((answer) => (
+              <>
+                <h2>{answer?.question?.title}</h2>
+                <p>{answer.text.toString()}</p>
+              </>
+            )),
+          )}
+        </div>
+        <button className={styles.answerBtn} onClick={onClick} type={"button"}>
+          Закрыть
+        </button>
       </div>
-      <button className={styles.answerBtn} onClick={onClick} type={"button"}>
-                  Закрыть
-      </button>
     </div>
-      </div>
   );
 }
 

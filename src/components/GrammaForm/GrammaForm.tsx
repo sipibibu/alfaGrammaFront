@@ -3,24 +3,24 @@ import { QuestionType } from "../../const.ts";
 import QuestionsList from "./QuestionsList/QuestionList.tsx";
 import SubmitButton from "./SumbitButton/SubmitButton.tsx";
 import { useEffect, useState } from "react";
-import { IQuestionAnswer, IQuestionForm, ScaleOptions } from "../../types.ts";
+import { IQuestionAnswer, IQuestionWithId } from "../../types.ts";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router";
 import { useStores } from "../../rootStoreContext.ts";
 
-const getInitialUserValues = (questionForm: IQuestionForm): IQuestionAnswer => {
-  switch (questionForm.type) {
+const getInitialUserValues = (question: IQuestionWithId): IQuestionAnswer => {
+  switch (question.type) {
     default:
     case QuestionType.Text:
-      return { questionId: questionForm.id, text: "" };
+      return { questionId: question.id, text: "" };
     case QuestionType.Radio:
-      return { questionId: questionForm.id, text: "" };
+      return { questionId: question.id, text: "" };
     case QuestionType.Checkbox:
-      return { questionId: questionForm.id, text: [] };
+      return { questionId: question.id, text: [] };
     case QuestionType.Scale:
       return {
-        questionId: questionForm.id,
-        text: (questionForm.options as ScaleOptions).from,
+        questionId: question.id,
+        text: question.options[0].text,
       };
   }
 };
@@ -30,15 +30,12 @@ function GrammaForm() {
   const { grammaStore } = useStores();
   const grammaForm = grammaStore.grammaForm;
   const [userAnswers, setUserAnswers] = useState<IQuestionAnswer[]>([]);
-  console.log(grammaForm);
-
   useEffect(() => {
     if (id) {
       const intId = parseInt(id);
       if (!grammaForm || intId !== grammaForm.id) {
         grammaStore.getGrammaForm(intId);
-      }
-      else {
+      } else {
         setUserAnswers(
           [...grammaForm.questions].map((question) =>
             getInitialUserValues(question),
@@ -51,7 +48,7 @@ function GrammaForm() {
   if (!grammaForm || !grammaForm.id || userAnswers.length === 0) {
     return null;
   }
-
+  console.log(grammaForm);
   const handleUserAnswerChange = (updated: IQuestionAnswer) => {
     setUserAnswers((prevState) => {
       const index = prevState.findIndex(
@@ -64,13 +61,12 @@ function GrammaForm() {
       ];
     });
   };
-  console.log(grammaForm);
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>{grammaForm.title}</h1>
       <p className={styles.description}>{grammaForm.description}</p>
       <QuestionsList
-        questions={[...grammaForm.questions] as IQuestionForm[]}
+        questions={[...grammaForm.questions] as IQuestionWithId[]}
         userAnswers={userAnswers}
         onAnswerChanged={handleUserAnswerChange}
       />

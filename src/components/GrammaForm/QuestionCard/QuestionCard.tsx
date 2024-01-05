@@ -1,15 +1,12 @@
 import styles from "./question-card.module.css";
 import {
-  CheckboxOptions,
   ICheckboxAnswer,
   IQuestion,
   IQuestionAnswer,
-  IQuestionForm,
+  IQuestionWithId,
   IRadioAnswer,
   IScaleAnswer,
   ITextAnswer,
-  RadioOptions,
-  ScaleOptions,
 } from "../../../types.ts";
 import cn from "classnames";
 import { QuestionType } from "../../../const.ts";
@@ -19,7 +16,7 @@ import CheckboxesField from "../Answers/CheckboxesField/CheckboxesField.tsx";
 import ScaleField from "../Answers/ScaleField/ScaleField.tsx";
 
 type QuestionCardProps = {
-  question: IQuestionForm;
+  question: IQuestionWithId;
   userAnswer: IQuestionAnswer["text"];
   onAnswerChanged: (answer: IQuestionAnswer["text"]) => void;
 };
@@ -41,7 +38,7 @@ const getQuestionField = (
     case QuestionType.Radio:
       return (
         <RadioField
-          options={question.options as RadioOptions}
+          options={question.options}
           userAnswer={userAnswer as IRadioAnswer}
           onAnswerChange={onAnswerChanged}
         />
@@ -49,7 +46,7 @@ const getQuestionField = (
     case QuestionType.Checkbox:
       return (
         <CheckboxesField
-          options={question.options as CheckboxOptions}
+          options={question.options}
           userAnswer={userAnswer as ICheckboxAnswer}
           onAnswerChange={onAnswerChanged}
         />
@@ -57,7 +54,7 @@ const getQuestionField = (
     case QuestionType.Scale:
       return (
         <ScaleField
-          options={question.options as ScaleOptions}
+          options={question.options}
           userAnswer={userAnswer as IScaleAnswer}
           onAnswerChange={onAnswerChanged}
         />
@@ -70,7 +67,7 @@ export default function QuestionCard({
   userAnswer,
   onAnswerChanged,
 }: QuestionCardProps) {
-  console.log(question);
+  console.log("Вопрос");
   return (
     <div className={styles.question}>
       <h2 className={cn(styles.title, question.isRequired && styles.required)}>

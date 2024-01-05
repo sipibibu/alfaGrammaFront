@@ -3,7 +3,7 @@ import AuthService from "../../services/AuthService.ts";
 import { makeAutoObservable } from "mobx";
 import { decodeToken } from "../../utils/decodeToken.ts";
 import ProfileService from "../../services/ProfileService.ts";
-import { AuthorizationStatus } from "../../types.ts";
+import { AuthorizationStatus } from "../../const.ts";
 
 class UserStore {
   respondent = {} as IRespondent;

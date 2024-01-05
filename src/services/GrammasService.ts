@@ -1,10 +1,10 @@
 import { axiosInstance } from "../axios";
-import { IGrammaStructure } from "../types.ts";
+import { IGrammaConstructor } from "../types.ts";
 import { adaptGramma } from "../adapters/form-adapter-to-server.tsx";
 import { GrammaFromServer } from "../adapters/form-adapter-to-client.ts";
 
 export default class GrammasService {
-  static async createGramma(gramma: IGrammaStructure) {
+  static async createGramma(gramma: IGrammaConstructor) {
     const adapted = adaptGramma(gramma);
     console.log(adapted);
     return axiosInstance.post("/forms/create", adapted);

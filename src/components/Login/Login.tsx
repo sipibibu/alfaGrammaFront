@@ -3,7 +3,7 @@ import { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
 import { useStores } from "../../rootStoreContext.ts";
-import { AuthorizationStatus } from "../../types.ts";
+import { AuthorizationStatus } from "../../const.ts";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");

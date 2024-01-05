@@ -1,7 +1,7 @@
 import styles from "./gramma-constructor.module.css";
 import cn from "classnames";
 import { ChangeEvent, useCallback, useState } from "react";
-import { IGrammaStructure, IQuestion } from "../../types.ts";
+import { IGrammaConstructor, IQuestion } from "../../types.ts";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { Dayjs } from "dayjs";
 import CreateButton from "./CreateButton/CreateButton.tsx";
@@ -11,7 +11,7 @@ import SamplesSelect from "./SamplesSelect/SamplesSelect.tsx";
 import { Samples, SampleVariants } from "../../utils/gramma_samples.ts";
 
 export default function GrammaConstructor() {
-  const [gramma, setGramma] = useState<IGrammaStructure>(
+  const [gramma, setGramma] = useState<IGrammaConstructor>(
     Samples[SampleVariants.EMPTY],
   );
 

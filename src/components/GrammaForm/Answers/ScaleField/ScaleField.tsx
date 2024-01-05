@@ -1,41 +1,44 @@
 import styles from "./scale-field.module.css";
-import { IScaleAnswer, ScaleOptions } from "../../../../types.ts";
+import { IAnswerVariants, IScaleAnswer } from "../../../../types.ts";
 import React from "react";
 import { Slider } from "@mui/material";
 
 type ScaleProps = {
-  options: ScaleOptions;
+  options: IAnswerVariants;
   userAnswer: IScaleAnswer;
   onAnswerChange: (answer: IScaleAnswer) => void;
 };
 
-const getMarks = ({ from, to, step }: ScaleOptions) => {
+const getMarks = (from: number, to: number, step: number) => {
   const marks = [];
-  for (let i = from; i < to; i += step) {
-    marks.push({ value: i, label: i });
+  if (step <= 0) {
+    step = 1;
+  }
+  // while ((to - from) / step > 20) {
+  //   step += 1;
+  // }
+  marks.push({ value: from, label: from });
+  for (let i = from + 1; i < to; i += step) {
+    marks.push({ value: i, label: "" });
   }
   marks.push({ value: to, label: to });
   return marks;
 };
 
 function ScaleField({ options, userAnswer, onAnswerChange }: ScaleProps) {
-  // @ts-ignore
-  const from = parseInt(options.from.text);
-  // @ts-ignore
-  const to = parseInt(options.to.text);
-  // @ts-ignore
-  const step = parseInt(options.step.text);
+  const [from, to, step] = options.map((options) => parseInt(options.text));
   const handleChange = (_: Event, newValue: number | number[]) => {
     if (typeof newValue === "number") {
       onAnswerChange(newValue);
     }
   };
+  console.log(from, to, step);
   return (
     <div className={styles.scale}>
       <Slider
         value={userAnswer}
         onChange={handleChange}
-        marks={getMarks({ from, to, step })}
+        marks={getMarks(from, to, step)}
         defaultValue={from}
         min={from}
         max={to}

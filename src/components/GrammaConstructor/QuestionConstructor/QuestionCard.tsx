@@ -8,14 +8,7 @@ import Checkboxes from "./Answers/Checkboxes/Checkboxes.tsx";
 import DeleteQuestionButton from "./DeleteQuestionButton/DeleteQuestionButton.tsx";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { QuestionType } from "../../../const.ts";
-import {
-  CheckboxOptions,
-  IQuestion,
-  QuestionOptions,
-  RadioOptions,
-  ScaleOptions,
-  TextOptions,
-} from "../../../types.ts";
+import { IAnswerVariants, IQuestion } from "../../../types.ts";
 
 type QuestionCardProps = {
   question: IQuestion;
@@ -28,40 +21,33 @@ const getQuestionOptions = (questionType: string) => {
   switch (questionType) {
     default:
     case QuestionType.Text:
-      return null as TextOptions;
     case QuestionType.Radio:
-      return [] as RadioOptions;
     case QuestionType.Checkbox:
-      return [] as CheckboxOptions;
+      return [];
     case QuestionType.Scale:
-      return { from: 0, to: 0, step: 1 } as ScaleOptions;
+      return [
+        { text: "0" },
+        { text: "100" },
+        { text: "10" },
+      ] as IAnswerVariants;
   }
 };
 
 const getQuestionField = (
   questionType: string,
-  options: QuestionOptions,
-  setOptions: (options: QuestionOptions) => void,
+  options: IAnswerVariants,
+  setOptions: (options: IAnswerVariants) => void,
 ) => {
   switch (questionType) {
     default:
     case QuestionType.Text:
       return <Text />;
     case QuestionType.Radio:
-      return (
-        <Radio options={options as RadioOptions} setOptions={setOptions} />
-      );
+      return <Radio options={options} setOptions={setOptions} />;
     case QuestionType.Checkbox:
-      return (
-        <Checkboxes
-          options={options as CheckboxOptions}
-          setOptions={setOptions}
-        />
-      );
+      return <Checkboxes options={options} setOptions={setOptions} />;
     case QuestionType.Scale:
-      return (
-        <Scale options={options as ScaleOptions} setOptions={setOptions} />
-      );
+      return <Scale options={options} setOptions={setOptions} />;
   }
 };
 
@@ -103,7 +89,7 @@ function QuestionCard({
   }, [question, handleQuestionChange]);
 
   const handleOptionsChange = useCallback(
-    (options: QuestionOptions) => {
+    (options: IAnswerVariants) => {
       handleQuestionChange(
         {
           ...question,
