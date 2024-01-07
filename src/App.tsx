@@ -19,6 +19,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute.tsx";
 import { Role } from "./const.ts";
 import Layout from "./components/Layout/Layout.tsx";
 import { observer } from "mobx-react-lite";
+import GrammaFormManager from "./components/GrammaForm/GrammaFormManager.tsx";
 
 function App() {
   const { userStore } = useStores();
@@ -55,10 +56,8 @@ function App() {
             <Route element={<PrivateRoute role={Role.Manager} />}>
               <Route path={"profile-manager"} element={<ProfileManager />} />
               <Route path={"/ourgrammas"} element={<CompanysGrammasPage />} />
-              <Route
-                path={"gramma-constructor"}
-                element={<GrammaConstructor />}
-              />
+              <Route path={"gramma-constructor"} element={<GrammaConstructor />}/>
+              {/*<Route path={"ourgrammas/:id"} element={<GrammaFormManager />} />*/}
             </Route>
           </Route>
         </Routes>

@@ -2,6 +2,7 @@ import styles from "./PollCard.module.css";
 import grammaImage from "./gramma.png";
 import { IGramma } from "../../types.ts";
 import { Link } from "react-router-dom";
+import {observer} from "mobx-react-lite";
 
 type PollCardProps = {
   gramma: Pick<IGramma, "id" | "title" | "description">;
@@ -23,4 +24,4 @@ const PollCard = ({ gramma }: PollCardProps) => {
   );
 };
 
-export default PollCard;
+export default observer(PollCard);
