@@ -1,81 +1,36 @@
 import styles from "./gramma-form.module.css";
-import { QuestionType } from "../../const.ts";
-import QuestionsList from "./QuestionsList/QuestionList.tsx";
-import SubmitButton from "./SumbitButton/SubmitButton.tsx";
-import { useEffect, useState } from "react";
-import { IQuestionAnswer, IQuestionWithId } from "../../types.ts";
+import {useEffect, useState} from "react";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router";
 import { useStores } from "../../rootStoreContext.ts";
+import AnswersList from "./AnswersList/AnswersList.tsx";
+import { createDictQuestionsAnswers } from "../../utils/answers.ts";
 
-const getInitialUserValues = (question: IQuestionWithId): IQuestionAnswer => {
-    switch (question.type) {
-        default:
-        case QuestionType.Text:
-            return { questionId: question.id, text: "" };
-        case QuestionType.Radio:
-            return { questionId: question.id, text: "" };
-        case QuestionType.Checkbox:
-            return { questionId: question.id, text: [] };
-        case QuestionType.Scale:
-            return {
-                questionId: question.id,
-                text: question.options[0].text,
-            };
-    }
-};
-
-function GrammaForm() {
+function GrammaFormManager() {
     const { id } = useParams();
-    const { grammaStore } = useStores();
+    const { grammaStore, answersStore } = useStores();
     const grammaForm = grammaStore.grammaForm;
-    const [userAnswers, setUserAnswers] = useState<IQuestionAnswer[]>([]);
+    const [dictAnswers, setDictAnswers] = useState<Map<string, string[]>>()
     useEffect(() => {
         if (id) {
-            const intId = parseInt(id);
-            if (!grammaForm || intId !== grammaForm.id) {
-                grammaStore.getGrammaForm(intId);
-            } else {
-                setUserAnswers(
-                    [...grammaForm.questions].map((question) =>
-                        getInitialUserValues(question),
-                    ),
-                );
-            }
+            const intId = parseInt(id)
+            grammaStore.getGrammaForm(intId)
+            answersStore.getGrammaAnswers(intId)
+            setDictAnswers(createDictQuestionsAnswers(answersStore.grammaAnswers))
         }
-    }, [id, grammaForm]);
+    }, [id]);
 
-    if (!grammaForm || !grammaForm.id || userAnswers.length === 0) {
+    if (!grammaForm || !grammaForm.id || !dictAnswers) {
         return null;
     }
-    const handleUserAnswerChange = (updated: IQuestionAnswer) => {
-        setUserAnswers((prevState) => {
-            const index = prevState.findIndex(
-                (answer) => answer.questionId === updated.questionId,
-            );
-            return [
-                ...prevState.slice(0, index),
-                updated,
-                ...prevState.slice(index + 1, prevState.length),
-            ];
-        });
-    };
+
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>{grammaForm.title}</h1>
             <p className={styles.description}>{grammaForm.description}</p>
-            <QuestionsList
-                questions={[...grammaForm.questions] as IQuestionWithId[]}
-                userAnswers={userAnswers}
-                onAnswerChanged={handleUserAnswerChange}
-            />
-            <SubmitButton
-                answers={userAnswers}
-                grammaId={grammaForm.id}
-                questions={grammaForm.questions}
-            />
+            <AnswersList questions={grammaForm.questions} dictAnswers={dictAnswers}/>
         </div>
     );
 }
 
-export default observer(GrammaForm);
+export default observer(GrammaFormManager);

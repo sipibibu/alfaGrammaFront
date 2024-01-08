@@ -57,7 +57,7 @@ function App() {
               <Route path={"profile-manager"} element={<ProfileManager />} />
               <Route path={"/ourgrammas"} element={<CompanysGrammasPage />} />
               <Route path={"gramma-constructor"} element={<GrammaConstructor />}/>
-              {/*<Route path={"ourgrammas/:id"} element={<GrammaFormManager />} />*/}
+              <Route path={"ourgrammas/:id"} element={<GrammaFormManager />} />
             </Route>
           </Route>
         </Routes>
