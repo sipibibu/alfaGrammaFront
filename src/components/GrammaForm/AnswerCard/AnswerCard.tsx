@@ -2,6 +2,7 @@ import {IQuestion} from "../../../types.ts";
 import styles from "../QuestionCard/question-card.module.css";
 import cn from "classnames";
 import {QuestionType} from "../../../const.ts";
+import {countQuestionAnswers} from "../../../utils/answers.ts";
 
 type AnswerCardProps = {
     question: IQuestion
@@ -9,40 +10,6 @@ type AnswerCardProps = {
 }
 
 const AnswerCard = ({question, answers} : AnswerCardProps) => {
-    const countQuestionAnswers = (question: IQuestion) => {
-        const answerObjects = new Array<{answer: string, count: number}>()
-        if(answers != undefined){
-            if(question.options.length != 0){
-                if(question.type == QuestionType.Scale){
-                    for (let i = Number(question.options[0].text); i <=  Number(question.options[1].text); i += Number(question.options[2].text)) {
-                        let countAnswers = 0
-                        for (let j = 0; j < answers.length; j++) {
-                            if (i.toString() == answers[j]) {
-                                countAnswers += 1
-                            }
-                        }
-                        if(countAnswers != 0){
-                            answerObjects.push({answer: i.toString(), count: countAnswers})
-                        }
-                    }
-                }
-                else {
-                    for (let i = 0; i < question.options.length; i++) {
-                        let countAnswers = 0
-                        for (let j = 0; j < answers.length; j++) {
-                            if (question.options[i].text == answers[j]) {
-                                countAnswers += 1
-                            }
-                        }
-                        answerObjects.push({answer: question.options[i].text, count: countAnswers})
-                    }
-                }
-                return answerObjects
-            }
-            else return new Array<string>()
-        }
-        else return new Array<string>()
-    }
 
     if(answers == undefined){
         return null
@@ -56,7 +23,7 @@ const AnswerCard = ({question, answers} : AnswerCardProps) => {
             <div className={styles.questionField}>
                 <ul>
                     {question.type != QuestionType.Text ?
-                        countQuestionAnswers(question)
+                        countQuestionAnswers(question, answers)
                         .map((answer) =>
                                 question.type == QuestionType.Radio || QuestionType.Scale ?
                                     <li>{answer.answer} {answer.count}</li>
