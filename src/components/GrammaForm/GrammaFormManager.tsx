@@ -10,15 +10,19 @@ function GrammaFormManager() {
     const { id } = useParams();
     const { grammaStore, answersStore } = useStores();
     const grammaForm = grammaStore.grammaForm;
+    const gramaAnswers = answersStore.grammaAnswers;
     const [dictAnswers, setDictAnswers] = useState<Map<string, string[]>>()
     useEffect(() => {
         if (id) {
-            const intId = parseInt(id)
-            grammaStore.getGrammaForm(intId)
-            answersStore.getGrammaAnswers(intId)
-            setDictAnswers(createDictQuestionsAnswers(answersStore.grammaAnswers))
+            const intId = parseInt(id);
+            if (!grammaForm || intId !== grammaForm.id || !gramaAnswers) {
+                grammaStore.getGrammaForm(intId);
+                answersStore.getGrammaAnswers(intId)
+            } else {
+                setDictAnswers(createDictQuestionsAnswers(answersStore.grammaAnswers))
+            }
         }
-    }, [id]);
+        }, [id, grammaForm, gramaAnswers]);
 
     if (!grammaForm || !grammaForm.id || !dictAnswers) {
         return null;
