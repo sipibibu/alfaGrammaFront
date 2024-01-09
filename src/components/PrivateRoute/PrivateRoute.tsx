@@ -9,6 +9,7 @@ type PrivateRouteProps = {
 
 function PrivateRoute({ role }: PrivateRouteProps) {
   const { userStore } = useStores();
+  console.log(userStore.role);
   if (userStore.role === Role.None) {
     return <Outlet />;
   }
