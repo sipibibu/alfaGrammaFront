@@ -10,7 +10,7 @@ class UserStore {
   respondent = {} as IRespondent;
   manager = {} as IManager;
   isLogin = false;
-  role = Role.None;
+  role = Role.Unknown;
 
   constructor() {
     makeAutoObservable(this);
@@ -36,7 +36,7 @@ class UserStore {
     try {
       await AuthService.registration(userAuth);
     } catch (e) {
-      this.setRole(Role.None);
+      this.setRole(Role.NoAuth);
       dropToken();
       console.log(e);
     }
@@ -50,7 +50,7 @@ class UserStore {
       this.setRole(decodeToken(response) as Role);
     } catch (e) {
       dropToken();
-      this.setRole(Role.None);
+      this.setRole(Role.NoAuth);
       console.log(e);
     }
   }
@@ -60,7 +60,8 @@ class UserStore {
       await this.registration(userAuth);
       await this.login(userAuth.login, userAuth.password);
     } catch (e) {
-      this.setRole(Role.None);
+      dropToken();
+      this.setRole(Role.NoAuth);
       console.log(e);
     }
   }
@@ -98,6 +99,7 @@ class UserStore {
       }
     } catch (e) {
       dropToken();
+      this.setRole(Role.NoAuth);
       console.log(e);
     }
   }
@@ -106,7 +108,7 @@ class UserStore {
     try {
       dropToken();
       this.setLogin(false);
-      this.setRole(Role.None);
+      this.setRole(Role.NoAuth);
       this.setRespondent({} as IRespondent);
       this.setManager({} as IManager);
     } catch (e) {

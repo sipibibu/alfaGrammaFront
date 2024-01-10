@@ -3,6 +3,7 @@ import { IGrammaConstructor } from "../../../types.ts";
 import styles from "./create-button.module.css";
 import { useStores } from "../../../rootStoreContext.ts";
 import { validateConstructor } from "../../../utils/validation.ts";
+import { useNavigate } from "react-router";
 
 type CreateButtonProps = {
   gramma: IGrammaConstructor;
@@ -10,9 +11,11 @@ type CreateButtonProps = {
 
 function CreateButton({ gramma }: CreateButtonProps) {
   const { grammaStore } = useStores();
+  const navigate = useNavigate();
   const handleSubmit = () => {
     if (validateConstructor(gramma)) {
       grammaStore.createGramma(gramma);
+      navigate("/ourgrammas");
     }
   };
 
