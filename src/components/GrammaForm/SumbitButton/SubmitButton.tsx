@@ -18,7 +18,7 @@ function SubmitButton({ grammaId, answers, questions }: SubmitButtonProps) {
   const handleSubmit = () => {
     if (validateAnswers(answers, questions)) {
       answersStore.sendAnswers(answers, grammaId);
-      navigate("grammas");
+      navigate("/grammas");
     }
   };
 
