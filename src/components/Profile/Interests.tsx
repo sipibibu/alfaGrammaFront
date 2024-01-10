@@ -1,4 +1,5 @@
 import styles from "./profile.module.css";
+// @ts-ignore
 import Select, { MultiValue, OptionsType, OptionType } from "react-select";
 import { useStores } from "../../rootStoreContext.ts";
 
@@ -25,6 +26,8 @@ export default function Interests({
 }: Interests) {
   const { userStore } = useStores();
   const userInterests = userStore.respondent.additionalData?.interests;
+
+  // @ts-ignore
   return (
     <>
       <h3 className={styles.whatUseTitle}>Чем интересуюсь</h3>
@@ -35,14 +38,14 @@ export default function Interests({
           value={options}
           onChange={(data) => {
             setOptions(data);
-            setInterests(data.map((e) => e.value));
+            setInterests(data.map((e: any) => e.value));
           }}
           isSearchable={true}
           isMulti
         />
       ) : (
         <ul className={styles.whatUseList}>
-          {userInterests?.map((item, count) => (
+          {userInterests?.map((item: any, count) => (
             <li className={styles.whatUseItem} key={count}>
               {item.name ? item.name : item}
             </li>

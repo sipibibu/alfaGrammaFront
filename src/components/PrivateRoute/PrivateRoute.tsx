@@ -9,8 +9,8 @@ type PrivateRouteProps = {
 
 function PrivateRoute({ role }: PrivateRouteProps) {
   const { userStore } = useStores();
-  if (userStore.role === Role.Unknown) {
-    return null;
+  if (userStore.role === Role.None) {
+    return <Outlet />;
   }
   return userStore.role !== role ? <Navigate to={"/login"} /> : <Outlet />;
 }
