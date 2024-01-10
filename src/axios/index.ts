@@ -2,7 +2,7 @@ import axios from "axios";
 import { getToken } from "../utils/token.ts";
 
 export const axiosInstance = axios.create({
-  baseURL: "https://alpha-gramms.zavsoft.net",
+  baseURL: import.meta.env.VITE_BACKEND_URL,
 });
 
 axiosInstance.interceptors.request.use((config) => {
