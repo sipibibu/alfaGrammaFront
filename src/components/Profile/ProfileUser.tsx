@@ -16,7 +16,7 @@ const ProfileUser = () => {
   const [options, setOptions] = useState<MultiValue<string> | string>([]);
   const [interests, setInterests] = useState<string[]>([]);
   const [mode, setMode] = useState("display");
-
+  console.log(userStore.role);
   useEffect(() => {
     userStore.getAccount();
   }, [userStore]);
@@ -28,7 +28,7 @@ const ProfileUser = () => {
           <img
             src={additionalDataUserServer?.imageUrl}
             className={styles.image}
-            alt="profile image"
+            alt="respondent image"
           />
         ) : (
           <img src={avatar} className={styles.image} alt="profile image" />

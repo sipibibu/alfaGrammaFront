@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 import { IGramma, IGrammaForm, IGrammaConstructor } from "../../types.ts";
 import GrammasService from "../../services/GrammasService.ts";
 import { adaptGramma } from "../../adapters/form-adapter-to-client.ts";
+import { toast } from "react-toastify";
 
 class GrammaStore {
   grammaCard = {} as IGramma;
@@ -27,7 +28,9 @@ class GrammaStore {
   async createGramma(gramma: IGrammaConstructor) {
     try {
       await GrammasService.createGramma(gramma);
+      toast.done("Опрос успешно создан");
     } catch (e) {
+      toast.error("Не удалось создать опрос. Пожалуйста, повторите позже");
       console.log(e);
     }
   }

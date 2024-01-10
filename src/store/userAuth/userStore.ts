@@ -36,7 +36,7 @@ class UserStore {
     try {
       await AuthService.registration(userAuth);
     } catch (e) {
-      this.setRole(Role.NoAuth);
+      this.setRole(Role.None);
       dropToken();
       console.log(e);
     }
@@ -50,7 +50,7 @@ class UserStore {
       this.setRole(decodeToken(response) as Role);
     } catch (e) {
       dropToken();
-      this.setRole(Role.NoAuth);
+      this.setRole(Role.None);
       console.log(e);
     }
   }
@@ -60,7 +60,7 @@ class UserStore {
       await this.registration(userAuth);
       await this.login(userAuth.login, userAuth.password);
     } catch (e) {
-      this.setRole(Role.NoAuth);
+      this.setRole(Role.None);
       console.log(e);
     }
   }
@@ -98,7 +98,6 @@ class UserStore {
       }
     } catch (e) {
       dropToken();
-      this.setRole(Role.NoAuth);
       console.log(e);
     }
   }
@@ -107,7 +106,7 @@ class UserStore {
     try {
       dropToken();
       this.setLogin(false);
-      this.setRole(Role.NoAuth);
+      this.setRole(Role.None);
       this.setRespondent({} as IRespondent);
       this.setManager({} as IManager);
     } catch (e) {
