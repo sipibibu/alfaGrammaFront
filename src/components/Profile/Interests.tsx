@@ -2,13 +2,7 @@ import styles from "./profile.module.css";
 // @ts-ignore
 import Select, { MultiValue, OptionsType, OptionType } from "react-select";
 import { useStores } from "../../rootStoreContext.ts";
-
-const optionsServer: OptionsType<OptionType> = [
-  { value: "спорт", label: "спорт" },
-  { value: "it", label: "it" },
-  { value: "рисование", label: "рисование" },
-  { value: "фильмы", label: "фильмы" },
-];
+import {useEffect} from "react";
 
 export interface Interests {
   mode: string;
@@ -24,8 +18,12 @@ export default function Interests({
   setOptions,
   setInterests,
 }: Interests) {
-  const { userStore } = useStores();
+  const { userStore, grammaStore } = useStores();
   const userInterests = userStore.respondent.additionalData?.interests;
+  const optionsServer : OptionsType<OptionType> = grammaStore.interests.map((interest) => { return {value: interest.name, label: interest.name}} )
+  useEffect(() => {
+    grammaStore.getInterests()
+  }, [grammaStore])
 
   // @ts-ignore
   return (
