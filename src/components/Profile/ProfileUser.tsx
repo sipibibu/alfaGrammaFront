@@ -16,7 +16,7 @@ const ProfileUser = () => {
   const [options, setOptions] = useState<MultiValue<string> | string>([]);
   const [interests, setInterests] = useState<string[]>([]);
   const [mode, setMode] = useState("display");
-  console.log(userStore.role);
+
   useEffect(() => {
     userStore.getAccount();
   }, [userStore]);
@@ -65,7 +65,6 @@ const ProfileUser = () => {
             className={styles.whatUseEditBtn}
             onClick={() => {
               setMode("display");
-              console.log(age, education, interests);
               profileRespondentStore.updateProfile(age, education, interests);
             }}
           >

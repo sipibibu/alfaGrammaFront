@@ -12,7 +12,7 @@ const ProfileManager = () => {
   const [mode, setMode] = useState("display");
   const [companyName, setCompanyName] = useState("");
   const [description, setDiscription] = useState("");
-  console.log(userStore.role);
+
   useEffect(() => {
     userStore.getAccount();
   }, [userStore]);

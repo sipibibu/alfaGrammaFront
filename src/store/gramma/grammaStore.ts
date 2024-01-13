@@ -38,7 +38,6 @@ class GrammaStore {
   async createGramma(gramma: IGrammaConstructor) {
     try {
       const grammaWithId = await GrammasService.createGramma(gramma);
-      console.log(grammaWithId);
       if (grammaWithId.id && gramma.interest.id !== 0) {
         await GrammasService.setInterest(grammaWithId.id, gramma.interest);
       }

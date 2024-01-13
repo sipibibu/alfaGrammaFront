@@ -24,7 +24,6 @@ import { Navigate } from "react-router";
 
 function App() {
   const { userStore } = useStores();
-  console.log(userStore.role);
 
   useEffect(() => {
     userStore.getAccount();
