@@ -6,12 +6,7 @@ export default class ProfileService {
       "/account/setAge",
       {
         age: age,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      },
+      }
     );
   }
 
@@ -20,12 +15,7 @@ export default class ProfileService {
       "/account/setEducation",
       {
         education: education,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      },
+      }
     );
   }
 
@@ -34,27 +24,20 @@ export default class ProfileService {
       "/account/setInterests",
       {
         interests: interests,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      },
+      }
     );
   }
 
   static async getAccount() {
     return axiosInstance
-      .get("/account/get", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+      .get("/account/get")
       .then((res) => res.data);
   }
 
   static async getCompany(title: string) {
-    return axiosInstance.get(`/company/${title}`);
+    return axiosInstance
+        .get(`/company/${title}`)
+        .then((res) => res.data);
   }
 
   static async updateProfileManagerCompanyName(companyName: string) {
@@ -62,12 +45,7 @@ export default class ProfileService {
       "/company/setTitle",
       {
         title: companyName,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      },
+      }
     );
   }
 
@@ -76,12 +54,7 @@ export default class ProfileService {
       "/company/setDescription",
       {
         description: description,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      },
+      }
     );
   }
 }
