@@ -29,10 +29,6 @@ function App() {
     userStore.getAccount();
   }, [userStore.role]);
 
-  if (userStore.role === Role.None) {
-    return null;
-  }
-
   return (
     <>
       <ToastContainer
