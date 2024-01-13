@@ -20,6 +20,7 @@ import { Role } from "./const.ts";
 import Layout from "./components/Layout/Layout.tsx";
 import { observer } from "mobx-react-lite";
 import GrammaFormManager from "./components/GrammaForm/GrammaFormManager.tsx";
+import { Navigate } from "react-router";
 
 function App() {
   const { userStore } = useStores();
@@ -28,6 +29,11 @@ function App() {
   useEffect(() => {
     userStore.getAccount();
   }, [userStore.role]);
+
+  if (userStore.role === Role.None) {
+    return null;
+  }
+
   return (
     <>
       <ToastContainer
@@ -44,6 +50,20 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
+          <Route
+            path={"/"}
+            element={
+              <Navigate
+                to={
+                  userStore.role === Role.Manager
+                    ? "/ourgrammas"
+                    : userStore.role === Role.Respondent
+                    ? "/grammas"
+                    : "/login"
+                }
+              />
+            }
+          />
           <Route path={"registration"} element={<Registration />} />
           <Route path={"/login"} element={<Login />} />
           <Route element={<Layout />}>
