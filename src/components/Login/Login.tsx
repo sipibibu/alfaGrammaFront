@@ -1,10 +1,11 @@
 import styles from "../../styles/Authorization.module.css";
 import { useState } from "react";
 import { observer } from "mobx-react-lite";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { useStores } from "../../rootStoreContext.ts";
 import { validateLoginForm } from "../../utils/validation.ts";
 import { toast } from "react-toastify";
+import { Role } from "../../const.ts";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -23,6 +24,14 @@ const Login = () => {
         toast.error("Неверный логин или пароль");
       }
     }
+  }
+
+  if (userStore.role === Role.Respondent) {
+    return <Navigate to={"/grammas"} />;
+  }
+
+  if (userStore.role === Role.Manager) {
+    return <Navigate to={"/ourgrammas"} />;
   }
 
   return (

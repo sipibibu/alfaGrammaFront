@@ -1,7 +1,7 @@
 import styles from "../../styles/Authorization.module.css";
 import { useState } from "react";
 import { observer } from "mobx-react-lite";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { IUserAuth } from "../../models/IUser.ts";
 import { useStores } from "../../rootStoreContext.ts";
 import { Role } from "../../const.ts";
@@ -29,6 +29,14 @@ const Registration = () => {
         navigate("/");
       }
     }
+  }
+
+  if (userStore.role === Role.Respondent) {
+    return <Navigate to={"/grammas"} />;
+  }
+
+  if (userStore.role === Role.Manager) {
+    return <Navigate to={"/ourgrammas"} />;
   }
 
   return (
