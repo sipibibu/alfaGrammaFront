@@ -11,7 +11,7 @@ export const SampleVariants = {
 
 export const Samples = {
   [SampleVariants.EMPTY]: {
-    interest: "",
+    interest: { id: 0, name: "" },
     dateFrom: "",
     dateTo: "",
     description: "",
@@ -19,7 +19,7 @@ export const Samples = {
     title: "",
   } as IGrammaConstructor,
   [SampleVariants.FOOD]: {
-    interest: "Еда",
+    interest: { id: 0, name: "" },
     dateFrom: "",
     dateTo: "",
     description: "",
@@ -27,7 +27,7 @@ export const Samples = {
     title: "Любимая кухня",
   } as IGrammaConstructor,
   [SampleVariants.TIMEMANAGEMENT]: {
-    interest: "Тайм-менеджмент",
+    interest: { id: 0, name: "" },
     dateFrom: "",
     dateTo: "",
     description: "Тайм-менеджмент",
@@ -68,7 +68,7 @@ export const Samples = {
     title: "Управление временем",
   } as IGrammaConstructor,
   [SampleVariants.WORK]: {
-    interest: "IT",
+    interest: { id: 0, name: "" },
     dateFrom: "",
     dateTo: "",
     description: "",
@@ -76,7 +76,7 @@ export const Samples = {
     title: "Удовлетворенность работой",
   } as IGrammaConstructor,
   [SampleVariants.TEST]: {
-    interest: "",
+    interest: { id: 0, name: "" },
     dateFrom: "2023-12-24T06:35",
     dateTo: "2023-12-30T06:35",
     description: "description",

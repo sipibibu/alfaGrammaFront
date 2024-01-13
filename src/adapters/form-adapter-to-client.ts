@@ -20,8 +20,8 @@ export type GrammaFromServer = {
   companyName: string;
   shortDescription: string;
   fullDescription: string;
-  startingAt: [number, number, number, number, number, number, number];
-  closingAt: [number, number, number, number, number, number, number];
+  startingAt: number;
+  closingAt: number;
   questions: QuestionFromServer[];
 };
 
@@ -51,8 +51,8 @@ export function adaptGramma(gramma: GrammaFromServer) {
     id: gramma.id,
     title: gramma.title,
     description: gramma.fullDescription,
-    dateFrom: "2024-01-01T00:00:00+05:00",
-    dateTo: "2024-01-31T00:00:00+05:00",
+    dateFrom: new Date(gramma.startingAt * 1000).toUTCString(),
+    dateTo: new Date(gramma.closingAt * 1000).toUTCString(),
     companyName: gramma.companyName,
     questions: gramma.questions
       ? gramma.questions.map((question) => adaptQuestion(question))

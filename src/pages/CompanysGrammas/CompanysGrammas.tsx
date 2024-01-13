@@ -9,7 +9,7 @@ function CompanysGrammasPage() {
   const grammasList = grammaStore.grammasList;
 
   useEffect(() => {
-    grammaStore.getGrammasList();
+    grammaStore.getGrammasListByCompany();
   }, []);
 
   return (

@@ -1,13 +1,15 @@
 import styles from "../gramma-constructor.module.css";
 import { Autocomplete, TextField } from "@mui/material";
-import { MockInterests } from "../../../mock/mock-interests.tsx";
+import { IInterest } from "../../../types.ts";
 
 type InterestSelectProps = {
-  chosenInterest: string;
-  onChange: (interest: string) => void;
+  interests: IInterest[];
+  chosenInterest: IInterest;
+  onChange: (interest: IInterest) => void;
 };
 
 export default function InterestSelect({
+  interests,
   chosenInterest,
   onChange,
 }: InterestSelectProps) {
@@ -16,12 +18,15 @@ export default function InterestSelect({
       className={styles.interest}
       disablePortal
       id="combo-box-demo"
-      options={MockInterests}
+      options={interests.map((interest) => interest.name)}
       sx={{ width: "100%" }}
-      value={chosenInterest}
+      value={chosenInterest.name}
       onChange={(_: any, newValue: string | null) => {
         if (newValue) {
-          onChange(newValue);
+          const interest = interests.find(
+            (interest) => interest.name === newValue,
+          ) as IInterest;
+          onChange(interest);
         }
       }}
       renderInput={(params) => <TextField {...params} label={"Выбор темы"} />}
