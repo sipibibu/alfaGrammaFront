@@ -19,6 +19,10 @@ function GrammaPage() {
     }
   }, [id]);
 
+  if (!id || gramma.id !== parseInt(id)) {
+    return null;
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>

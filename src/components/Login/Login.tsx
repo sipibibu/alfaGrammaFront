@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
 import { useStores } from "../../rootStoreContext.ts";
 import { validateLoginForm } from "../../utils/validation.ts";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -19,7 +20,7 @@ const Login = () => {
       } else if (userStore.role == "Manager") {
         navigate("/ourgrammas");
       } else {
-        navigate("/");
+        toast.error("Неверный логин или пароль");
       }
     }
   }
