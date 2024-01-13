@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { useStores } from "../../rootStoreContext.ts";
+import { getFormattedDateTime } from "../../utils.ts";
 
 function GrammaPage() {
   const { id } = useParams();
@@ -19,6 +20,10 @@ function GrammaPage() {
     }
   }, [id]);
 
+  if (!id || gramma.id !== parseInt(id)) {
+    return null;
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -32,13 +37,11 @@ function GrammaPage() {
         <div className={styles.calendar}>
           <p>
             Начало:
-            {/*<span> {getFormattedDateTime(gramma.dateFrom)}</span>*/}
-            <span>24.12.2023, 00:00</span>
+            <span> {getFormattedDateTime(gramma.dateFrom)}</span>
           </p>
           <p>
             Конец:
-            {/*<span> {getFormattedDateTime(gramma.dateTo)}</span>*/}
-            <span>30.12.2023, 00:00</span>
+            <span> {getFormattedDateTime(gramma.dateTo)}</span>
           </p>
         </div>
         <Link to={`/gramma-form/${gramma.id}`}>

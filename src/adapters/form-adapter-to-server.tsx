@@ -10,11 +10,13 @@ function adaptQuestion(question: IQuestion) {
 }
 
 export function adaptGramma(gramma: IGrammaConstructor) {
+  console.log(gramma);
   return {
     title: gramma.title,
     fullDescription: gramma.description,
     start: new Date(gramma.dateFrom).toISOString(),
     end: new Date(gramma.dateTo).toISOString(),
     questions: gramma.questions.map((question) => adaptQuestion(question)),
+    interest: gramma.interest,
   };
 }

@@ -12,9 +12,9 @@ type CreateButtonProps = {
 function CreateButton({ gramma }: CreateButtonProps) {
   const { grammaStore } = useStores();
   const navigate = useNavigate();
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateConstructor(gramma)) {
-      grammaStore.createGramma(gramma);
+      await grammaStore.createGramma(gramma);
       navigate("/ourgrammas");
     }
   };

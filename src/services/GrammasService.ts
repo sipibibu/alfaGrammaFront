@@ -1,12 +1,14 @@
 import { axiosInstance } from "../axios";
-import { IGrammaConstructor } from "../types.ts";
+import { IGrammaConstructor, IGrammaForm, IInterest } from "../types.ts";
 import { adaptGramma } from "../adapters/form-adapter-to-server.tsx";
 import { GrammaFromServer } from "../adapters/form-adapter-to-client.ts";
 
 export default class GrammasService {
   static async createGramma(gramma: IGrammaConstructor) {
     const adapted = adaptGramma(gramma);
-    return axiosInstance.post("/forms/create", adapted);
+    return axiosInstance
+      .post("/forms/create", adapted)
+      .then((res) => res.data as IGrammaForm);
   }
 
   static async getGramma(id: number) {
@@ -28,6 +30,24 @@ export default class GrammasService {
   static async getAllGrammas() {
     return axiosInstance
       .get<GrammaFromServer[]>("/forms/getAll")
+      .then((res) => res.data);
+  }
+
+  static async getAllGrammasByCompany() {
+    return axiosInstance
+      .get<GrammaFromServer[]>("forms/getCurCompany")
+      .then((res) => res.data);
+  }
+
+  static async getInterests() {
+    return axiosInstance
+      .get<IInterest[]>("/interests/")
+      .then((res) => res.data);
+  }
+
+  static async setInterest(formId: number, interest: IInterest) {
+    return axiosInstance
+      .put(`/forms/${formId}/addInterest?interestId=${interest.id}`)
       .then((res) => res.data);
   }
 }

@@ -1,7 +1,7 @@
 import styles from "./gramma-constructor.module.css";
 import cn from "classnames";
-import { ChangeEvent, useCallback, useState } from "react";
-import { IGrammaConstructor, IQuestion } from "../../types.ts";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { IGrammaConstructor, IInterest, IQuestion } from "../../types.ts";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { Dayjs } from "dayjs";
 import CreateButton from "./CreateButton/CreateButton.tsx";
@@ -9,12 +9,17 @@ import QuestionsList from "./QuestionConstructor/QuestionsList/QuestionsList.tsx
 import InterestSelect from "./InterestSelect/InterestSelect.tsx";
 import SamplesSelect from "./SamplesSelect/SamplesSelect.tsx";
 import { Samples, SampleVariants } from "../../utils/gramma_samples.ts";
+import { useStores } from "../../rootStoreContext.ts";
 
 export default function GrammaConstructor() {
   const [gramma, setGramma] = useState<IGrammaConstructor>(
     Samples[SampleVariants.EMPTY],
   );
+  const { grammaStore } = useStores();
 
+  useEffect(() => {
+    grammaStore.getInterests();
+  }, []);
   const handleTitleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       setGramma((prevState) => ({ ...prevState, title: event.target.value }));
@@ -50,7 +55,7 @@ export default function GrammaConstructor() {
     setGramma((prevState) => ({ ...prevState, questions: questions }));
   }, []);
 
-  const handleChangeInterest = useCallback((interest: string) => {
+  const handleChangeInterest = useCallback((interest: IInterest) => {
     setGramma((prevState) => ({ ...prevState, interest: interest }));
   }, []);
 
@@ -79,6 +84,7 @@ export default function GrammaConstructor() {
           onChange={handleDescriptionChange}
         />
         <InterestSelect
+          interests={grammaStore.interests}
           chosenInterest={gramma.interest}
           onChange={handleChangeInterest}
         />

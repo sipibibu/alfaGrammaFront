@@ -17,7 +17,7 @@ export interface IQuestionWithId extends IQuestion {
 }
 
 export interface IGrammaConstructor {
-  interest: string;
+  interest: IInterest;
   title: string;
   description: string;
   dateFrom: string;
@@ -52,4 +52,9 @@ export type IQuestionAnswer = {
 export interface IUserResponse {
   formId: number;
   questions: IQuestionAnswer[];
+}
+
+export interface IInterest {
+  id: number;
+  name: string;
 }
