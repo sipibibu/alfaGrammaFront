@@ -7,21 +7,25 @@ import { useOptions } from "../../../../../hooks/useOptions.ts";
 type CheckboxesProps = {
   options: IAnswerVariants;
   setOptions: (options: IAnswerVariants) => void;
+  disabled?: boolean;
 };
 
-function Checkboxes({ options, setOptions }: CheckboxesProps) {
+function Checkboxes({ options, setOptions, disabled }: CheckboxesProps) {
   const setOptionsArray = useOptions(options, setOptions);
 
   return (
     <div className={styles.radioList}>
-      {[...options, { text: "" }].map((option, i) => (
-        <CheckItem
-          value={option.text}
-          index={i}
-          onChange={setOptionsArray}
-          key={i}
-        />
-      ))}
+      {(disabled ? [...options] : [...options, { text: "" }]).map(
+        (option, i) => (
+          <CheckItem
+            value={option.text}
+            index={i}
+            onChange={setOptionsArray}
+            key={i}
+            disabled={disabled}
+          />
+        ),
+      )}
     </div>
   );
 }

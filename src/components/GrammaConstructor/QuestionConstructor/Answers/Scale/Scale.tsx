@@ -5,9 +5,10 @@ import React, { ChangeEvent } from "react";
 type ScaleProps = {
   options: IAnswerVariants;
   setOptions: (prevState: IAnswerVariants) => void;
+  disabled?: boolean;
 };
 
-function Scale({ options, setOptions }: ScaleProps) {
+function Scale({ options, setOptions, disabled }: ScaleProps) {
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     setOptions({
       ...options,
@@ -33,6 +34,7 @@ function Scale({ options, setOptions }: ScaleProps) {
             min={0}
             value={options[0].text}
             onChange={handleOnChange}
+            disabled={disabled}
           />
         </div>
         <div className={styles.line}>
@@ -43,6 +45,7 @@ function Scale({ options, setOptions }: ScaleProps) {
             min={0}
             value={options[1].text}
             onChange={handleOnChange}
+            disabled={disabled}
           />
         </div>
       </div>
@@ -54,6 +57,7 @@ function Scale({ options, setOptions }: ScaleProps) {
           min={1}
           value={options[2].text}
           onChange={handleOnChange}
+          disabled={disabled}
         />
       </div>
     </div>

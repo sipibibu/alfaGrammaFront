@@ -6,6 +6,8 @@ import { observer } from "mobx-react-lite";
 import { MultiValue } from "react-select";
 import { useStores } from "../../rootStoreContext.ts";
 import LogoutButton from "./LogoutButton.tsx";
+import { Helmet } from "react-helmet";
+import Loading from "../Loading/Loading.tsx";
 
 const ProfileUser = () => {
   const { userStore, profileRespondentStore } = useStores();
@@ -16,13 +18,22 @@ const ProfileUser = () => {
   const [options, setOptions] = useState<MultiValue<string> | string>([]);
   const [interests, setInterests] = useState<string[]>([]);
   const [mode, setMode] = useState("display");
-  console.log(userStore.role);
+
   useEffect(() => {
     userStore.getAccount();
   }, [userStore]);
 
+  if (!userStore.respondent.role) {
+    return <Loading />;
+  }
+
   return (
     <div className={styles.profile}>
+      <Helmet>
+        <title>
+          {name} {surname}
+        </title>
+      </Helmet>
       <div className={styles.bottomMenu}>
         {additionalDataUserServer?.imageUrl != null ? (
           <img
@@ -65,7 +76,6 @@ const ProfileUser = () => {
             className={styles.whatUseEditBtn}
             onClick={() => {
               setMode("display");
-              console.log(age, education, interests);
               profileRespondentStore.updateProfile(age, education, interests);
             }}
           >

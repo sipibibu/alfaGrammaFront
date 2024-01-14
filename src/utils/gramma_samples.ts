@@ -1,5 +1,5 @@
 import { IGrammaConstructor, IQuestion } from "../types.ts";
-import { QuestionType } from "../const.ts";
+import { QuestionType, WithoutInterest } from "../const.ts";
 
 export const SampleVariants = {
   EMPTY: "EMPTY",
@@ -11,7 +11,7 @@ export const SampleVariants = {
 
 export const Samples = {
   [SampleVariants.EMPTY]: {
-    interest: { id: 0, name: "" },
+    interest: WithoutInterest,
     dateFrom: "",
     dateTo: "",
     description: "",
@@ -19,7 +19,7 @@ export const Samples = {
     title: "",
   } as IGrammaConstructor,
   [SampleVariants.FOOD]: {
-    interest: { id: 0, name: "" },
+    interest: WithoutInterest,
     dateFrom: "",
     dateTo: "",
     description: "",
@@ -27,7 +27,7 @@ export const Samples = {
     title: "Любимая кухня",
   } as IGrammaConstructor,
   [SampleVariants.TIMEMANAGEMENT]: {
-    interest: { id: 0, name: "" },
+    interest: WithoutInterest,
     dateFrom: "",
     dateTo: "",
     description: "Тайм-менеджмент",
@@ -68,7 +68,7 @@ export const Samples = {
     title: "Управление временем",
   } as IGrammaConstructor,
   [SampleVariants.WORK]: {
-    interest: { id: 0, name: "" },
+    interest: WithoutInterest,
     dateFrom: "",
     dateTo: "",
     description: "",
@@ -76,7 +76,7 @@ export const Samples = {
     title: "Удовлетворенность работой",
   } as IGrammaConstructor,
   [SampleVariants.TEST]: {
-    interest: { id: 0, name: "" },
+    interest: WithoutInterest,
     dateFrom: "2023-12-24T06:35",
     dateTo: "2023-12-30T06:35",
     description: "description",

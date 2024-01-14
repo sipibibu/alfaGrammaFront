@@ -10,7 +10,7 @@ export default function GrammasList({ grammasList }: GrammasListProps) {
   return (
     <div className={styles.grammas}>
       {grammasList.map((gramma) => (
-        <PollCard gramma={gramma} />
+        <PollCard gramma={gramma} key={gramma.id} />
       ))}
     </div>
   );

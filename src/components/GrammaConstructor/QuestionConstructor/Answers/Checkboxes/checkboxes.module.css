@@ -25,7 +25,10 @@
   outline: none;
 }
 
-.radioItem label {
+.radioItem input[type=text]:disabled {
+  filter: none;
+  background-color: white;
+  color: black;
 }
 
 .radioItem label:before {

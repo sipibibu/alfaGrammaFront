@@ -6,10 +6,11 @@ import { DateTimePicker } from "@mui/x-date-pickers";
 import { Dayjs } from "dayjs";
 import CreateButton from "./CreateButton/CreateButton.tsx";
 import QuestionsList from "./QuestionConstructor/QuestionsList/QuestionsList.tsx";
-import InterestSelect from "./InterestSelect/InterestSelect.tsx";
 import SamplesSelect from "./SamplesSelect/SamplesSelect.tsx";
 import { Samples, SampleVariants } from "../../utils/gramma_samples.ts";
 import { useStores } from "../../rootStoreContext.ts";
+import InterestSelect from "../InterestSelect/InterestSelect.tsx";
+import { Helmet } from "react-helmet";
 
 export default function GrammaConstructor() {
   const [gramma, setGramma] = useState<IGrammaConstructor>(
@@ -68,6 +69,9 @@ export default function GrammaConstructor() {
 
   return (
     <div className={styles.container}>
+      <Helmet>
+        <title>Создание опроса</title>
+      </Helmet>
       <div className={styles.menu}>
         <SamplesSelect onChange={handleSampleChange} />
         <input

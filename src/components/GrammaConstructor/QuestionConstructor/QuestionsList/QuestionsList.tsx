@@ -8,6 +8,7 @@ import { QuestionType } from "../../../../const.ts";
 type QuestionListProps = {
   questionsList: IQuestion[];
   questionsChange: (questions: IQuestion[]) => void;
+  disabled?: boolean;
 };
 
 const initialQuestion: IQuestion = {
@@ -17,7 +18,11 @@ const initialQuestion: IQuestion = {
   options: [],
 };
 
-function QuestionsList({ questionsList, questionsChange }: QuestionListProps) {
+function QuestionsList({
+  questionsList,
+  questionsChange,
+  disabled,
+}: QuestionListProps) {
   const handleQuestionChange = useCallback(
     (updatedQuestion: IQuestion, index: number) => {
       questionsChange([
@@ -52,6 +57,7 @@ function QuestionsList({ questionsList, questionsChange }: QuestionListProps) {
           key={index}
           handleDeleteQuestion={handleDeleteQuestion}
           handleQuestionChange={handleQuestionChange}
+          disabled={disabled}
         />
       ))}
       <NewQuestionButton onClick={handleAddQuestion} />

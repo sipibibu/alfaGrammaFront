@@ -5,6 +5,8 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { useStores } from "../../rootStoreContext.ts";
 import { getFormattedDateTime } from "../../utils.ts";
+import { Helmet } from "react-helmet";
+import Loading from "../../components/Loading/Loading.tsx";
 
 function GrammaPage() {
   const { id } = useParams();
@@ -21,11 +23,14 @@ function GrammaPage() {
   }, [id]);
 
   if (!id || gramma.id !== parseInt(id)) {
-    return null;
+    return <Loading />;
   }
 
   return (
     <div className={styles.container}>
+      <Helmet>
+        <title>Опрос "{gramma.title}"</title>
+      </Helmet>
       <div className={styles.title}>
         <h1>{gramma.title}</h1> <h2>{gramma.companyName}</h2>
       </div>
