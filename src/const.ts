@@ -1,3 +1,5 @@
+import { IInterest } from "./types.ts";
+
 export const QuestionType = {
   Text: "TextQuestion",
   Checkbox: "CheckboxQuestion",
@@ -5,15 +7,14 @@ export const QuestionType = {
   Scale: "ScaleQuestion",
 };
 
-export enum AuthorizationStatus {
-  Unknown,
-  NoAuth,
-  Auth,
-}
-
 export enum Role {
   None = "None",
   NoAuth = "NoAuth",
   Respondent = "Respondent",
   Manager = "Manager",
 }
+
+export const WithoutInterest = {
+  id: 0,
+  name: "Не выбрано",
+} as IInterest;

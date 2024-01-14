@@ -1,6 +1,7 @@
-import styles from "../gramma-constructor.module.css";
+import styles from "../GrammaConstructor/gramma-constructor.module.css";
 import { Autocomplete, TextField } from "@mui/material";
-import { IInterest } from "../../../types.ts";
+import { IInterest } from "../../types.ts";
+import { WithoutInterest } from "../../const.ts";
 
 type InterestSelectProps = {
   interests: IInterest[];
@@ -18,12 +19,13 @@ export default function InterestSelect({
       className={styles.interest}
       disablePortal
       id="combo-box-demo"
-      options={interests.map((interest) => interest.name)}
+      defaultValue={WithoutInterest.name}
+      options={[WithoutInterest, ...interests].map((interest) => interest.name)}
       sx={{ width: "100%" }}
       value={chosenInterest.name}
       onChange={(_: any, newValue: string | null) => {
         if (newValue) {
-          const interest = interests.find(
+          const interest = [WithoutInterest, ...interests].find(
             (interest) => interest.name === newValue,
           ) as IInterest;
           onChange(interest);

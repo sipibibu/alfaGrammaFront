@@ -10,7 +10,6 @@ function adaptQuestion(question: IQuestion) {
 }
 
 export function adaptGramma(gramma: IGrammaConstructor) {
-  console.log(gramma);
   return {
     title: gramma.title,
     fullDescription: gramma.description,

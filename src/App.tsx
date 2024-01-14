@@ -19,16 +19,22 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute.tsx";
 import { Role } from "./const.ts";
 import Layout from "./components/Layout/Layout.tsx";
 import { observer } from "mobx-react-lite";
-import GrammaFormManager from "./components/GrammaForm/GrammaFormManager.tsx";
 import { Navigate } from "react-router";
+import GrammaAnswers from "./components/GrammaForm/GrammaAnswers.tsx";
+import GrammaFormManager from "./components/GrammaForm/GrammaFormManager.tsx";
+import Loading from "./components/Loading/Loading.tsx";
 
 function App() {
   const { userStore } = useStores();
-  console.log(userStore.role);
 
   useEffect(() => {
     userStore.getAccount();
   }, [userStore.role]);
+
+  if (userStore.role === Role.None) {
+    return <Loading />;
+  }
+
 
   return (
     <>
@@ -72,12 +78,19 @@ function App() {
             </Route>
             <Route element={<PrivateRoute role={Role.Manager} />}>
               <Route path={"profile-manager"} element={<ProfileManager />} />
+              <Route
+                path={"/ourgrammas/answers/:id"}
+                element={<GrammaAnswers />}
+              />
+              <Route
+                path={"/ourgrammas/form/:id"}
+                element={<GrammaFormManager />}
+              />
               <Route path={"/ourgrammas"} element={<CompanysGrammasPage />} />
               <Route
                 path={"gramma-constructor"}
                 element={<GrammaConstructor />}
               />
-              <Route path={"ourgrammas/:id"} element={<GrammaFormManager />} />
             </Route>
           </Route>
         </Routes>

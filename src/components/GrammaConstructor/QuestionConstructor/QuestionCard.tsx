@@ -15,6 +15,7 @@ type QuestionCardProps = {
   handleQuestionChange: (updatedQuestion: IQuestion, index: number) => void;
   handleDeleteQuestion: (index: number) => void;
   index: number;
+  disabled?: boolean;
 };
 
 const getQuestionOptions = (questionType: string) => {
@@ -37,17 +38,28 @@ const getQuestionField = (
   questionType: string,
   options: IAnswerVariants,
   setOptions: (options: IAnswerVariants) => void,
+  disabled?: boolean,
 ) => {
   switch (questionType) {
     default:
     case QuestionType.Text:
       return <Text />;
     case QuestionType.Radio:
-      return <Radio options={options} setOptions={setOptions} />;
+      return (
+        <Radio options={options} setOptions={setOptions} disabled={disabled} />
+      );
     case QuestionType.Checkbox:
-      return <Checkboxes options={options} setOptions={setOptions} />;
+      return (
+        <Checkboxes
+          options={options}
+          setOptions={setOptions}
+          disabled={disabled}
+        />
+      );
     case QuestionType.Scale:
-      return <Scale options={options} setOptions={setOptions} />;
+      return (
+        <Scale options={options} setOptions={setOptions} disabled={disabled} />
+      );
   }
 };
 
@@ -56,6 +68,7 @@ function QuestionCard({
   handleQuestionChange,
   handleDeleteQuestion,
   index,
+  disabled,
 }: QuestionCardProps) {
   const handleTitleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -113,13 +126,16 @@ function QuestionCard({
           placeholder={"Введите вопрос"}
           value={question.title}
           onChange={handleTitleChange}
+          disabled={disabled}
         />
         <div className={styles.right}>
           <TypesSelect
             questionType={question.type}
             setQuestionType={handleTypeChange}
+            disabled={disabled}
           />
           <FormControlLabel
+            disabled={disabled}
             control={
               <Checkbox
                 sx={{
@@ -138,9 +154,14 @@ function QuestionCard({
         </div>
       </div>
       <div className={styles.questionField}>
-        {getQuestionField(question.type, question.options, handleOptionsChange)}
+        {getQuestionField(
+          question.type,
+          question.options,
+          handleOptionsChange,
+          disabled,
+        )}
       </div>
-      <DeleteQuestionButton onClick={handleDelete} />
+      {!disabled && <DeleteQuestionButton onClick={handleDelete} />}
     </div>
   );
 }

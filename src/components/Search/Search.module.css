@@ -5,6 +5,7 @@
     height: 63px;
     width: calc(100% - 1px);
     border: 1px solid rgba(0, 0, 0, 0.10);
+    margin-bottom: 50px;
 }
 
 .inputSearch{

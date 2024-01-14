@@ -1,17 +1,31 @@
 import styles from "./sidebar.module.css";
 import Search from "../Search/Search.tsx";
-import Selector from "../Selector/Selector.tsx";
+import InterestSelect from "../InterestSelect/InterestSelect.tsx";
+import { IInterest } from "../../types.ts";
 
 export interface SidebarProps {
   search: string;
   onChangeSearch: (input: string) => void;
+  interests: IInterest[];
+  interestId: IInterest;
+  setInterestId: (id: IInterest) => void;
 }
 
-const Sidebar = ({ search, onChangeSearch }: SidebarProps) => {
+const Sidebar = ({
+  search,
+  onChangeSearch,
+  interests,
+  interestId,
+  setInterestId,
+}: SidebarProps) => {
   return (
     <div className={styles.bar}>
       <Search search={search} onChangeSearch={onChangeSearch} />
-      <Selector />
+      <InterestSelect
+        interests={interests}
+        chosenInterest={interestId}
+        onChange={setInterestId}
+      />
     </div>
   );
 };

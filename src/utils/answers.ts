@@ -32,7 +32,6 @@ export const createDictQuestionsAnswers = (grammasList: IUserResponse[]) => {
       }
     }
   }
-  console.log(dictQuestionsAnswers);
   return dictQuestionsAnswers;
 };
 

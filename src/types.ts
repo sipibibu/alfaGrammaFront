@@ -32,6 +32,7 @@ export interface IGramma {
   dateFrom: string;
   dateTo: string;
   companyName: string;
+  interests: number[];
 }
 
 export interface IGrammaForm extends IGramma {

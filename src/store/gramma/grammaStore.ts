@@ -38,10 +38,10 @@ class GrammaStore {
   async createGramma(gramma: IGrammaConstructor) {
     try {
       const grammaWithId = await GrammasService.createGramma(gramma);
-      console.log(grammaWithId);
       if (grammaWithId.id && gramma.interest.id !== 0) {
         await GrammasService.setInterest(grammaWithId.id, gramma.interest);
       }
+      toast.done(`Опрос '${grammaWithId.title}' успешно создан`);
     } catch (e) {
       toast.error("Не удалось создать опрос. Пожалуйста, повторите позже");
       console.log(e);
