@@ -8,9 +8,10 @@ import EmptyList from "../../components/EmptyList/EmptyList.tsx";
 
 function PlannedGrammasPage() {
   const { grammaStore } = useStores();
-  const grammasList = grammaStore.grammasList;
+  const grammasList = grammaStore.plannedGrammasList;
 
   useEffect(() => {
+    grammaStore.getSubscribingGrammas();
     grammaStore.getPlannedGrammasList();
   }, []);
 

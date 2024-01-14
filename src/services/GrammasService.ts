@@ -1,5 +1,5 @@
 import { axiosInstance } from "../axios";
-import { IGrammaConstructor, IGrammaForm, IInterest } from "../types.ts";
+import {IGrammaConstructor, IGrammaForm, IInterest, ISubscribingGramma} from "../types.ts";
 import { adaptGramma } from "../adapters/form-adapter-to-server.tsx";
 import { GrammaFromServer } from "../adapters/form-adapter-to-client.ts";
 
@@ -54,12 +54,18 @@ export default class GrammasService {
   static async subscribeToGramma(formId: number) {
     return axiosInstance
         .put(`/account/subscribe/${formId}`)
-        .then((res) => res.data)
+        .then((res) => res.status)
+  }
+
+  static async unSubscribeToGramma(formId: number) {
+    return axiosInstance
+        .delete(`/account/subscribe/${formId}`)
+        .then((res) => res.status)
   }
 
   static async getSubscribingGrammas(){
     return axiosInstance
-        .get('/account/subscribe')
+        .get<ISubscribingGramma[]>('/account/subscribe')
         .then((res) => res.data)
   }
 }

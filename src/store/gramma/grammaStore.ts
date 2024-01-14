@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 class GrammaStore {
   grammaCard = {} as IGramma;
   grammasList = [] as IGramma[];
+  plannedGrammasList = [] as IGramma[];
   subscribingGrammasIds: number[] = [];
   grammaForm: IGrammaForm | null = null;
   interests = [] as IInterest[];
@@ -26,6 +27,10 @@ class GrammaStore {
 
   setGrammasList(grammasList: IGramma[]) {
     this.grammasList = grammasList;
+  }
+
+  setPlannedGrammasList(plannedGrammasList: IGramma[]) {
+    this.plannedGrammasList = plannedGrammasList;
   }
 
   setSubscribingGrammasIds(subscribingGrammasIds: number[]){
@@ -93,7 +98,13 @@ class GrammaStore {
   async getPlannedGrammasList() {
     try {
       const grammasList = await GrammasService.getAllGrammas();
-      this.setGrammasList(grammasList.map((gramma) => adaptGramma(gramma)));
+      const plannedGrammasList: IGramma[] = []
+      for(let i = 0; i < grammasList.length; i++){
+        if(this.subscribingGrammasIds.includes(grammasList[i].id)){
+          plannedGrammasList.push(adaptGramma(grammasList[i]))
+        }
+      }
+      this.setPlannedGrammasList(plannedGrammasList);
     } catch (e) {
       console.log(e);
     }
@@ -110,8 +121,17 @@ class GrammaStore {
 
   async subscribeToGramma(formId: number) {
     try {
-      const grammasIds = await GrammasService.subscribeToGramma(formId)
-      console.log(grammasIds);
+      const status = await GrammasService.subscribeToGramma(formId)
+      return status == 200
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async unSubscribeToGramma(formId: number) {
+    try {
+      const status = await GrammasService.unSubscribeToGramma(formId)
+      return status == 200
     } catch (e) {
       console.log(e);
     }
@@ -120,7 +140,7 @@ class GrammaStore {
   async getSubscribingGrammas() {
     try {
       const grammasIds = await GrammasService.getSubscribingGrammas();
-      console.log(grammasIds);
+      this.setSubscribingGrammasIds(grammasIds.map((subscribe) => subscribe.id));
     } catch (e) {
       console.log(e);
     }
