@@ -5,11 +5,9 @@ import { observer } from "mobx-react-lite";
 import { useStores } from "../../rootStoreContext.ts";
 import Sidebar from "../../components/Sidebar/Sidebar.tsx";
 import { IInterest } from "../../types.ts";
-
-const WithoutInterest = {
-  id: 0,
-  name: "Не выбрано",
-} as IInterest;
+import { WithoutInterest } from "../../const.ts";
+import { Helmet } from "react-helmet";
+import EmptyList from "../../components/EmptyList/EmptyList.tsx";
 
 function AllGrammasListPage() {
   const { grammaStore } = useStores();
@@ -37,16 +35,30 @@ function AllGrammasListPage() {
   }, [grammaStore]);
 
   return (
-    <div className={styles.grammasPage}>
-      <Sidebar
-        search={search}
-        onChangeSearch={onChangeSearch}
-        interests={[WithoutInterest, ...interests]}
-        interestId={interest}
-        setInterestId={setInterest}
-      />
-      <GrammasList grammasList={filteredGramms} />
-    </div>
+    <>
+      <Helmet>
+        <title>Главная</title>
+      </Helmet>
+      <div className={styles.grammasPage}>
+        <Sidebar
+          search={search}
+          onChangeSearch={onChangeSearch}
+          interests={interests}
+          interestId={interest}
+          setInterestId={setInterest}
+        />
+        {grammas.length === 0 && (
+          <EmptyList>
+            Пока что нет новых опросов. Пожалуйста зайдите позже
+          </EmptyList>
+        )}
+        {grammas.length !== 0 && filteredGramms.length === 0 ? (
+          <EmptyList>По заданным параметрам ничего не найдено</EmptyList>
+        ) : (
+          <GrammasList grammasList={filteredGramms} />
+        )}
+      </div>
+    </>
   );
 }
 

@@ -22,6 +22,7 @@ import { observer } from "mobx-react-lite";
 import { Navigate } from "react-router";
 import GrammaAnswers from "./components/GrammaForm/GrammaAnswers.tsx";
 import GrammaFormManager from "./components/GrammaForm/GrammaFormManager.tsx";
+import Loading from "./components/Loading/Loading.tsx";
 
 function App() {
   const { userStore } = useStores();
@@ -29,6 +30,10 @@ function App() {
   useEffect(() => {
     userStore.getAccount();
   }, [userStore.role]);
+
+  if (userStore.role === Role.None) {
+    return <Loading />;
+  }
 
   return (
     <>

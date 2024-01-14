@@ -5,6 +5,8 @@ import { useParams } from "react-router";
 import { useStores } from "../../rootStoreContext.ts";
 import AnswersList from "./AnswersList/AnswersList.tsx";
 import { createDictQuestionsAnswers } from "../../utils/answers.ts";
+import { Helmet } from "react-helmet";
+import Loading from "../Loading/Loading.tsx";
 
 function GrammaAnswers() {
   const { id } = useParams();
@@ -31,11 +33,14 @@ function GrammaAnswers() {
     !answersDict ||
     grammaForm.id !== parseInt(id as string)
   ) {
-    return null;
+    return <Loading />;
   }
 
   return (
     <div className={styles.container}>
+      <Helmet>
+        <title>Ответы на опрос "{grammaForm.title}"</title>
+      </Helmet>
       <h1 className={styles.title}>{grammaForm.title}</h1>
       <p className={styles.description}>{grammaForm.description}</p>
       <AnswersList questions={grammaForm.questions} dictAnswers={answersDict} />

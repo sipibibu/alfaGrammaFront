@@ -1,0 +1,11 @@
+.empty {
+  color: #505050;
+  font: inherit;
+  font-size: 28px;
+  align-self: center;
+  display: block;
+  position: absolute;
+  top: calc(50% - 100px);
+  width: 100%;
+  text-align: center;
+}

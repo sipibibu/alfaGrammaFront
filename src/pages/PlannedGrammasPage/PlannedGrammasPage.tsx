@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import GrammasList from "../../components/GrammasList/GrammasList.tsx";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../../rootStoreContext.ts";
+import { Helmet } from "react-helmet";
+import EmptyList from "../../components/EmptyList/EmptyList.tsx";
 
 function PlannedGrammasPage() {
   const { grammaStore } = useStores();
@@ -14,7 +16,17 @@ function PlannedGrammasPage() {
 
   return (
     <div className={styles.grammasPage}>
-      <GrammasList grammasList={grammasList} />
+      <Helmet>
+        <title>Запланированные опросы</title>
+      </Helmet>
+      {grammasList.length > 0 ? (
+        <GrammasList grammasList={grammasList} />
+      ) : (
+        <EmptyList>
+          Здесь пока ничего нет. Запланируйте прохождение опроса и он
+          отобразится здесь
+        </EmptyList>
+      )}
     </div>
   );
 }

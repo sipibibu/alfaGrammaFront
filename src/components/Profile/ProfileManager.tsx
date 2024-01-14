@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../../rootStoreContext.ts";
 import LogoutButton from "./LogoutButton.tsx";
+import { Helmet } from "react-helmet";
+import Loading from "../Loading/Loading.tsx";
 
 const ProfileManager = () => {
   const { userStore, profileManagerStore } = useStores();
@@ -17,8 +19,17 @@ const ProfileManager = () => {
     userStore.getAccount();
   }, [userStore]);
 
+  if (!userStore.manager.role) {
+    return <Loading />;
+  }
+
   return (
     <div className={styles.profile}>
+      <Helmet>
+        <title>
+          {name} {surname}
+        </title>
+      </Helmet>
       <div className={styles.bottomMenu}>
         <img src={avatar} className={styles.image} alt="profile image" />
         {mode == "edit" ? (

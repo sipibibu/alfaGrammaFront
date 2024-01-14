@@ -7,6 +7,7 @@ import { IQuestionAnswer, IQuestionWithId } from "../../types.ts";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router";
 import { useStores } from "../../rootStoreContext.ts";
+import Loading from "../Loading/Loading.tsx";
 
 const getInitialUserValues = (question: IQuestionWithId): IQuestionAnswer => {
   switch (question.type) {
@@ -46,7 +47,7 @@ function GrammaForm() {
   }, [id, grammaForm]);
 
   if (!grammaForm || !grammaForm.id || userAnswers.length === 0) {
-    return null;
+    return <Loading />;
   }
   const handleUserAnswerChange = (updated: IQuestionAnswer) => {
     setUserAnswers((prevState) => {

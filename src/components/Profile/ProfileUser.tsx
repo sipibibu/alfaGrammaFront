@@ -6,6 +6,8 @@ import { observer } from "mobx-react-lite";
 import { MultiValue } from "react-select";
 import { useStores } from "../../rootStoreContext.ts";
 import LogoutButton from "./LogoutButton.tsx";
+import { Helmet } from "react-helmet";
+import Loading from "../Loading/Loading.tsx";
 
 const ProfileUser = () => {
   const { userStore, profileRespondentStore } = useStores();
@@ -21,8 +23,17 @@ const ProfileUser = () => {
     userStore.getAccount();
   }, [userStore]);
 
+  if (!userStore.respondent.role) {
+    return <Loading />;
+  }
+
   return (
     <div className={styles.profile}>
+      <Helmet>
+        <title>
+          {name} {surname}
+        </title>
+      </Helmet>
       <div className={styles.bottomMenu}>
         {additionalDataUserServer?.imageUrl != null ? (
           <img
