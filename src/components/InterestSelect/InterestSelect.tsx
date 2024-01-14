@@ -1,6 +1,6 @@
-import styles from "../gramma-constructor.module.css";
+import styles from "../GrammaConstructor/gramma-constructor.module.css";
 import { Autocomplete, TextField } from "@mui/material";
-import { IInterest } from "../../../types.ts";
+import { IInterest } from "../../types.ts";
 
 type InterestSelectProps = {
   interests: IInterest[];

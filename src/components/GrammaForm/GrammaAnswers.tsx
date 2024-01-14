@@ -1,24 +1,34 @@
 import styles from "./gramma-form.module.css";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router";
 import { useStores } from "../../rootStoreContext.ts";
-import QuestionsList from "../GrammaConstructor/QuestionConstructor/QuestionsList/QuestionsList.tsx";
+import AnswersList from "./AnswersList/AnswersList.tsx";
+import { createDictQuestionsAnswers } from "../../utils/answers.ts";
 
-function GrammaFormManager() {
+function GrammaAnswers() {
   const { id } = useParams();
-  const { grammaStore } = useStores();
+  const { grammaStore, answersStore } = useStores();
   const grammaForm = grammaStore.grammaForm;
+  const gramaAnswers = answersStore.grammaAnswers;
 
   useEffect(() => {
     if (id) {
       const intId = parseInt(id);
       grammaStore.getGrammaForm(intId);
+      answersStore.getGrammaAnswers(intId);
     }
   }, [id]);
+
+  const answersDict = useMemo(
+    () => createDictQuestionsAnswers(answersStore.grammaAnswers),
+    [gramaAnswers],
+  );
+
   if (
     !grammaForm ||
     !grammaForm.id ||
+    !answersDict ||
     grammaForm.id !== parseInt(id as string)
   ) {
     return null;
@@ -28,13 +38,9 @@ function GrammaFormManager() {
     <div className={styles.container}>
       <h1 className={styles.title}>{grammaForm.title}</h1>
       <p className={styles.description}>{grammaForm.description}</p>
-      <QuestionsList
-        questionsList={grammaForm.questions}
-        questionsChange={() => {}}
-        disabled
-      />
+      <AnswersList questions={grammaForm.questions} dictAnswers={answersDict} />
     </div>
   );
 }
 
-export default observer(GrammaFormManager);
+export default observer(GrammaAnswers);

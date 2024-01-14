@@ -24,6 +24,12 @@
   outline: none;
 }
 
+.radioItem input[type=text]:disabled {
+  filter: none;
+  background-color: white;
+  color: black;
+}
+
 .radioItem label {
 }
 
@@ -44,5 +50,11 @@
 
 /* Disabled */
 .radioItem input[type=radio]:disabled + input[type=text]:before {
-  filter: grayscale(100%);
+  filter: none;
+  background-color: white;
+}
+
+.radioItem input[type=radio]:disabled {
+  filter: none;
+  background-color: white;
 }

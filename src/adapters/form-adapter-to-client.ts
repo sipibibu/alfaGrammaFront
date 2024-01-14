@@ -22,6 +22,7 @@ export type GrammaFromServer = {
   fullDescription: string;
   startingAt: number;
   closingAt: number;
+  interests: number[];
   questions: QuestionFromServer[];
 };
 
@@ -54,6 +55,7 @@ export function adaptGramma(gramma: GrammaFromServer) {
     dateFrom: new Date(gramma.startingAt * 1000).toUTCString(),
     dateTo: new Date(gramma.closingAt * 1000).toUTCString(),
     companyName: gramma.companyName,
+    interests: gramma.interests,
     questions: gramma.questions
       ? gramma.questions.map((question) => adaptQuestion(question))
       : [],

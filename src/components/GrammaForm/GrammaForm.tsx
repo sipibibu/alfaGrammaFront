@@ -60,12 +60,13 @@ function GrammaForm() {
       ];
     });
   };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>{grammaForm.title}</h1>
       <p className={styles.description}>{grammaForm.description}</p>
       <QuestionsList
-        questions={[...grammaForm.questions] as IQuestionWithId[]}
+        questions={[...grammaForm.questions]}
         userAnswers={userAnswers}
         onAnswerChanged={handleUserAnswerChange}
       />

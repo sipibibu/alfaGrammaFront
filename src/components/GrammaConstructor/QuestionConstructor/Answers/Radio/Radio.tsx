@@ -7,21 +7,25 @@ import { useOptions } from "../../../../../hooks/useOptions.ts";
 type RadioProps = {
   options: IAnswerVariants;
   setOptions: (options: IAnswerVariants) => void;
+  disabled?: boolean;
 };
 
-function Radio({ options, setOptions }: RadioProps) {
+function Radio({ options, setOptions, disabled }: RadioProps) {
   const setOptionsArray = useOptions(options, setOptions);
 
   return (
     <div className={styles.radioList}>
-      {[...options, { text: "" }].map((variant, i) => (
-        <RadioItem
-          value={variant.text}
-          index={i}
-          onChange={setOptionsArray}
-          key={i}
-        />
-      ))}
+      {(disabled ? [...options] : [...options, { text: "" }]).map(
+        (variant, i) => (
+          <RadioItem
+            value={variant.text}
+            index={i}
+            onChange={setOptionsArray}
+            key={i}
+            disabled={disabled}
+          />
+        ),
+      )}
     </div>
   );
 }

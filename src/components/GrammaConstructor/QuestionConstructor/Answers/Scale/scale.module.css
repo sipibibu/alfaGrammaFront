@@ -47,3 +47,9 @@
 .line input[type="number"][type=number] {
   -moz-appearance:textfield;
 }
+
+.line input[type='number']:disabled {
+  filter: none;
+  background-color: white;
+  color: black;
+}

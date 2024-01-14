@@ -5,6 +5,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 type TypesSelectProps = {
   questionType: string;
   setQuestionType: (type: string) => void;
+  disabled?: boolean;
 };
 
 const getTitle = (questionType: string) => {
@@ -21,7 +22,11 @@ const getTitle = (questionType: string) => {
   }
 };
 
-function TypesSelect({ questionType, setQuestionType }: TypesSelectProps) {
+function TypesSelect({
+  questionType,
+  setQuestionType,
+  disabled,
+}: TypesSelectProps) {
   return (
     <FormControl size="small">
       <InputLabel>Тип вопроса</InputLabel>
@@ -30,6 +35,7 @@ function TypesSelect({ questionType, setQuestionType }: TypesSelectProps) {
         onChange={(event) => setQuestionType(event.target.value)}
         autoWidth
         label="Тип вопроса"
+        disabled={disabled}
       >
         <MenuItem value={QuestionType.Text}>
           {getTitle(QuestionType.Text)}
