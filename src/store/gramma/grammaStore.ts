@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 class GrammaStore {
   grammaCard = {} as IGramma;
   grammasList = [] as IGramma[];
+  subscribingGrammasIds: number[] = [];
   grammaForm: IGrammaForm | null = null;
   interests = [] as IInterest[];
 
@@ -25,6 +26,10 @@ class GrammaStore {
 
   setGrammasList(grammasList: IGramma[]) {
     this.grammasList = grammasList;
+  }
+
+  setSubscribingGrammasIds(subscribingGrammasIds: number[]){
+    this.subscribingGrammasIds = subscribingGrammasIds
   }
 
   setGrammaForm(grammaForm: IGrammaForm) {
@@ -98,6 +103,24 @@ class GrammaStore {
     try {
       const interests = await GrammasService.getInterests();
       this.setInterests(interests);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async subscribeToGramma(formId: number) {
+    try {
+      const grammasIds = await GrammasService.subscribeToGramma(formId)
+      console.log(grammasIds);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getSubscribingGrammas() {
+    try {
+      const grammasIds = await GrammasService.getSubscribingGrammas();
+      console.log(grammasIds);
     } catch (e) {
       console.log(e);
     }

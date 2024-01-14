@@ -50,4 +50,16 @@ export default class GrammasService {
       .put(`/forms/${formId}/addInterest?interestId=${interest.id}`)
       .then((res) => res.data);
   }
+
+  static async subscribeToGramma(formId: number) {
+    return axiosInstance
+        .put(`/account/subscribe/${formId}`)
+        .then((res) => res.data)
+  }
+
+  static async getSubscribingGrammas(){
+    return axiosInstance
+        .get('/account/subscribe')
+        .then((res) => res.data)
+  }
 }

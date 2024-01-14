@@ -45,7 +45,7 @@ function GrammaPage() {
           </p>
         </div>
         <Link to={`/gramma-form/${gramma.id}`}>
-          <button>Пройти</button>
+          <button>Записаться</button>
         </Link>
       </div>
     </div>
