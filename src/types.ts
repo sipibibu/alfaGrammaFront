@@ -59,3 +59,8 @@ export interface IInterest {
   id: number;
   name: string;
 }
+
+export interface ISubscribingGramma{
+  id: number;
+  isAvailable: boolean;
+}

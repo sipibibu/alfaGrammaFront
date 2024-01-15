@@ -1,17 +1,23 @@
 import styles from "./gramma-page.module.css";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { useParams } from "react-router";
 import { observer } from "mobx-react-lite";
-import { Link } from "react-router-dom";
 import { useStores } from "../../rootStoreContext.ts";
 import { getFormattedDateTime } from "../../utils.ts";
 import { Helmet } from "react-helmet";
 import Loading from "../../components/Loading/Loading.tsx";
+import {Link} from "react-router-dom";
 
 function GrammaPage() {
   const { id } = useParams();
   const { grammaStore } = useStores();
   const gramma = grammaStore.grammaCard;
+  const [isSubscribe, setIsSubscribe] = useState(
+      id ?
+          grammaStore.subscribingGrammasIds.includes(parseInt(id))
+          :
+          false
+  )
 
   useEffect(() => {
     if (id) {
@@ -49,9 +55,29 @@ function GrammaPage() {
             <span> {getFormattedDateTime(gramma.dateTo)}</span>
           </p>
         </div>
-        <Link to={`/gramma-form/${gramma.id}`}>
-          <button>Пройти</button>
-        </Link>
+        <div className={styles.buttons}>
+          {
+            isSubscribe ?
+                <button onClick={() => {
+                  grammaStore.unSubscribeToGramma(parseInt(id)).then((res) => {
+                    res ? setIsSubscribe(false) : setIsSubscribe(true)
+                  });
+                }}>Отписаться</button>
+                :
+                <button onClick={() => {
+                  grammaStore.subscribeToGramma(parseInt(id)).then((res) => {
+                    res ? setIsSubscribe(true) : setIsSubscribe(false)
+                  });
+                }}>Записаться</button>
+          }
+          { isSubscribe && new Date() <= new Date(gramma.dateTo) && new Date() >= new Date(gramma.dateFrom) ?
+              <Link to={`/gramma-form/${gramma.id}`}>
+                <button>Пройти</button>
+              </Link>
+              :
+              null
+          }
+        </div>
       </div>
     </div>
   );

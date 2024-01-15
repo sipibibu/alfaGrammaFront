@@ -24,14 +24,14 @@ const AnswerCard = ({question, answers} : AnswerCardProps) => {
                 <ul>
                     {question.type != QuestionType.Text ?
                         countQuestionAnswers(question, answers)
-                        .map((answer) =>
+                        .map((answer, count) =>
                                 question.type == QuestionType.Radio || QuestionType.Scale ?
-                                    <li>{answer.answer} {answer.count}</li>
+                                    <li key={count}>{answer.answer} {answer.count}</li>
                                     :
                                     <li>{answer.answer} {answer.count}</li>
                         )
                         :
-                        answers.map((answer) => answer != '' && <li>{answer}</li>)
+                        answers.map((answer, count) => answer != '' && <li key={count}>{answer}</li>)
                     }
                 </ul>
             </div>

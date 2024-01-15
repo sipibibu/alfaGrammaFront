@@ -44,9 +44,9 @@ export const countQuestionAnswers = (
     if (question.options.length != 0) {
       if (question.type == QuestionType.Scale) {
         for (
-          let i = Number(question.options[0].text);
-          i <= Number(question.options[1].text);
-          i += Number(question.options[2].text)
+          let i = 0;
+          i <= 100;
+          i += 1
         ) {
           let countAnswers = 0;
           for (let j = 0; j < answers.length; j++) {

@@ -87,3 +87,9 @@
   color: white;
   cursor: pointer;
 }
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}

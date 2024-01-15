@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 class GrammaStore {
   grammaCard = {} as IGramma;
   grammasList = [] as IGramma[];
+  plannedGrammasList = [] as IGramma[];
+  subscribingGrammasIds: number[] = [];
   grammaForm: IGrammaForm | null = null;
   interests = [] as IInterest[];
 
@@ -25,6 +27,14 @@ class GrammaStore {
 
   setGrammasList(grammasList: IGramma[]) {
     this.grammasList = grammasList;
+  }
+
+  setPlannedGrammasList(plannedGrammasList: IGramma[]) {
+    this.plannedGrammasList = plannedGrammasList;
+  }
+
+  setSubscribingGrammasIds(subscribingGrammasIds: number[]){
+    this.subscribingGrammasIds = subscribingGrammasIds
   }
 
   setGrammaForm(grammaForm: IGrammaForm) {
@@ -88,7 +98,13 @@ class GrammaStore {
   async getPlannedGrammasList() {
     try {
       const grammasList = await GrammasService.getAllGrammas();
-      this.setGrammasList(grammasList.map((gramma) => adaptGramma(gramma)));
+      const plannedGrammasList: IGramma[] = []
+      for(let i = 0; i < grammasList.length; i++){
+        if(this.subscribingGrammasIds.includes(grammasList[i].id)){
+          plannedGrammasList.push(adaptGramma(grammasList[i]))
+        }
+      }
+      this.setPlannedGrammasList(plannedGrammasList);
     } catch (e) {
       console.log(e);
     }
@@ -98,6 +114,33 @@ class GrammaStore {
     try {
       const interests = await GrammasService.getInterests();
       this.setInterests(interests);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async subscribeToGramma(formId: number) {
+    try {
+      const status = await GrammasService.subscribeToGramma(formId)
+      return status == 200
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async unSubscribeToGramma(formId: number) {
+    try {
+      const status = await GrammasService.unSubscribeToGramma(formId)
+      return status == 200
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getSubscribingGrammas() {
+    try {
+      const grammasIds = await GrammasService.getSubscribingGrammas();
+      this.setSubscribingGrammasIds(grammasIds.map((subscribe) => subscribe.id));
     } catch (e) {
       console.log(e);
     }

@@ -32,6 +32,7 @@ function AllGrammasListPage() {
   useEffect(() => {
     grammaStore.getGrammasList();
     grammaStore.getInterests();
+    grammaStore.getSubscribingGrammas();
   }, [grammaStore]);
 
   return (

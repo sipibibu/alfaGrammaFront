@@ -11,8 +11,8 @@ const AnswersList = ({questions, dictAnswers} : AnswersListProps) => {
     return (
         <div>
             <div className={styles.questions}>
-                {questions.map((question) => (
-                    <AnswerCard question={question} answers={dictAnswers.get(question.title)}/>
+                {questions.map((question, count) => (
+                    <AnswerCard question={question} answers={dictAnswers.get(question.title)} key={count}/>
                 ))}
             </div>
         </div>
